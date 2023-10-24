@@ -1,5 +1,0 @@
-"0",""
-"0",""
-"0","selected_data <- exports_data %>%"
-"0","  select(Country, F2018, F2019, F2020, F2021, F2022)"
-"0","head(exports_data)"

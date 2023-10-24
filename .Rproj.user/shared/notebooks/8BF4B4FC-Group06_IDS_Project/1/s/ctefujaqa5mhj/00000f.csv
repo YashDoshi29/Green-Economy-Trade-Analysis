@@ -1,3 +1,0 @@
-"0","null_values_count<- colSums(is.na(data))"
-"0","null_values_dataframe <- data.frame(Column = names(null_values_count), NA_Count = null_values_count)"
-"0","null_values_dataframe"

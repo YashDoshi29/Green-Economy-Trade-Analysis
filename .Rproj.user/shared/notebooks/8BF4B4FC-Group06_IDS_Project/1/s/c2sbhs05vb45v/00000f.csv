@@ -1,3 +1,0 @@
-"0","years <- paste0('F', 2013:2022)"
-"0","env_goods_exports_years <- env_goods_exports[, c('Country', years)]"
-"0","env_goods_exports_years"

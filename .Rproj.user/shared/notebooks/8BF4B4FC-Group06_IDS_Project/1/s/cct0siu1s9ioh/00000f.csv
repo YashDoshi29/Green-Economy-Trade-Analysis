@@ -1,6 +1,0 @@
-"0","columns_to_remove <- c('F1994', 'F1995', 'F1996', 'F1997', 'F1998', 'F1999', 'F2000', 'F2001',"
-"0","                       'F2002', 'F2003', 'F2004', 'F2005', 'F2006', 'F2007', 'F2008', 'F2009',"
-"0","                       'F2010', 'F2011')"
-"0",""
-"0","filtered_data <- data[, !(names(data) %in% columns_to_remove)]"
-"0","head(filtered_data,2)"

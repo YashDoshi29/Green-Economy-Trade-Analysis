@@ -1,4 +1,0 @@
-"0","# Step 4: Create a Linear Regression Model"
-"0","linear_model <- lm(Total_Export_Value ~ Year, data = total_exports_df)"
-"0","model_summary <- summary(linear_model)"
-"0",""

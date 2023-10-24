@@ -1,7 +1,0 @@
-"0","unique_country <- table(data$Country)"
-"0","cat('There are',length(unique_country),'unique countries in dataset')"
-"1","There are"
-"1"," "
-"1","48"
-"1"," "
-"1","unique countries in dataset"

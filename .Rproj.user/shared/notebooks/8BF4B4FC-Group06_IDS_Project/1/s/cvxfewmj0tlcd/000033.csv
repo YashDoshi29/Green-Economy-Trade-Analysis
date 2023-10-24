@@ -1,8 +1,0 @@
-"0","p <- ggplot(filtered_group_data, aes(x = Country_Classification, y = F2022, fill = Trade_Flow)) +"
-"0","  geom_bar(stat = ""identity"", position = ""dodge"", width = 0.7) +"
-"0","  scale_y_log10(""Environmental Goods Trade"", labels = scales::comma_format()) +"
-"0","  xlab(""Country Classification"") +"
-"0","  ggtitle(""ENV. Good Imports and Exports in 2022 Landlocked vs Coastal Countries"") +"
-"0","  theme_minimal() +"
-"0","  scale_fill_manual(values = c(""#38599f"",""#a5bfd1""))"
-"0","p"

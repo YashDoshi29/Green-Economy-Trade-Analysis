@@ -1,4 +1,0 @@
-"0","# Step 3: Check for each country if the exports have increased every year"
-"0","increasing_exports <- selected_data %>%"
-"0","  filter(F2018 < F2019 & F2019 < F2020 & F2020 < F2021 & F2021 < F2022) %>%"
-"0","  arrange(desc(F2022))"
