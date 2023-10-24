@@ -1,0 +1,300 @@
+---
+title: "PROJECT"
+output: html_document
+date: "2023-10-21"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+>DATA PREPROCESSING
+
+
+```{r}
+data<- read.csv('Bilateral_Trade_in_Environmental_Goods.csv')
+head(data)
+```
+
+
+```{r}
+shape <- dim(data)
+cat('Rows:', shape[1], 'Columns:', shape[2], '\n')
+```
+
+```{r}
+data_types <- sapply(data, class)
+print(data_types)
+```
+
+
+```{r}
+summary(data)
+```
+
+
+```{r}
+null_values_count<- colSums(is.na(data))
+null_values_dataframe <- data.frame(Column = names(null_values_count), NA_Count = null_values_count)
+null_values_dataframe
+```
+
+```{r}
+columns_to_remove <- c('F1994', 'F1995', 'F1996', 'F1997', 'F1998', 'F1999', 'F2000', 'F2001',
+                       'F2002', 'F2003', 'F2004', 'F2005', 'F2006', 'F2007', 'F2008', 'F2009',
+                       'F2010', 'F2011')
+
+filtered_data <- data[, !(names(data) %in% columns_to_remove)]
+head(filtered_data,2)
+```
+```{r}
+names(filtered_data)
+```
+```{r}
+unique_country <- table(data$Country)
+cat('There are',length(unique_country),'unique countries in dataset')
+```
+
+> Checking null values of filtered_data
+
+```{r}
+null_values_count<- colSums(is.na(filtered_data))
+null_values_dataframe <- data.frame(Column = names(null_values_count), NA_Count = null_values_count)
+null_values_dataframe
+```
+
+>Droping null values
+
+```{r}
+data_cleaned <- na.omit(filtered_data)
+```
+
+> Checking shape of cleaned data
+
+```{r}
+shape <- dim(data_cleaned)
+cat('Rows:', shape[1], 'Columns:', shape[2], '\n')
+
+```
+```{r}
+head(data_cleaned)
+```
+> Changing value of object id and resetting index
+
+```{r}
+data_cleaned$ObjectId <- seq(1, nrow(data_cleaned))
+head(data_cleaned)
+```
+
+>save filtered data into csv file
+
+```{r}
+write.csv(data_cleaned, "Data.csv", row.names = FALSE)
+```
+
+
+
+
+
+>Filter dataset
+
+```{r, results='markup'}
+data<-read.csv("Data.csv")
+head(data)
+```
+
+```{r}
+unique_country <- table(data$Country)
+cat('There are',length(unique_country),'unique countries in dataset')
+```
+
+
+
+>Exploratory Data Analysis
+
+```{r, results='markup'}
+library(tidyverse)
+```
+
+--- SMART QUESTION 01: What is the trend in global environmental goods exports over the last decade (2013-2022)?
+
+
+
+```{r, results='markup'}
+exports_data <- filter(data, Indicator == "Environmental goods exports") # filter will be used to extract 
+exports_data
+```
+
+```{r, results='markup'}
+exports_trend <- colSums(exports_data[, c("F2013", "F2014", "F2015", "F2016", "F2017", "F2018", "F2019", "F2020", "F2021", "F2022")], na.rm = TRUE)
+exports_trend 
+```
+```{r, results='markup'}
+exports_trend <- round(exports_trend / 1000000000) #Converting the tota cost of exports into billion
+
+```
+
+
+```{r, results='markup'}
+exports_trend_df <- data.frame(Year = 2013:2022, 'Exports_In_Billions' = exports_trend)
+exports_trend_df
+
+```
+
+
+```{r, results='markup'}
+
+ggplot(exports_trend_df, aes(x = Year, y = Exports_In_Billions)) +
+  geom_line(group = 1, color = '#38599F') +
+  geom_point(color="#00297b") +
+  labs(title = "Global Environmental Goods Exports (2013-2022)",
+       x = "Year",
+       y = "Total Exports (US Dollars in billions)") +
+  
+  scale_x_continuous(breaks = 2013:2022) +
+  scale_y_continuous(breaks = seq(300, 500, by = 25))
+  
+
+```
+> 
+
+```{r}
+
+env_goods_exports <- subset(data, Indicator == 'Environmental goods exports')
+env_goods_exports
+
+```
+
+```{r}
+years <- paste0('F', 2013:2022)
+env_goods_exports_years <- env_goods_exports[, c('Country', years)]
+env_goods_exports_years
+```
+
+```{r}
+total_exports_by_year <- colSums(env_goods_exports_years[, -1], na.rm = TRUE)
+total_exports_by_year
+```
+```{r}
+total_exports_df <- data.frame(Year = as.numeric(sub("F", "", names(total_exports_by_year))), 
+                                Total_Export_Value = total_exports_by_year)
+total_exports_df <- arrange(total_exports_df, Year)
+total_exports_df$Total_Export_Value <- (total_exports_df$Total_Export_Value/1000000000)
+total_exports_df
+```
+
+
+```{r}
+
+
+
+variance_exports <- var(total_exports_df$Total_Export_Value)
+sd_exports <- sd(total_exports_df$Total_Export_Value)
+```
+```{r}
+variance_exports <- var(total_exports_df$Total_Export_Value)
+sd_exports <- sd(total_exports_df$Total_Export_Value)
+
+cat('Variance: ',variance_exports, 'Standard deviation: ',sd_exports)
+```
+```{r}
+print(total_exports_df)
+cat('Variance of Exports:', variance_exports, '\n')
+cat('Standard Deviation of Exports:', sd_exports, '\n')
+```
+```{r}
+# Step 4: Create a Linear Regression Model
+linear_model <- lm(Total_Export_Value ~ Year, data = total_exports_df)
+model_summary <- summary(linear_model)
+
+```
+
+```{r}
+library(broom)
+total_exports_df
+```
+
+```{r}
+total_exports_df$residuals <- residuals(linear_model)
+total_exports_df$predicted <- fitted(linear_model)
+
+plot <- ggplot(total_exports_df, aes(x = Year)) +
+  geom_point(aes(y = Total_Export_Value, color = "Actual Data Points"), size = 3) +
+  geom_line(aes(y = predicted, color = "Trend Line"), size = 0.77) +
+  geom_point(aes(y = predicted, color = "Predicted Points on Trend Line",fill="Predicted Points on Trend Line"), 
+             size = 4, shape = 25) +
+  scale_color_manual(values = c("Actual Data Points" = "#00297b", 
+                                "Trend Line" = "#38599f", 
+                                "Predicted Points on Trend Line" = "black")) +
+  scale_fill_manual(values = c("Predicted Points on Trend Line" = "#a5bfd1")) +
+  guides(color = guide_legend(override.aes = list(fill = c(NA, NA, "#a5bfd1"), shape = c(16, NA, 25), size = c(3, 0.77, 4))),
+         fill = guide_legend(override.aes = list(color = "black", shape = 25, size = 4))) +
+  labs(title = "Trend in Global Environmental Goods Exports (2013-2022)",
+       x = "Year",
+       y = "Total Export Value",
+       color = "") +
+  theme_minimal()
+
+plot + scale_x_continuous(breaks = seq(min(total_exports_df$Year), max(total_exports_df$Year), by = 1))
+
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
