@@ -243,6 +243,91 @@ plot + scale_x_continuous(breaks = seq(min(total_exports_df$Year), max(total_exp
 
 ```
 
+-----------------SMART QUESTION 2----------------------------
+
+```{r}
+
+
+selected_data <- exports_data %>%
+  select(Country, F2018, F2019, F2020, F2021, F2022)
+head(exports_data)
+
+```
+
+```{r, results='markup'}
+head(selected_data)
+```
+
+
+```{r}
+# Step 3: Check for each country if the exports have increased every year
+increasing_exports <- selected_data %>%
+  filter(F2018 < F2019 & F2019 < F2020 & F2020 < F2021 & F2021 < F2022) %>%
+  arrange(desc(F2022))
+```
+
+
+```{r}
+head(increasing_exports)
+```
+
+```{r}
+
+increasing_exports_long <- increasing_exports %>%
+  gather(key = "Year", value = "Exports", -Country) %>%
+  mutate(Year = as.numeric(sub("F", "", Year))) 
+
+increasing_exports_long$Exports=round(increasing_exports_long$Exports/1000000000)
+
+top_three_countries <- head(increasing_exports, 3)
+
+
+top_three_countries_names <- top_three_countries$Country
+
+top_three_countries_long <- increasing_exports_long %>%
+  filter(Country %in% top_three_countries_names)
+
+top_three_countries_long <- top_three_countries_long %>%
+  mutate(Country_Year = paste(Country, Year, sep = "-"))
+top_three_countries_long
+
+```
+
+
+
+
+```{r}
+ggplot(top_three_countries_long, aes(x = Country, y = Exports, fill = as.factor(Year))) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.7) +
+  scale_fill_manual(values = c("2018" = "#00297b", "2019" = "#38599F", "2020" = "#698bbD", "2021" = "#A5bfd1", "2022" = "#f1f1d2")) +
+  labs(title = "Environmental Goods Exports Trend (2018-2022)",
+       x = "Country",
+       y = "Exports (US Dollars in billions)",
+       fill = "Year") +
+  theme_minimal() +
+  scale_y_continuous(breaks = seq(0,15,by=1))
+  theme(legend.position = "bottom")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
