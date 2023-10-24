@@ -310,6 +310,128 @@ ggplot(top_three_countries_long, aes(x = Country, y = Exports, fill = as.factor(
 ```
 
 
+--- SMART QUESTION 06
+
+```{r}
+trade_balance_data <- filter(data, data$Indicator == 'Environmental goods trade balance')
+trade_balance_data
+```
+
+
+```{r}
+asian_countries = c('Afghanistan', 'Armenia', 'Azerbaijan', 'Bahrain', 'Bangladesh', 'Bhutan', 'Brunei Darussalam', 'Cambodia', 'China', 'Cyprus', 'Georgia', 'India', 'Indonesia', 'Iran (Islamic Republic of)', 'Iraq', 'Israel', 'Japan', 'Jordan', 'Kazakhstan', 'Kuwait', 'Kyrgyzstan', 'Lao People\'s Democratic Republic', 'Lebanon', 'Malaysia', 'Maldives', 'Mongolia', 'Myanmar', 'Nepal', 'Korea (Democratic People\'s Republic of)', 'Oman', 'Pakistan', 'Palestine', 'Philippines', 'Qatar', 'Saudi Arabia', 'Singapore', 'Korea (Republic of)', 'Sri Lanka', 'Syrian Arab Republic', 'Taiwan', 'Tajikistan', 'Thailand', 'Timor-Leste', 'Turkey', 'Turkmenistan', 'United Arab Emirates', 'Uzbekistan', 'Viet Nam', 'Yemen')
+
+european_countries = c('Albania', 'Andorra', 'Austria', 'Belarus', 'Belgium', 'Bosnia and Herzegovina', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Iceland', 'Ireland', 'Italy', 'Latvia', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Malta', 'Moldova', 'Monaco', 'Montenegro', 'Netherlands', 'North Macedonia', 'Norway', 'Poland', 'Portugal', 'Romania', 'Russian Federation', 'San Marino', 'Serbia', 'Slovakia', 'Slovenia', 'Spain', 'Sweden', 'Switzerland', 'Ukraine', 'United Kingdom', 'Vatican City State (Holy See)')
+```
+
+
+```{r}
+trade_balance_data$Region <- ifelse(trade_balance_data$Country %in% asian_countries, 'Asia',
+                                    ifelse(trade_balance_data$Country %in% european_countries, 'Europe', 'Other'))
+trade_balance_data
+```
+```{r}
+# Select the columns for years and Region
+years <- c('F2015', 'F2016', 'F2017', 'F2018', 'F2019', 'F2020', 'F2021', 'F2022')
+agg_data <- trade_balance_data %>%
+  select(one_of(c("Region", years)))
+# Group by 'Region' and calculate the sum for each year
+agg_data <- agg_data %>%
+  group_by(Region) %>%
+  summarise(across(.cols = everything(), .fns = sum, na.rm = TRUE))
+# Filter only 'Asia' and 'Europe'
+agg_data <- agg_data %>%
+  filter(Region %in% c('Asia', 'Europe'))
+agg_data
+```
+
+```{r, results='markup'}
+result6 <- data.frame(Year = 2015:2022, 
+                      'Asia' = t(agg_data[1,2:ncol(agg_data)]), 
+                      'Europe' = t(agg_data[2,2:ncol(agg_data)]))
+result6
+
+```
+
+```{r}
+ggplot(result6, aes(x = Year)) +
+  geom_line(aes(y = Asia / 1000000000, label='Asia'), color = "red", linetype = "solid") +
+  geom_line(aes(y = Europe / 1000000000, label='Europe'), color = "blue", linetype = "solid") +
+  labs(
+    title = "Total Trade Balance by Year (in Billions)",
+    x = "Year",
+    y = "Trade Balance"
+  ) +
+  scale_color_manual(values = c("Asia" = "red", "Europe" = "blue"),
+                     name = "Legend",
+                     labels = c('Asia', 'Europe')) +
+  theme_minimal()
+```
+
+```{r}
+correlation_coefficient <- cor(result6['Asia'], result6['Europe'])
+cat("Pearson Correlation Coefficient:", correlation_coefficient, "\n")
+```
+
+
+--- SMART QUESTION 07
+
+```{r}
+us_data = filter(trade_balance_data, Counterpart_Country == "United States")
+us_data <- us_data %>% 
+  select("Country", "F2010", "F2011", "F2012", "F2013", "F2014", "F2015", "F2016", "F2017", "F2018", "F2019", "F2020", "F2021", "F2022")
+us_data
+```
+
+```{r}
+# Convert the data into a long format
+trade_balance_data_long <- pivot_longer(us_data, 
+                                       cols = starts_with("F"), 
+                                       names_to = "Year", 
+                                       values_to = "Balance")
+trade_balance_data_long$Year <- as.numeric(substring(trade_balance_data_long$Year, 2))
+trade_balance_data_long
+```
+
+```{r}
+# Create the multiline graph
+ggplot(trade_balance_data_long, aes(x = Year, y = Balance / 1000000000, color = Country)) +
+  geom_line() + 
+  geom_point() +
+  labs(
+    title = "Trade Balance with the USA",
+    x = "Year",
+    y = "Balance in Billions"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "top") +
+  scale_x_continuous(breaks = seq(min(as.numeric(trade_balance_data_long$Year)), 
+                                  max(as.numeric(trade_balance_data_long$Year)), 1))
+```
+
+```{r}
+fluctuation_data <- us_data %>%
+  mutate(Fluctuation = F2022 - F2010)
+
+ggplot(fluctuation_data, aes(x = Country, y = Fluctuation / 1000000000)) +
+  geom_bar(stat = "identity", fill = "red") +
+  labs(
+    title = "Environmental Goods Trade Balance Fluctuation (2010-2022)",
+    x = "Country",
+    y = "Fluctuation in Billions"
+  ) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+```
+
+```{r}
+max_fluctuation_index <- which.max(abs(fluctuation_data$Fluctuation))
+country_with_max_fluctuation <- fluctuation_data$Country[max_fluctuation_index]
+max_fluctuation <- fluctuation_data$Fluctuation[max_fluctuation_index]
+
+cat("Country with Maximum Fluctuation (based on absolute values):", country_with_max_fluctuation, "\n")
+cat("Maximum Fluctuation Value (based on absolute values in billions):", max_fluctuation / 1000000000, "\n")
+```
 
 
 
