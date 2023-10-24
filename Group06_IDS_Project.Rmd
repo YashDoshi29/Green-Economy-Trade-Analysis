@@ -420,9 +420,9 @@ cat("Pearson Correlation Coefficient:", correlation_coefficient, "\n")
 --- SMART QUESTION 07
 
 ```{r}
-us_data = filter(data, Counterpart_Country == "United States")
+us_data = filter(trade_balance_data, Counterpart_Country == "United States")
 us_data <- us_data %>% 
-  select("Country", "F2010", "F2011", "F2012", "F2013", "F2014", "F2015", "F2016", "F2017", "F2018", "F2019", "F2020", "F2021", "F2022")
+  select("Country", "F2012", "F2013", "F2014", "F2015", "F2016", "F2017", "F2018", "F2019", "F2020", "F2021", "F2022")
 us_data
 ```
 
@@ -454,7 +454,7 @@ ggplot(trade_balance_data_long, aes(x = Year, y = Balance / 1000000000, color = 
 
 ```{r}
 fluctuation_data <- us_data %>%
-  mutate(Fluctuation = F2022 - F2010)
+  mutate(Fluctuation = F2022 - F2012)
 
 ggplot(fluctuation_data, aes(x = Country, y = Fluctuation / 1000000000)) +
   geom_bar(stat = "identity", fill = "red") +
