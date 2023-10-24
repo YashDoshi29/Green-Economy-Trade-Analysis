@@ -1,0 +1,2 @@
+"0","data<- read.csv('Bilateral_Trade_in_Environmental_Goods.csv')"
+"0","head(data)"

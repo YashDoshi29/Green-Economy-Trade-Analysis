@@ -1,0 +1,5 @@
+"0","total_exports_df <- data.frame(Year = as.numeric(sub(""F"", """", names(total_exports_by_year))), "
+"0","                                Total_Export_Value = total_exports_by_year)"
+"0","total_exports_df <- arrange(total_exports_df, Year)"
+"0","total_exports_df$Total_Export_Value <- (total_exports_df$Total_Export_Value/1000000000)"
+"0","total_exports_df"

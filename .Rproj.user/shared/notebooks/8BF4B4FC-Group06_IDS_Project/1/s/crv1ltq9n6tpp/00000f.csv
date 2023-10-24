@@ -1,0 +1,5 @@
+"0",""
+"0",""
+"0",""
+"0","variance_exports <- var(total_exports_df$Total_Export_Value)"
+"0","sd_exports <- sd(total_exports_df$Total_Export_Value)"

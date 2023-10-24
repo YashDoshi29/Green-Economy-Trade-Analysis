@@ -1,0 +1,2 @@
+"0","exports_trend_df <- data.frame(Year = 2013:2022, 'Exports_In_Billions' = exports_trend)"
+"0","exports_trend_df"

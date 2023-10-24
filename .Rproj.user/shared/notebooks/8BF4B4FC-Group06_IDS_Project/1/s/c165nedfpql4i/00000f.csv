@@ -1,0 +1,3 @@
+"0","trade_balance_data$Region <- ifelse(trade_balance_data$Country %in% asian_countries, 'Asia',"
+"0","                                    ifelse(trade_balance_data$Country %in% european_countries, 'Europe', 'Other'))"
+"0","trade_balance_data"

@@ -1,0 +1,550 @@
+---
+title: "PROJECT"
+output: html_document
+date: "2023-10-21"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+>DATA PREPROCESSING
+
+
+```{r}
+data<- read.csv('Bilateral_Trade_in_Environmental_Goods.csv')
+head(data)
+```
+
+
+```{r}
+shape <- dim(data)
+cat('Rows:', shape[1], 'Columns:', shape[2], '\n')
+```
+
+```{r}
+data_types <- sapply(data, class)
+print(data_types)
+```
+
+
+```{r}
+summary(data)
+```
+
+
+```{r}
+null_values_count<- colSums(is.na(data))
+null_values_dataframe <- data.frame(Column = names(null_values_count), NA_Count = null_values_count)
+null_values_dataframe
+```
+
+```{r}
+columns_to_remove <- c('F1994', 'F1995', 'F1996', 'F1997', 'F1998', 'F1999', 'F2000', 'F2001',
+                       'F2002', 'F2003', 'F2004', 'F2005', 'F2006', 'F2007', 'F2008', 'F2009',
+                       'F2010', 'F2011')
+
+filtered_data <- data[, !(names(data) %in% columns_to_remove)]
+head(filtered_data,2)
+```
+```{r}
+names(filtered_data)
+```
+```{r}
+unique_country <- table(data$Country)
+cat('There are',length(unique_country),'unique countries in dataset')
+```
+
+> Checking null values of filtered_data
+
+```{r}
+null_values_count<- colSums(is.na(filtered_data))
+null_values_dataframe <- data.frame(Column = names(null_values_count), NA_Count = null_values_count)
+null_values_dataframe
+```
+
+>Droping null values
+
+```{r}
+data_cleaned <- na.omit(filtered_data)
+```
+
+> Checking shape of cleaned data
+
+```{r}
+shape <- dim(data_cleaned)
+cat('Rows:', shape[1], 'Columns:', shape[2], '\n')
+
+```
+```{r}
+head(data_cleaned)
+```
+> Changing value of object id and resetting index
+
+```{r}
+data_cleaned$ObjectId <- seq(1, nrow(data_cleaned))
+head(data_cleaned)
+```
+
+>save filtered data into csv file
+
+```{r}
+write.csv(data_cleaned, "Data.csv", row.names = FALSE)
+```
+
+
+
+
+
+>Filter dataset
+
+```{r, results='markup'}
+data<-read.csv("Data.csv")
+head(data)
+```
+
+```{r}
+unique_country <- table(data$Country)
+cat('There are',length(unique_country),'unique countries in dataset')
+```
+
+
+
+>Exploratory Data Analysis
+
+```{r, results='markup'}
+library(tidyverse)
+```
+
+--- SMART QUESTION 01: What is the trend in global environmental goods exports over the last decade (2013-2022)?
+
+
+
+```{r, results='markup'}
+exports_data <- filter(data, Indicator == "Environmental goods exports") # filter will be used to extract 
+exports_data
+```
+
+```{r, results='markup'}
+exports_trend <- colSums(exports_data[, c("F2013", "F2014", "F2015", "F2016", "F2017", "F2018", "F2019", "F2020", "F2021", "F2022")], na.rm = TRUE)
+exports_trend 
+```
+```{r, results='markup'}
+exports_trend <- round(exports_trend / 1000000000) #Converting the tota cost of exports into billion
+
+```
+
+
+```{r, results='markup'}
+exports_trend_df <- data.frame(Year = 2013:2022, 'Exports_In_Billions' = exports_trend)
+exports_trend_df
+
+```
+
+
+```{r, results='markup'}
+
+ggplot(exports_trend_df, aes(x = Year, y = Exports_In_Billions)) +
+  geom_line(group = 1, color = '#38599F') +
+  geom_point(color="#00297b") +
+  labs(title = "Global Environmental Goods Exports (2013-2022)",
+       x = "Year",
+       y = "Total Exports (US Dollars in billions)") +
+  
+  scale_x_continuous(breaks = 2013:2022) +
+  scale_y_continuous(breaks = seq(300, 500, by = 25))
+  
+
+```
+> 
+
+```{r}
+
+env_goods_exports <- subset(data, Indicator == 'Environmental goods exports')
+env_goods_exports
+
+```
+
+```{r}
+years <- paste0('F', 2013:2022)
+env_goods_exports_years <- env_goods_exports[, c('Country', years)]
+env_goods_exports_years
+```
+
+```{r}
+total_exports_by_year <- colSums(env_goods_exports_years[, -1], na.rm = TRUE)
+total_exports_by_year
+```
+```{r}
+total_exports_df <- data.frame(Year = as.numeric(sub("F", "", names(total_exports_by_year))), 
+                                Total_Export_Value = total_exports_by_year)
+total_exports_df <- arrange(total_exports_df, Year)
+total_exports_df$Total_Export_Value <- (total_exports_df$Total_Export_Value/1000000000)
+total_exports_df
+```
+
+
+```{r}
+
+
+
+variance_exports <- var(total_exports_df$Total_Export_Value)
+sd_exports <- sd(total_exports_df$Total_Export_Value)
+```
+```{r}
+variance_exports <- var(total_exports_df$Total_Export_Value)
+sd_exports <- sd(total_exports_df$Total_Export_Value)
+
+cat('Variance: ',variance_exports, 'Standard deviation: ',sd_exports)
+```
+```{r}
+print(total_exports_df)
+cat('Variance of Exports:', variance_exports, '\n')
+cat('Standard Deviation of Exports:', sd_exports, '\n')
+```
+```{r}
+# Step 4: Create a Linear Regression Model
+linear_model <- lm(Total_Export_Value ~ Year, data = total_exports_df)
+model_summary <- summary(linear_model)
+
+```
+
+```{r}
+library(broom)
+total_exports_df
+```
+
+```{r}
+total_exports_df$residuals <- residuals(linear_model)
+total_exports_df$predicted <- fitted(linear_model)
+
+plot <- ggplot(total_exports_df, aes(x = Year)) +
+  geom_point(aes(y = Total_Export_Value, color = "Actual Data Points"), size = 3) +
+  geom_line(aes(y = predicted, color = "Trend Line"), size = 0.77) +
+  geom_point(aes(y = predicted, color = "Predicted Points on Trend Line",fill="Predicted Points on Trend Line"), 
+             size = 4, shape = 25) +
+  scale_color_manual(values = c("Actual Data Points" = "#00297b", 
+                                "Trend Line" = "#38599f", 
+                                "Predicted Points on Trend Line" = "black")) +
+  scale_fill_manual(values = c("Predicted Points on Trend Line" = "#a5bfd1")) +
+  guides(color = guide_legend(override.aes = list(fill = c(NA, NA, "#a5bfd1"), shape = c(16, NA, 25), size = c(3, 0.77, 4))),
+         fill = guide_legend(override.aes = list(color = "black", shape = 25, size = 4))) +
+  labs(title = "Trend in Global Environmental Goods Exports (2013-2022)",
+       x = "Year",
+       y = "Total Export Value",
+       color = "") +
+  theme_minimal()
+
+plot + scale_x_continuous(breaks = seq(min(total_exports_df$Year), max(total_exports_df$Year), by = 1))
+
+
+
+
+```
+
+-----------------SMART QUESTION 2----------------------------
+
+```{r}
+
+
+selected_data <- exports_data %>%
+  select(Country, F2018, F2019, F2020, F2021, F2022)
+head(exports_data)
+
+```
+
+```{r, results='markup'}
+head(selected_data)
+```
+
+
+```{r}
+# Step 3: Check for each country if the exports have increased every year
+increasing_exports <- selected_data %>%
+  filter(F2018 < F2019 & F2019 < F2020 & F2020 < F2021 & F2021 < F2022) %>%
+  arrange(desc(F2022))
+```
+
+
+```{r}
+head(increasing_exports)
+```
+
+```{r}
+
+increasing_exports_long <- increasing_exports %>%
+  gather(key = "Year", value = "Exports", -Country) %>%
+  mutate(Year = as.numeric(sub("F", "", Year))) 
+
+increasing_exports_long$Exports=round(increasing_exports_long$Exports/1000000000)
+
+top_three_countries <- head(increasing_exports, 3)
+
+
+top_three_countries_names <- top_three_countries$Country
+
+top_three_countries_long <- increasing_exports_long %>%
+  filter(Country %in% top_three_countries_names)
+
+top_three_countries_long <- top_three_countries_long %>%
+  mutate(Country_Year = paste(Country, Year, sep = "-"))
+top_three_countries_long
+
+```
+
+
+
+
+```{r}
+ggplot(top_three_countries_long, aes(x = Country, y = Exports, fill = as.factor(Year))) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.7) +
+  scale_fill_manual(values = c("2018" = "#00297b", "2019" = "#38599F", "2020" = "#698bbD", "2021" = "#A5bfd1", "2022" = "#f1f1d2")) +
+  labs(title = "Environmental Goods Exports Trend (2018-2022)",
+       x = "Country",
+       y = "Exports (US Dollars in billions)",
+       fill = "Year") +
+  theme_minimal() +
+  scale_y_continuous(breaks = seq(0,15,by=1))
+  theme(legend.position = "bottom")
+```
+
+>>> SMART QUESTION 04: How do landlocked countries compare to coastal countries in terms of environmental goods imports in 2022?
+
+```{r}
+# Define the groups of countries
+landlocked_countries_group <- c('Czech Republic', 'Hungary', 'Azerbaijan', 'Bolivia', 'Georgia')
+coastal_countries_group <- c('Chile', 'Greece', 'Jordan', 'Estonia', 'Mozambique')
+
+# Filter data for the specified countries, indicators, and the year 2022
+filtered_group_data <- data %>%
+  filter(Country %in% c(landlocked_countries_group, coastal_countries_group),
+         Indicator %in% c('Environmental goods imports', 'Environmental goods exports'),
+         Trade_Flow %in% c('Imports', 'Exports')) %>%
+  select(Country, Indicator, Trade_Flow, F2022)
+
+# Display the filtered data
+head(filtered_group_data)
+```
+```{r}
+# Add a new column for country classification
+filtered_group_data$Country_Classification <- ifelse(filtered_group_data$Country %in% landlocked_countries_group, 'Landlocked', 'Coastal')
+
+# Calculate total trade (imports and exports) for landlocked and coastal groups
+total_trade_group <- filtered_group_data %>%
+  group_by(Country_Classification, Trade_Flow) %>%
+  summarise(Total_Trade = sum(F2022)) %>%
+  spread(key = Trade_Flow, value = Total_Trade)
+
+# Display the total trade group
+total_trade_group$Exports<- total_trade_group$Exports/10000000000
+total_trade_group$Imports <- total_trade_group$Imports/10000000000
+```
+
+```{r}
+p <- ggplot(filtered_group_data, aes(x = Country_Classification, y = F2022, fill = Trade_Flow)) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.7) +
+  scale_y_log10("Environmental Goods Trade", labels = scales::comma_format()) +
+  xlab("Country Classification") +
+  ggtitle("ENV. Good Imports and Exports in 2022 Landlocked vs Coastal Countries") +
+  theme_minimal() +
+  scale_fill_manual(values = c("#38599f","#a5bfd1"))
+p
+```
+
+
+--- SMART QUESTION 06
+
+```{r}
+trade_balance_data <- filter(data, data$Indicator == 'Environmental goods trade balance')
+trade_balance_data
+```
+
+
+```{r}
+asian_countries = c('Afghanistan', 'Armenia', 'Azerbaijan', 'Bahrain', 'Bangladesh', 'Bhutan', 'Brunei Darussalam', 'Cambodia', 'China', 'Cyprus', 'Georgia', 'India', 'Indonesia', 'Iran (Islamic Republic of)', 'Iraq', 'Israel', 'Japan', 'Jordan', 'Kazakhstan', 'Kuwait', 'Kyrgyzstan', 'Lao People\'s Democratic Republic', 'Lebanon', 'Malaysia', 'Maldives', 'Mongolia', 'Myanmar', 'Nepal', 'Korea (Democratic People\'s Republic of)', 'Oman', 'Pakistan', 'Palestine', 'Philippines', 'Qatar', 'Saudi Arabia', 'Singapore', 'Korea (Republic of)', 'Sri Lanka', 'Syrian Arab Republic', 'Taiwan', 'Tajikistan', 'Thailand', 'Timor-Leste', 'Turkey', 'Turkmenistan', 'United Arab Emirates', 'Uzbekistan', 'Viet Nam', 'Yemen')
+
+european_countries = c('Albania', 'Andorra', 'Austria', 'Belarus', 'Belgium', 'Bosnia and Herzegovina', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Iceland', 'Ireland', 'Italy', 'Latvia', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Malta', 'Moldova', 'Monaco', 'Montenegro', 'Netherlands', 'North Macedonia', 'Norway', 'Poland', 'Portugal', 'Romania', 'Russian Federation', 'San Marino', 'Serbia', 'Slovakia', 'Slovenia', 'Spain', 'Sweden', 'Switzerland', 'Ukraine', 'United Kingdom', 'Vatican City State (Holy See)')
+```
+
+
+```{r}
+trade_balance_data$Region <- ifelse(trade_balance_data$Country %in% asian_countries, 'Asia',
+                                    ifelse(trade_balance_data$Country %in% european_countries, 'Europe', 'Other'))
+trade_balance_data
+```
+```{r}
+# Select the columns for years and Region
+years <- c('F2015', 'F2016', 'F2017', 'F2018', 'F2019', 'F2020', 'F2021', 'F2022')
+agg_data <- trade_balance_data %>%
+  select(one_of(c("Region", years)))
+# Group by 'Region' and calculate the sum for each year
+agg_data <- agg_data %>%
+  group_by(Region) %>%
+  summarise(across(.cols = everything(), .fns = sum, na.rm = TRUE))
+# Filter only 'Asia' and 'Europe'
+agg_data <- agg_data %>%
+  filter(Region %in% c('Asia', 'Europe'))
+agg_data
+```
+
+```{r, results='markup'}
+result6 <- data.frame(Year = 2015:2022, 
+                      'Asia' = t(agg_data[1,2:ncol(agg_data)]), 
+                      'Europe' = t(agg_data[2,2:ncol(agg_data)]))
+result6
+
+```
+
+```{r}
+ggplot(result6, aes(x = Year)) +
+  geom_line(aes(y = Asia / 1000000000, label='Asia'), color = "red", linetype = "solid") +
+  geom_line(aes(y = Europe / 1000000000, label='Europe'), color = "blue", linetype = "solid") +
+  labs(
+    title = "Total Trade Balance by Year (in Billions)",
+    x = "Year",
+    y = "Trade Balance"
+  ) +
+  scale_color_manual(values = c("Asia" = "red", "Europe" = "blue"),
+                     name = "Legend",
+                     labels = c('Asia', 'Europe')) +
+  theme_minimal()
+```
+
+```{r}
+correlation_coefficient <- cor(result6['Asia'], result6['Europe'])
+cat("Pearson Correlation Coefficient:", correlation_coefficient, "\n")
+```
+
+
+--- SMART QUESTION 07
+
+```{r}
+us_data = filter(trade_balance_data, Counterpart_Country == "United States")
+us_data <- us_data %>% 
+  select("Country", "F2010", "F2011", "F2012", "F2013", "F2014", "F2015", "F2016", "F2017", "F2018", "F2019", "F2020", "F2021", "F2022")
+us_data
+```
+
+```{r}
+# Convert the data into a long format
+trade_balance_data_long <- pivot_longer(us_data, 
+                                       cols = starts_with("F"), 
+                                       names_to = "Year", 
+                                       values_to = "Balance")
+trade_balance_data_long$Year <- as.numeric(substring(trade_balance_data_long$Year, 2))
+trade_balance_data_long
+```
+
+```{r}
+# Create the multiline graph
+ggplot(trade_balance_data_long, aes(x = Year, y = Balance / 1000000000, color = Country)) +
+  geom_line() + 
+  geom_point() +
+  labs(
+    title = "Trade Balance with the USA",
+    x = "Year",
+    y = "Balance in Billions"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "top") +
+  scale_x_continuous(breaks = seq(min(as.numeric(trade_balance_data_long$Year)), 
+                                  max(as.numeric(trade_balance_data_long$Year)), 1))
+```
+
+```{r}
+fluctuation_data <- us_data %>%
+  mutate(Fluctuation = F2022 - F2010)
+
+ggplot(fluctuation_data, aes(x = Country, y = Fluctuation / 1000000000)) +
+  geom_bar(stat = "identity", fill = "red") +
+  labs(
+    title = "Environmental Goods Trade Balance Fluctuation (2010-2022)",
+    x = "Country",
+    y = "Fluctuation in Billions"
+  ) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+```
+
+```{r}
+max_fluctuation_index <- which.max(abs(fluctuation_data$Fluctuation))
+country_with_max_fluctuation <- fluctuation_data$Country[max_fluctuation_index]
+max_fluctuation <- fluctuation_data$Fluctuation[max_fluctuation_index]
+
+cat("Country with Maximum Fluctuation (based on absolute values):", country_with_max_fluctuation, "\n")
+cat("Maximum Fluctuation Value (based on absolute values in billions):", max_fluctuation / 1000000000, "\n")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

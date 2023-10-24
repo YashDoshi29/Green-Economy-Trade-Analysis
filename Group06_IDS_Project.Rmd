@@ -309,6 +309,49 @@ ggplot(top_three_countries_long, aes(x = Country, y = Exports, fill = as.factor(
   theme(legend.position = "bottom")
 ```
 
+>>> SMART QUESTION 04: How do landlocked countries compare to coastal countries in terms of environmental goods imports in 2022?
+
+```{r}
+# Define the groups of countries
+landlocked_countries_group <- c('Czech Republic', 'Hungary', 'Azerbaijan', 'Bolivia', 'Georgia')
+coastal_countries_group <- c('Chile', 'Greece', 'Jordan', 'Estonia', 'Mozambique')
+
+# Filter data for the specified countries, indicators, and the year 2022
+filtered_group_data <- data %>%
+  filter(Country %in% c(landlocked_countries_group, coastal_countries_group),
+         Indicator %in% c('Environmental goods imports', 'Environmental goods exports'),
+         Trade_Flow %in% c('Imports', 'Exports')) %>%
+  select(Country, Indicator, Trade_Flow, F2022)
+
+# Display the filtered data
+head(filtered_group_data)
+```
+```{r}
+# Add a new column for country classification
+filtered_group_data$Country_Classification <- ifelse(filtered_group_data$Country %in% landlocked_countries_group, 'Landlocked', 'Coastal')
+
+# Calculate total trade (imports and exports) for landlocked and coastal groups
+total_trade_group <- filtered_group_data %>%
+  group_by(Country_Classification, Trade_Flow) %>%
+  summarise(Total_Trade = sum(F2022)) %>%
+  spread(key = Trade_Flow, value = Total_Trade)
+
+# Display the total trade group
+total_trade_group$Exports<- total_trade_group$Exports/10000000000
+total_trade_group$Imports <- total_trade_group$Imports/10000000000
+```
+
+```{r}
+p <- ggplot(filtered_group_data, aes(x = Country_Classification, y = F2022, fill = Trade_Flow)) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.7) +
+  scale_y_log10("Environmental Goods Trade", labels = scales::comma_format()) +
+  xlab("Country Classification") +
+  ggtitle("ENV. Good Imports and Exports in 2022 Landlocked vs Coastal Countries") +
+  theme_minimal() +
+  scale_fill_manual(values = c("#38599f","#a5bfd1"))
+p
+```
+
 
 --- SMART QUESTION 06
 

@@ -1,0 +1,3 @@
+"0",""
+"0","env_goods_exports <- subset(data, Indicator == 'Environmental goods exports')"
+"0","env_goods_exports"

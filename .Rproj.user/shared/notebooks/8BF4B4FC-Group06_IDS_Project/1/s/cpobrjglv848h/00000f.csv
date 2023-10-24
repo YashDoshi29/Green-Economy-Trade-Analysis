@@ -1,0 +1,2 @@
+"0","trade_balance_data <- filter(data, data$Indicator == 'Environmental goods trade balance')"
+"0","trade_balance_data"

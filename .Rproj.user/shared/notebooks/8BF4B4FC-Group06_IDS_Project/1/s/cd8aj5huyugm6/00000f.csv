@@ -1,0 +1,8 @@
+"0","correlation_coefficient <- cor(result6['Asia'], result6['Europe'])"
+"0","cat(""Pearson Correlation Coefficient:"", correlation_coefficient, ""\n"")"
+"1","Pearson Correlation Coefficient:"
+"1"," "
+"1","-0.4190462"
+"1"," "
+"1","
+"

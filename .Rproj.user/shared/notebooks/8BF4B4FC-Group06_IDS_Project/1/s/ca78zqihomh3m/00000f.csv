@@ -1,0 +1,4 @@
+"0","result6 <- data.frame(Year = 2015:2022, "
+"0","                      'Asia' = t(agg_data[1,2:ncol(agg_data)]), "
+"0","                      'Europe' = t(agg_data[2,2:ncol(agg_data)]))"
+"0","result6"

@@ -1,0 +1,2 @@
+"0","exports_data <- filter(data, Indicator == ""Environmental goods exports"") # filter will be used to extract "
+"0","exports_data"
