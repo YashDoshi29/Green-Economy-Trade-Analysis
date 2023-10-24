@@ -353,6 +353,101 @@ p
 ```
 
 
+--------------------SMART QUESTION 05-------------------
+```{r}
+india_trade <- filter(data, Counterpart_Country == 'India')
+```
+
+```{r}
+environmental_trade <- filter(india_trade, Indicator %in% c('Environmental goods exports', 'Environmental goods imports'))
+```
+
+```{r}
+country_indicator_count <- environmental_trade %>%
+  group_by(Country) %>%
+  summarise(Unique_Indicators = n_distinct(Indicator))
+```
+
+```{r}
+countries_with_both <- filter(country_indicator_count, Unique_Indicators == 2) %>%
+  pull(Country)
+```
+
+```{r}
+filtered_data <- filter(environmental_trade, Country %in% countries_with_both)
+
+# Step 2: Group the data by country and indicator, and calculate the sum for each group
+grouped_data <- filtered_data %>%
+  group_by(Country, Indicator) %>%
+  summarise(Sum = sum(F2022, na.rm = TRUE)) %>%
+  ungroup()
+
+# Step 3: Pivot the data to have exports and imports in separate columns for easier comparison
+trade_sums <- grouped_data %>%
+  spread(key = Indicator, value = Sum)
+
+# Step 4: Replace NaN values with 0
+trade_sums[is.na(trade_sums)] <- 0
+trade_sums
+```
+```{r}
+#Step 1: Calculate the Import-Export Difference
+trade_sums <- trade_sums %>%
+  mutate(Import_Export_Difference = `Environmental goods imports` - `Environmental goods exports`)
+
+# Step 2: Select Specific Columns
+result <- select(trade_sums, Country, Import_Export_Difference)
+result
+```
+
+```{r}
+trade_values <- trade_sums %>%
+  pivot_longer(cols = c(`Environmental goods exports`, `Environmental goods imports`),
+               names_to = "Indicator",
+               values_to = "Trade_Value")
+
+# Showing the trade values
+print(trade_values)
+```
+
+```{r}
+# Step 1: Calculate the Import-Export Difference
+trade_sums <- trade_sums %>%
+  mutate(Import_Export_Difference = `Environmental goods imports` - `Environmental goods exports`)
+
+# Step 2: Select Specific Columns
+result <- select(trade_sums, Country, Import_Export_Difference)
+result
+```
+
+```{r}
+library(ggplot2)
+
+top_countries <- result %>%
+  arrange(desc(abs(Import_Export_Difference)))
+
+# Step 2: Select the Top 10
+top_10_countries <- head(top_countries, 10)
+
+# Step 3: Create the Plot
+ggplot(data = top_10_countries, aes(x = reorder(Country, -abs(Import_Export_Difference)), y = Import_Export_Difference)) +
+  geom_bar(stat = "identity", fill = "#698bbd") +
+  labs(title = "Top 10 Countries: Import-Export Difference of Environmental Goods",
+       x = "Country",
+       y = "Import-Export Difference") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+
+
+
+
+
+
+
+
+
 --- SMART QUESTION 06
 
 ```{r}
