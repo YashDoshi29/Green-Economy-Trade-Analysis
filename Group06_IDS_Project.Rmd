@@ -66,9 +66,7 @@ null_values_dataframe
 > Removing Some columns from dataset.
 
 ```{r, results='markup'}
-columns_to_remove <- c('F1994', 'F1995', 'F1996', 'F1997', 'F1998', 'F1999', 'F2000', 'F2001',
-                       'F2002', 'F2003', 'F2004', 'F2005', 'F2006', 'F2007', 'F2008', 'F2009',
-                       'F2010', 'F2011')
+columns_to_remove <- c('ISO3', 'Counterpart_ISO3', 'Source', 'CTS_Code', 'CTS_Name', 'CTS_Full_Descriptor', 'Unit', 'Scale', 'F1994', 'F1995', 'F1996', 'F1997', 'F1998', 'F1999', 'F2000', 'F2001', 'F2002', 'F2003', 'F2004', 'F2005', 'F2006', 'F2007', 'F2008', 'F2009', 'F2010', 'F2011')
 
 filtered_data <- data[, !(names(data) %in% columns_to_remove)]
 head(filtered_data,2)
@@ -156,7 +154,7 @@ cat('There are',length(unique_country),'unique countries in dataset')
 
 ```{r, results='markup'}
 exports_data <- filter(data, Indicator == "Environmental goods exports") 
-exports_data
+head(exports_data)
 ```
 
 ```{r, results='markup'}
@@ -171,7 +169,7 @@ exports_trend <- round(exports_trend / 1000000000) #Converting the tota cost of 
 
 ```{r, results='markup'}
 exports_trend_df <- data.frame(Year = 2013:2022, 'Exports_In_Billions' = exports_trend)
-exports_trend_df
+head(exports_trend_df)
 
 ```
 
@@ -195,26 +193,26 @@ ggplot(exports_trend_df, aes(x = Year, y = Exports_In_Billions)) +
 ```{r}
 
 env_goods_exports <- subset(data, Indicator == 'Environmental goods exports')
-env_goods_exports
+head(env_goods_exports)
 
 ```
 
 ```{r}
 years <- paste0('F', 2013:2022)
 env_goods_exports_years <- env_goods_exports[, c('Country', years)]
-env_goods_exports_years
+head(env_goods_exports_years)
 ```
 
 ```{r}
 total_exports_by_year <- colSums(env_goods_exports_years[, -1], na.rm = TRUE)
-total_exports_by_year
+head(total_exports_by_year, 3)
 ```
 ```{r}
 total_exports_df <- data.frame(Year = as.numeric(sub("F", "", names(total_exports_by_year))), 
                                 Total_Export_Value = total_exports_by_year)
 total_exports_df <- arrange(total_exports_df, Year)
 total_exports_df$Total_Export_Value <- (total_exports_df$Total_Export_Value/1000000000)
-total_exports_df
+head(total_exports_df)
 ```
 
 
@@ -244,7 +242,7 @@ model_summary <- summary(linear_model)
 ```
 
 ```{r}
-total_exports_df
+head(total_exports_df)
 ```
 
 ```{r}
@@ -321,7 +319,7 @@ top_three_countries_long <- increasing_exports_long %>%
 
 top_three_countries_long <- top_three_countries_long %>%
   mutate(Country_Year = paste(Country, Year, sep = "-"))
-top_three_countries_long
+head(top_three_countries_long)
 
 ```
 
@@ -361,7 +359,7 @@ head(filtered_group_data)
 ```{r}
 # Add a new column for country classification
 filtered_group_data$Country_Classification <- ifelse(filtered_group_data$Country %in% landlocked_countries_group, 'Landlocked', 'Coastal')
-filtered_group_data
+head(filtered_group_data)
 ```
 ```{r}
 # Calculate total trade (imports and exports) for landlocked and coastal groups
@@ -369,7 +367,7 @@ total_trade_group <- filtered_group_data %>%
   group_by(Country_Classification, Trade_Flow) %>%
   summarise(Total_Trade = sum(F2022)) %>%
   spread(key = Trade_Flow, value = Total_Trade)
-total_trade_group
+head(total_trade_group)
 ```
 
 
@@ -379,7 +377,7 @@ total_trade_group
 # Transform the data to a long format
 total_trade_long <- total_trade_group %>%
   gather(key = "Trade_Flow", value = "Amount", -Country_Classification)
-total_trade_long
+head(total_trade_long)
 ```
 
 
@@ -451,7 +449,7 @@ trade_sums <- trade_sums %>%
 
 # Step 2: Select Specific Columns
 result <- select(trade_sums, Country, Import_Export_Difference)
-result
+head(result)
 ```
 
 ```{r}
@@ -471,7 +469,7 @@ trade_sums <- trade_sums %>%
 
 # Step 2: Select Specific Columns
 result <- select(trade_sums, Country, Import_Export_Difference)
-result
+head(result)
 ```
 
 ```{r}
@@ -506,7 +504,7 @@ ggplot(data = top_10_countries, aes(x = reorder(Country, -abs(Import_Export_Diff
 
 ```{r}
 trade_balance_data <- filter(data, data$Indicator == 'Environmental goods trade balance')
-trade_balance_data
+head(trade_balance_data)
 ```
 
 
@@ -520,7 +518,7 @@ european_countries = c('Albania', 'Andorra', 'Austria', 'Belarus', 'Belgium', 'B
 ```{r}
 trade_balance_data$Region <- ifelse(trade_balance_data$Country %in% asian_countries, 'Asia',
                                     ifelse(trade_balance_data$Country %in% european_countries, 'Europe', 'Other'))
-trade_balance_data
+head(trade_balance_data)
 ```
 ```{r}
 # Select the columns for years and Region
@@ -534,14 +532,14 @@ agg_data <- agg_data %>%
 # Filter only 'Asia' and 'Europe'
 agg_data <- agg_data %>%
   filter(Region %in% c('Asia', 'Europe'))
-agg_data
+head(agg_data)
 ```
 
 ```{r, results='markup'}
 result6 <- data.frame(Year = 2015:2022, 
                       'Asia' = t(agg_data[1,2:ncol(agg_data)]), 
                       'Europe' = t(agg_data[2,2:ncol(agg_data)]))
-result6
+head(result6)
 
 ```
 
@@ -572,7 +570,7 @@ cat("Pearson Correlation Coefficient:", correlation_coefficient, "\n")
 us_data = filter(trade_balance_data, Counterpart_Country == "United States")
 us_data <- us_data %>% 
   select("Country", "F2012", "F2013", "F2014", "F2015", "F2016", "F2017", "F2018", "F2019", "F2020", "F2021", "F2022")
-us_data
+head(us_data)
 ```
 
 ```{r}
@@ -582,7 +580,7 @@ trade_balance_data_long <- pivot_longer(us_data,
                                        names_to = "Year", 
                                        values_to = "Balance")
 trade_balance_data_long$Year <- as.numeric(substring(trade_balance_data_long$Year, 2))
-trade_balance_data_long
+head(trade_balance_data_long)
 ```
 
 ```{r}
@@ -632,7 +630,7 @@ cat("Maximum Fluctuation Value (based on absolute values in billions):", max_flu
 #filtered_data = data[['Country', 'Counterpart_Country', 'Trade_Flow', 'F2022']]
 filtered_data <- data %>%
   select(Country, Counterpart_Country, Trade_Flow, F2022)
-filtered_data
+head(filtered_data)
 ```
 
 ```{r}
@@ -641,7 +639,7 @@ filtered_data_2 <- filtered_data %>%
   mutate(Country_Pair = if_else(Country < Counterpart_Country,
                                 paste(Country, Counterpart_Country, sep = " - "),
                                 paste(Counterpart_Country, Country, sep = " - ")))
-filtered_data_2
+head(filtered_data_2)
 ```
 
 ```{r}
@@ -650,7 +648,7 @@ mutual_trade_volume <- filtered_data_2 %>%
   group_by(Country_Pair) %>%
   summarise(Total_Trade_2022 = sum(F2022, na.rm = TRUE)) %>%
   ungroup()
-mutual_trade_volume 
+head(mutual_trade_volume)
 ```
 
 ```{r}
@@ -659,7 +657,7 @@ highest_mutual_trade_volume <- mutual_trade_volume %>%
   arrange(desc(Total_Trade_2022))
 highest_mutual_trade_volume<- head(highest_mutual_trade_volume,15)
 highest_mutual_trade_volume$Total_Trade_2022<- highest_mutual_trade_volume$Total_Trade_2022/10000000000
-highest_mutual_trade_volume
+head(highest_mutual_trade_volume)
 ```
 
 ```{r}
@@ -698,7 +696,7 @@ unique_pairs <- dataset %>%
 sorted_pairs <- unique_pairs %>%
   arrange(desc(Mutual_Trade_2022))
 top_pairs <- head(sorted_pairs, 15)
-top_pairs
+head(top_pairs)
 ```
 
 ```{r}
@@ -715,7 +713,7 @@ anova_df <- data.frame(
   values = unlist(anova_data),
   group = factor(rep(1:10, each = 11))
 )
-anova_df
+head(anova_df)
 ```
 
 ```{r}
@@ -739,12 +737,12 @@ The mutual trade volumes across the selected country-counterpart pairs in 2022 d
 #filtered_data = data[['Country', 'Counterpart_Country', 'Trade_Flow', 'F2022']]
 filtered_data <- data %>%
   select(Country, Counterpart_Country, Trade_Flow, F2022)
-filtered_data
+head(filtered_data)
 trade_partnerships <- filtered_data %>%
   group_by(Country) %>%
   summarise(Unique_Trade_Partners = n_distinct(Counterpart_Country)) %>%
   ungroup()
-trade_partnerships
+head(trade_partnerships)
 ```
 
 ```{r}
@@ -752,7 +750,7 @@ trade_partnerships
 
 most_diversified_trade = most_diversified_trade <- trade_partnerships %>%
   arrange(desc(Unique_Trade_Partners))
-most_diversified_trade
+head(most_diversified_trade)
 ```
 
 ```{r}
@@ -777,7 +775,7 @@ ggplot(most_diversified_trade, aes(x = reorder(Country, -Unique_Trade_Partners),
 
 
 ```{r}
-most_diversified_trade
+head(most_diversified_trade)
 ```
 
 
@@ -785,13 +783,13 @@ most_diversified_trade
 total_trade <- data %>%
   group_by(Country) %>%
   summarise(Total_Trade_2022 = sum(F2022, na.rm = TRUE))
-total_trade
+head(total_trade)
 ```
 ```{r}
 trade_proportions <- data %>%
   left_join(total_trade, by = "Country") %>%
   mutate(Trade_Proportion = F2022 / Total_Trade_2022)
-trade_proportions
+head(trade_proportions)
 ```
 
 
@@ -813,7 +811,7 @@ hhi_data <- hhi_results %>%
     hhi_results$HHI >= 0.15 & hhi_results$HHI < 0.25 ~ "Moderate Diversity",
     hhi_results$HHI < 0.15 ~ "High Diversity"
   ))
-hhi_data
+head(hhi_data)
 ```
 
 ```{r}
