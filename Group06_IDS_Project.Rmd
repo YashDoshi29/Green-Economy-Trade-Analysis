@@ -377,7 +377,7 @@ cat("Pearson Correlation Coefficient:", correlation_coefficient, "\n")
 --- SMART QUESTION 07
 
 ```{r}
-us_data = filter(trade_balance_data, Counterpart_Country == "United States")
+us_data = filter(data, Counterpart_Country == "United States")
 us_data <- us_data %>% 
   select("Country", "F2010", "F2011", "F2012", "F2013", "F2014", "F2015", "F2016", "F2017", "F2018", "F2019", "F2020", "F2021", "F2022")
 us_data
@@ -434,6 +434,109 @@ cat("Maximum Fluctuation Value (based on absolute values in billions):", max_flu
 ```
 
 
+------------------SMART QUESTION 08----------------------------
+
+```{r}
+#filtered_data = data[['Country', 'Counterpart_Country', 'Trade_Flow', 'F2022']]
+filtered_data <- data %>%
+  select(Country, Counterpart_Country, Trade_Flow, F2022)
+filtered_data
+```
+
+```{r}
+#calculate mutual trade volume.
+filtered_data_2 <- filtered_data %>%
+  mutate(Country_Pair = if_else(Country < Counterpart_Country,
+                                paste(Country, Counterpart_Country, sep = " - "),
+                                paste(Counterpart_Country, Country, sep = " - ")))
+filtered_data_2
+```
+
+```{r}
+# Calculate the mutual trade volume for each country pair
+mutual_trade_volume <- filtered_data_2 %>%
+  group_by(Country_Pair) %>%
+  summarise(Total_Trade_2022 = sum(F2022, na.rm = TRUE)) %>%
+  ungroup()
+mutual_trade_volume 
+```
+
+```{r}
+#sort the results and find the country pairs with the highest mutual trade volume in 2022
+highest_mutual_trade_volume <- mutual_trade_volume %>%
+  arrange(desc(Total_Trade_2022))
+highest_mutual_trade_volume<- head(highest_mutual_trade_volume,15)
+highest_mutual_trade_volume$Total_Trade_2022<- highest_mutual_trade_volume$Total_Trade_2022/10000000000
+highest_mutual_trade_volume
+```
+
+```{r}
+ggplot(highest_mutual_trade_volume, aes(x = reorder(Country_Pair, -Total_Trade_2022), y = Total_Trade_2022)) +
+  geom_segment(aes(x = reorder(Country_Pair, -Total_Trade_2022), xend = reorder(Country_Pair, -Total_Trade_2022), y = 0, yend = Total_Trade_2022), color = "#00297b", size = 1) +
+  geom_point(aes(x = reorder(Country_Pair, -Total_Trade_2022), y = Total_Trade_2022), color = "#698bbd", size = 4) +
+  geom_point(aes(x = reorder(Country_Pair, -Total_Trade_2022), y = Total_Trade_2022), color = "black", size = 4, shape = 1) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 1, hjust=1)) +
+  labs(title = "Mutual Trade Volume in 2022",
+       x = "Country Pair",
+       y = "Trade Volume (USD)")
+
+```
+
+>Statistical Testing
+
+>Hypothesis:
+Is there a significant difference in mutual trade volumes across different country-counterpart pairs in 2022?"
+
+>Test: ANNOVA 
+# Step 1: Prepare the data for ANOVA
+
+```{r}
+
+dataset <- data %>%
+  group_by(Country, Counterpart_Country) %>%
+  mutate(Mutual_Trade_2022 = sum(F2022, na.rm = TRUE)) %>%
+  ungroup()
+
+```
+
+```{r}
+unique_pairs <- dataset %>%
+  distinct(Country, Counterpart_Country, .keep_all = TRUE)
+sorted_pairs <- unique_pairs %>%
+  arrange(desc(Mutual_Trade_2022))
+top_pairs <- head(sorted_pairs, 15)
+top_pairs
+```
+
+```{r}
+anova_data <- lapply(1:nrow(top_pairs), function(i) {
+  row <- top_pairs[i, ]
+  subset_data <- subset(dataset, Country == row$Country & Counterpart_Country == row$Counterpart_Country)
+  c(subset_data$F2012, subset_data$F2013, subset_data$F2014, subset_data$F2015, subset_data$F2016,
+    subset_data$F2017, subset_data$F2018, subset_data$F2019, subset_data$F2020, subset_data$F2021, subset_data$F2022)
+})
+```
+
+```{r}
+anova_df <- data.frame(
+  values = unlist(anova_data),
+  group = factor(rep(1:10, each = 11))
+)
+anova_df
+```
+
+```{r}
+# Performing the ANOVA test
+anova_result <- aov(values ~ group, data = anova_df)
+summary(anova_result)
+```
+
+>Conclusion:
+Because the p-value (0.78) is much greater than the common alpha level of 0.05, we fail to reject the null hypothesis.
+There is not enough statistical evidence to conclude that there is a significant difference in mutual trade volumes across different country-counterpart pairs in 2022.
+Interpretation:
+The mutual trade volumes across the selected country-counterpart pairs in 2022 do not significantly differ from each other, based on the ANOVA test conducted on the top trading pairs. This suggests that the variations in trade volumes within the pairs are not significantly less than the variations between the pairs.
 
 
 
