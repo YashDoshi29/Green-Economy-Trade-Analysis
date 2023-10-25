@@ -8,7 +8,6 @@ date: "2023-10-21"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
 >DATA PREPROCESSING
 
 ```{r, results='markup'}
@@ -123,17 +122,12 @@ head(data_cleaned)
 write.csv(data_cleaned, "Data.csv", row.names = FALSE)
 ```
 
-
-
-
-
 >Filter dataset
 
 ```{r, results='markup'}
 data<-read.csv("Data.csv")
 head(data)
 ```
-
 
 > No. of unique countries after filtering dataset
 
@@ -150,7 +144,9 @@ cat('There are',length(unique_country),'unique countries in dataset')
 
 ```
 
---- SMART QUESTION 01: What is the trend in global environmental goods exports over the last decade (2013-2022)?
+--------------------------------- SMART QUESTION 01----------------------------------
+
+What is the trend in global environmental goods exports over the last decade (2013-2022)?
 
 
 
@@ -192,24 +188,24 @@ ggplot(exports_trend_df, aes(x = Year, y = Exports_In_Billions)) +
 ```
 >Linear Regression Model
 
-```{r}
+```{r, results='markup'}
 
 env_goods_exports <- subset(data, Indicator == 'Environmental goods exports')
 env_goods_exports
 
 ```
 
-```{r}
+```{r, results='markup'}
 years <- paste0('F', 2013:2022)
 env_goods_exports_years <- env_goods_exports[, c('Country', years)]
 env_goods_exports_years
 ```
 
-```{r}
+```{r, results='markup'}
 total_exports_by_year <- colSums(env_goods_exports_years[, -1], na.rm = TRUE)
 total_exports_by_year
 ```
-```{r}
+```{r, results='markup'}
 total_exports_df <- data.frame(Year = as.numeric(sub("F", "", names(total_exports_by_year))), 
                                 Total_Export_Value = total_exports_by_year)
 total_exports_df <- arrange(total_exports_df, Year)
@@ -218,36 +214,36 @@ total_exports_df
 ```
 
 
-```{r}
+```{r, results='markup'}
 
 variance_exports <- var(total_exports_df$Total_Export_Value)
 sd_exports <- sd(total_exports_df$Total_Export_Value)
 ```
 
-```{r}
+```{r, results='markup'}
 variance_exports <- var(total_exports_df$Total_Export_Value)
 sd_exports <- sd(total_exports_df$Total_Export_Value)
 
 cat('Variance: ',variance_exports, 'Standard deviation: ',sd_exports)
 ```
 
-```{r}
+```{r, results='markup'}
 print(total_exports_df)
 cat('Variance of Exports:', variance_exports, '\n')
 cat('Standard Deviation of Exports:', sd_exports, '\n')
 ```
 
-```{r}
+```{r, results='markup'}
 linear_model <- lm(Total_Export_Value ~ Year, data = total_exports_df)
 model_summary <- summary(linear_model)
 
 ```
 
-```{r}
+```{r, results='markup'}
 total_exports_df
 ```
 
-```{r}
+```{r, results='markup'}
 total_exports_df$residuals <- residuals(linear_model)
 total_exports_df$predicted <- fitted(linear_model)
 
@@ -275,9 +271,10 @@ print(plot)
 
 ```
 
------------------SMART QUESTION 2----------------------------
+--------------------------------- SMART QUESTION 02----------------------------------
+Which three countries have consistently increased their environmental goods exports every year for the last five years (2018-2022)?
 
-```{r}
+```{r, results='markup'}
 
 
 selected_data <- exports_data %>%
@@ -291,7 +288,7 @@ head(selected_data)
 ```
 
 
-```{r}
+```{r, results='markup'}
 # Step 3: Check for each country if the exports have increased every year
 increasing_exports <- selected_data %>%
   filter(F2018 < F2019 & F2019 < F2020 & F2020 < F2021 & F2021 < F2022) %>%
@@ -299,11 +296,11 @@ increasing_exports <- selected_data %>%
 ```
 
 
-```{r}
+```{r, results='markup'}
 head(increasing_exports)
 ```
 
-```{r}
+```{r, results='markup'}
 
 increasing_exports_long <- increasing_exports %>%
   gather(key = "Year", value = "Exports", -Country) %>%
@@ -328,7 +325,7 @@ top_three_countries_long
 
 
 
-```{r}
+```{r, results='markup'}
 ggplot(top_three_countries_long, aes(x = Country, y = Exports, fill = as.factor(Year))) +
   geom_bar(stat = "identity", position = "dodge", width = 0.7) +
   scale_fill_manual(values = c("2018" = "#00297b", "2019" = "#38599F", "2020" = "#698bbD", "2021" = "#A5bfd1", "2022" = "#f1f1d2")) +
@@ -340,10 +337,10 @@ ggplot(top_three_countries_long, aes(x = Country, y = Exports, fill = as.factor(
   scale_y_continuous(breaks = seq(0,15,by=1))
   theme(legend.position = "bottom")
 ```
+---------------------------------------------SMART QUESTION 04---------------------------------- 
+How do landlocked countries compare to coastal countries in terms of environmental goods imports in 2022?
 
->>> SMART QUESTION 04: How do landlocked countries compare to coastal countries in terms of environmental goods imports in 2022?
-
-```{r}
+```{r, results='markup'}
 # Define the groups of countries
 landlocked_countries_group <- c('Czech Republic', 'Hungary', 'Azerbaijan', 'Bolivia', 'Georgia')
 coastal_countries_group <- c('Chile', 'Greece', 'Jordan', 'Estonia', 'Mozambique')
@@ -358,12 +355,12 @@ filtered_group_data <- data %>%
 # Display the filtered data
 head(filtered_group_data)
 ```
-```{r}
+```{r, results='markup'}
 # Add a new column for country classification
 filtered_group_data$Country_Classification <- ifelse(filtered_group_data$Country %in% landlocked_countries_group, 'Landlocked', 'Coastal')
 filtered_group_data
 ```
-```{r}
+```{r, results='markup'}
 # Calculate total trade (imports and exports) for landlocked and coastal groups
 total_trade_group <- filtered_group_data %>%
   group_by(Country_Classification, Trade_Flow) %>%
@@ -373,7 +370,7 @@ total_trade_group
 ```
 
 
-```{r}
+```{r, results='markup'}
 
 
 # Transform the data to a long format
@@ -383,7 +380,7 @@ total_trade_long
 ```
 
 
-```{r}
+```{r, results='markup'}
 p <- ggplot(total_trade_long, aes(x = Country_Classification, y = Amount, fill = Trade_Flow)) +
   geom_col(position = "dodge", width = 0.6) +
   scale_y_continuous(
@@ -394,7 +391,7 @@ p <- ggplot(total_trade_long, aes(x = Country_Classification, y = Amount, fill =
   labs(
     y = "Amount in Billions",
     x = "Country Classification",
-    title = "Environmental Goods Imports and Exports in 2022",
+    title = "Environmental Goods Trades in 2022",
     subtitle = "Landlocked vs Coastal Countries"
   ) +
   theme_minimal() +
@@ -407,27 +404,30 @@ p
 ```
 
 
---------------------SMART QUESTION 05-------------------
-```{r}
+-----------------------------------SMART QUESTION 05----------------------------------
+Which country, which exported environmental goods to India in 2022, also saw a parallel increase in its own imports of environmental goods from India during the same year?
+
+
+```{r, results='markup'}
 india_trade <- filter(data, Counterpart_Country == 'India')
 ```
 
-```{r}
+```{r, results='markup'}
 environmental_trade <- filter(india_trade, Indicator %in% c('Environmental goods exports', 'Environmental goods imports'))
 ```
 
-```{r}
+```{r, results='markup'}
 country_indicator_count <- environmental_trade %>%
   group_by(Country) %>%
   summarise(Unique_Indicators = n_distinct(Indicator))
 ```
 
-```{r}
+```{r, results='markup'}
 countries_with_both <- filter(country_indicator_count, Unique_Indicators == 2) %>%
   pull(Country)
 ```
 
-```{r}
+```{r, results='markup'}
 filtered_data <- filter(environmental_trade, Country %in% countries_with_both)
 
 # Step 2: Group the data by country and indicator, and calculate the sum for each group
@@ -444,7 +444,7 @@ trade_sums <- grouped_data %>%
 trade_sums[is.na(trade_sums)] <- 0
 trade_sums
 ```
-```{r}
+```{r, results='markup'}
 #Step 1: Calculate the Import-Export Difference
 trade_sums <- trade_sums %>%
   mutate(Import_Export_Difference = `Environmental goods imports` - `Environmental goods exports`)
@@ -454,7 +454,7 @@ result <- select(trade_sums, Country, Import_Export_Difference)
 result
 ```
 
-```{r}
+```{r, results='markup'}
 trade_values <- trade_sums %>%
   pivot_longer(cols = c(`Environmental goods exports`, `Environmental goods imports`),
                names_to = "Indicator",
@@ -464,7 +464,7 @@ trade_values <- trade_sums %>%
 print(trade_values)
 ```
 
-```{r}
+```{r, results='markup'}
 # Step 1: Calculate the Import-Export Difference
 trade_sums <- trade_sums %>%
   mutate(Import_Export_Difference = `Environmental goods imports` - `Environmental goods exports`)
@@ -474,7 +474,7 @@ result <- select(trade_sums, Country, Import_Export_Difference)
 result
 ```
 
-```{r}
+```{r, results='markup'}
 library(ggplot2)
 
 top_countries <- result %>%
@@ -495,34 +495,29 @@ ggplot(data = top_10_countries, aes(x = reorder(Country, -abs(Import_Export_Diff
 
 
 
+--------------------------------- SMART QUESTION 06 --------------------------------------
+Are there any correlations between the trade balance of Asian countries and European countries from 2015 to 2022?
 
 
-
-
-
-
-
---- SMART QUESTION 06
-
-```{r}
+```{r, results='markup'}
 trade_balance_data <- filter(data, data$Indicator == 'Environmental goods trade balance')
 trade_balance_data
 ```
 
 
-```{r}
+```{r, results='markup'}
 asian_countries = c('Afghanistan', 'Armenia', 'Azerbaijan', 'Bahrain', 'Bangladesh', 'Bhutan', 'Brunei Darussalam', 'Cambodia', 'China', 'Cyprus', 'Georgia', 'India', 'Indonesia', 'Iran (Islamic Republic of)', 'Iraq', 'Israel', 'Japan', 'Jordan', 'Kazakhstan', 'Kuwait', 'Kyrgyzstan', 'Lao People\'s Democratic Republic', 'Lebanon', 'Malaysia', 'Maldives', 'Mongolia', 'Myanmar', 'Nepal', 'Korea (Democratic People\'s Republic of)', 'Oman', 'Pakistan', 'Palestine', 'Philippines', 'Qatar', 'Saudi Arabia', 'Singapore', 'Korea (Republic of)', 'Sri Lanka', 'Syrian Arab Republic', 'Taiwan', 'Tajikistan', 'Thailand', 'Timor-Leste', 'Turkey', 'Turkmenistan', 'United Arab Emirates', 'Uzbekistan', 'Viet Nam', 'Yemen')
 
 european_countries = c('Albania', 'Andorra', 'Austria', 'Belarus', 'Belgium', 'Bosnia and Herzegovina', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Iceland', 'Ireland', 'Italy', 'Latvia', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Malta', 'Moldova', 'Monaco', 'Montenegro', 'Netherlands', 'North Macedonia', 'Norway', 'Poland', 'Portugal', 'Romania', 'Russian Federation', 'San Marino', 'Serbia', 'Slovakia', 'Slovenia', 'Spain', 'Sweden', 'Switzerland', 'Ukraine', 'United Kingdom', 'Vatican City State (Holy See)')
 ```
 
 
-```{r}
+```{r, results='markup'}
 trade_balance_data$Region <- ifelse(trade_balance_data$Country %in% asian_countries, 'Asia',
                                     ifelse(trade_balance_data$Country %in% european_countries, 'Europe', 'Other'))
 trade_balance_data
 ```
-```{r}
+```{r, results='markup'}
 # Select the columns for years and Region
 years <- c('F2015', 'F2016', 'F2017', 'F2018', 'F2019', 'F2020', 'F2021', 'F2022')
 agg_data <- trade_balance_data %>%
@@ -545,37 +540,38 @@ result6
 
 ```
 
-```{r}
+```{r, results='markup'}
 ggplot(result6, aes(x = Year)) +
-  geom_line(aes(y = Asia / 1000000000, label='Asia'), color = "red", linetype = "solid") +
-  geom_line(aes(y = Europe / 1000000000, label='Europe'), color = "blue", linetype = "solid") +
+  geom_line(aes(y = Asia / 1000000000, color = 'Asia', label='Asia'), linetype = "solid") +
+  geom_line(aes(y = Europe / 1000000000, color = 'Europe', label='Europe'), linetype = "solid") +
   labs(
     title = "Total Trade Balance by Year (in Billions)",
     x = "Year",
     y = "Trade Balance"
   ) +
-  scale_color_manual(values = c("Asia" = "red", "Europe" = "blue"),
-                     name = "Legend",
-                     labels = c('Asia', 'Europe')) +
+  scale_color_manual(values = c('Asia' = 'red', 'Europe' = 'blue')) +
+  guides(color = guide_legend(title = "Legend")) +
   theme_minimal()
 ```
 
-```{r}
+```{r, results='markup'}
 correlation_coefficient <- cor(result6['Asia'], result6['Europe'])
 cat("Pearson Correlation Coefficient:", correlation_coefficient, "\n")
 ```
 
 
---- SMART QUESTION 07
+-------------------------------------- SMART QUESTION 07 ---------------------------------------
+Which country's environmental goods trade balance with the US has seen the greatest fluctuation from 2010 to 2022?
 
-```{r}
+
+```{r, results='markup'}
 us_data = filter(trade_balance_data, Counterpart_Country == "United States")
 us_data <- us_data %>% 
   select("Country", "F2012", "F2013", "F2014", "F2015", "F2016", "F2017", "F2018", "F2019", "F2020", "F2021", "F2022")
 us_data
 ```
 
-```{r}
+```{r, results='markup'}
 # Convert the data into a long format
 trade_balance_data_long <- pivot_longer(us_data, 
                                        cols = starts_with("F"), 
@@ -585,7 +581,7 @@ trade_balance_data_long$Year <- as.numeric(substring(trade_balance_data_long$Yea
 trade_balance_data_long
 ```
 
-```{r}
+```{r, results='markup'}
 # Create the multiline graph
 ggplot(trade_balance_data_long, aes(x = Year, y = Balance / 1000000000, color = Country)) +
   geom_line() + 
@@ -601,7 +597,7 @@ ggplot(trade_balance_data_long, aes(x = Year, y = Balance / 1000000000, color = 
                                   max(as.numeric(trade_balance_data_long$Year)), 1))
 ```
 
-```{r}
+```{r, results='markup'}
 fluctuation_data <- us_data %>%
   mutate(Fluctuation = F2022 - F2012)
 
@@ -616,7 +612,7 @@ ggplot(fluctuation_data, aes(x = Country, y = Fluctuation / 1000000000)) +
 
 ```
 
-```{r}
+```{r, results='markup'}
 max_fluctuation_index <- which.max(abs(fluctuation_data$Fluctuation))
 country_with_max_fluctuation <- fluctuation_data$Country[max_fluctuation_index]
 max_fluctuation <- fluctuation_data$Fluctuation[max_fluctuation_index]
@@ -626,16 +622,18 @@ cat("Maximum Fluctuation Value (based on absolute values in billions):", max_flu
 ```
 
 
-------------------SMART QUESTION 08----------------------------
+-------------------------------------SMART QUESTION 08------------------------------------
+Which country-counterpart pairs have the highest mutual trade volume in 2022?
 
-```{r}
+
+```{r, results='markup'}
 #filtered_data = data[['Country', 'Counterpart_Country', 'Trade_Flow', 'F2022']]
 filtered_data <- data %>%
   select(Country, Counterpart_Country, Trade_Flow, F2022)
 filtered_data
 ```
 
-```{r}
+```{r, results='markup'}
 #calculate mutual trade volume.
 filtered_data_2 <- filtered_data %>%
   mutate(Country_Pair = if_else(Country < Counterpart_Country,
@@ -644,7 +642,7 @@ filtered_data_2 <- filtered_data %>%
 filtered_data_2
 ```
 
-```{r}
+```{r, results='markup'}
 # Calculate the mutual trade volume for each country pair
 mutual_trade_volume <- filtered_data_2 %>%
   group_by(Country_Pair) %>%
@@ -653,7 +651,7 @@ mutual_trade_volume <- filtered_data_2 %>%
 mutual_trade_volume 
 ```
 
-```{r}
+```{r, results='markup'}
 #sort the results and find the country pairs with the highest mutual trade volume in 2022
 highest_mutual_trade_volume <- mutual_trade_volume %>%
   arrange(desc(Total_Trade_2022))
@@ -662,7 +660,7 @@ highest_mutual_trade_volume$Total_Trade_2022<- highest_mutual_trade_volume$Total
 highest_mutual_trade_volume
 ```
 
-```{r}
+```{r, results='markup'}
 ggplot(highest_mutual_trade_volume, aes(x = reorder(Country_Pair, -Total_Trade_2022), y = Total_Trade_2022)) +
   geom_segment(aes(x = reorder(Country_Pair, -Total_Trade_2022), xend = reorder(Country_Pair, -Total_Trade_2022), y = 0, yend = Total_Trade_2022), color = "#00297b", size = 1) +
   geom_point(aes(x = reorder(Country_Pair, -Total_Trade_2022), y = Total_Trade_2022), color = "#698bbd", size = 4) +
@@ -683,7 +681,7 @@ Is there a significant difference in mutual trade volumes across different count
 >Test: ANNOVA 
 # Step 1: Prepare the data for ANOVA
 
-```{r}
+```{r, results='markup'}
 
 dataset <- data %>%
   group_by(Country, Counterpart_Country) %>%
@@ -692,7 +690,7 @@ dataset <- data %>%
 
 ```
 
-```{r}
+```{r, results='markup'}
 unique_pairs <- dataset %>%
   distinct(Country, Counterpart_Country, .keep_all = TRUE)
 sorted_pairs <- unique_pairs %>%
@@ -701,7 +699,7 @@ top_pairs <- head(sorted_pairs, 15)
 top_pairs
 ```
 
-```{r}
+```{r, results='markup'}
 anova_data <- lapply(1:nrow(top_pairs), function(i) {
   row <- top_pairs[i, ]
   subset_data <- subset(dataset, Country == row$Country & Counterpart_Country == row$Counterpart_Country)
@@ -710,7 +708,7 @@ anova_data <- lapply(1:nrow(top_pairs), function(i) {
 })
 ```
 
-```{r}
+```{r, results='markup'}
 anova_df <- data.frame(
   values = unlist(anova_data),
   group = factor(rep(1:10, each = 11))
@@ -718,7 +716,7 @@ anova_df <- data.frame(
 anova_df
 ```
 
-```{r}
+```{r, results='markup'}
 # Performing the ANOVA test
 anova_result <- aov(values ~ group, data = anova_df)
 summary(anova_result)
@@ -731,9 +729,11 @@ Interpretation:
 The mutual trade volumes across the selected country-counterpart pairs in 2022 do not significantly differ from each other, based on the ANOVA test conducted on the top trading pairs. This suggests that the variations in trade volumes within the pairs are not significantly less than the variations between the pairs.
 
 
--------------------------------SMART QUESTION 9------------------------------------------------------
+---------------------------------------------SMART QUESTION 9---------------------------------------
+Which country has the most diversified environmental goods trade partnerships in 2022?
 
-```{r}
+
+```{r, results='markup'}
 
 
 #filtered_data = data[['Country', 'Counterpart_Country', 'Trade_Flow', 'F2022']]
@@ -747,7 +747,7 @@ trade_partnerships <- filtered_data %>%
 trade_partnerships
 ```
 
-```{r}
+```{r, results='markup'}
 #Find the Country with the Most Diversified Trade
 
 most_diversified_trade = most_diversified_trade <- trade_partnerships %>%
@@ -755,10 +755,7 @@ most_diversified_trade = most_diversified_trade <- trade_partnerships %>%
 most_diversified_trade
 ```
 
-```{r}
-# Bar Chart
-
-
+```{r, results='markup'}
 # Bar Chart
 ggplot(most_diversified_trade, aes(x = reorder(Country, -Unique_Trade_Partners), y = Unique_Trade_Partners)) +
   geom_bar(stat = "identity", fill = "#00297b") +
@@ -776,18 +773,18 @@ ggplot(most_diversified_trade, aes(x = reorder(Country, -Unique_Trade_Partners),
 
 
 
-```{r}
+```{r, results='markup'}
 most_diversified_trade
 ```
 
 
-```{r}
+```{r, results='markup'}
 total_trade <- data %>%
   group_by(Country) %>%
   summarise(Total_Trade_2022 = sum(F2022, na.rm = TRUE))
 total_trade
 ```
-```{r}
+```{r, results='markup'}
 trade_proportions <- data %>%
   left_join(total_trade, by = "Country") %>%
   mutate(Trade_Proportion = F2022 / Total_Trade_2022)
@@ -796,7 +793,7 @@ trade_proportions
 
 
 
-```{r}
+```{r, results='markup'}
 # Assuming trade_proportions is your data frame and is already available in your R environment
 hhi_results <- trade_proportions %>%
   group_by(Country) %>%
@@ -806,7 +803,7 @@ hhi_results <- trade_proportions %>%
 print(hhi_results)
 ```
 
-```{r}
+```{r, results='markup'}
 hhi_data <- hhi_results %>%
   mutate(Group = case_when(
     hhi_results$HHI >= 0.25 ~ "Low Diversity",
@@ -816,11 +813,11 @@ hhi_data <- hhi_results %>%
 hhi_data
 ```
 
-```{r}
+```{r, results='markup'}
 hhi_data$Group <- as.factor(hhi_data$Group)
 head(hhi_data)
 ```
-```{r}
+```{r, results='markup'}
 anova_result <- aov(HHI ~ Group, data = hhi_data)
 summary(anova_result)
 ```
