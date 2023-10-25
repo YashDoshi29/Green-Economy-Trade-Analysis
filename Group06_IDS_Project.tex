@@ -1,0 +1,2325 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={PROJECT},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{PROJECT}
+\author{}
+\date{\vspace{-2.5em}2023-10-21}
+
+\begin{document}
+\maketitle
+
+\begin{quote}
+DATA PREPROCESSING
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v forcats   1.0.0     v readr     2.1.4
+## v ggplot2   3.4.2     v stringr   1.5.0
+## v lubridate 1.9.2     v tibble    3.2.1
+## v purrr     1.0.1     v tidyr     1.3.0
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+Importing Dataset
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data}\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{\textquotesingle{}Bilateral\_Trade\_in\_Environmental\_Goods.csv\textquotesingle{}}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   ObjectId                      Country ISO2 ISO3 Counterpart_Country
+## 1        1 Afghanistan, Islamic Rep. of   AF  AFG           Australia
+## 2        2 Afghanistan, Islamic Rep. of   AF  AFG           Australia
+## 3        3 Afghanistan, Islamic Rep. of   AF  AFG           Australia
+## 4        4 Afghanistan, Islamic Rep. of   AF  AFG           Australia
+## 5        5 Afghanistan, Islamic Rep. of   AF  AFG             Austria
+## 6        6 Afghanistan, Islamic Rep. of   AF  AFG             Austria
+##   Counterpart_ISO2 Counterpart_ISO3
+## 1               AU              AUS
+## 2               AU              AUS
+## 3               AU              AUS
+## 4               AU              AUS
+## 5               AT              AUT
+## 6               AT              AUT
+##                                               Indicator       Unit
+## 1                           Environmental goods exports US Dollars
+## 2 Environmental goods exports as share of total exports    Percent
+## 3                           Environmental goods imports US Dollars
+## 4 Environmental goods imports as share of total imports    Percent
+## 5                           Environmental goods exports US Dollars
+## 6 Environmental goods exports as share of total exports    Percent
+##                                                                                                                                                                       Source
+## 1 Department of Economic and Social Affairs/United Nations. 2022. United Nations Comtrade database. https://comtrade.un.org. Accessed on 2023-06-28; IMF staff calculations.
+## 2 Department of Economic and Social Affairs/United Nations. 2022. United Nations Comtrade database. https://comtrade.un.org. Accessed on 2023-06-28; IMF staff calculations.
+## 3 Department of Economic and Social Affairs/United Nations. 2022. United Nations Comtrade database. https://comtrade.un.org. Accessed on 2023-06-28; IMF staff calculations.
+## 4 Department of Economic and Social Affairs/United Nations. 2022. United Nations Comtrade database. https://comtrade.un.org. Accessed on 2023-06-28; IMF staff calculations.
+## 5 Department of Economic and Social Affairs/United Nations. 2022. United Nations Comtrade database. https://comtrade.un.org. Accessed on 2023-06-28; IMF staff calculations.
+## 6 Department of Economic and Social Affairs/United Nations. 2022. United Nations Comtrade database. https://comtrade.un.org. Accessed on 2023-06-28; IMF staff calculations.
+##   CTS_Code                              CTS_Name
+## 1   ECBTGX Trade in Environmental Goods; Exports
+## 2   ECBTGX Trade in Environmental Goods; Exports
+## 3   ECBTGM Trade in Environmental Goods; Imports
+## 4   ECBTGM Trade in Environmental Goods; Imports
+## 5   ECBTGX Trade in Environmental Goods; Exports
+## 6   ECBTGX Trade in Environmental Goods; Exports
+##                                                                               CTS_Full_Descriptor
+## 1 Environment, Climate Change, Cross-Border, Trade-Related, Trade in Environmental Goods, Exports
+## 2 Environment, Climate Change, Cross-Border, Trade-Related, Trade in Environmental Goods, Exports
+## 3 Environment, Climate Change, Cross-Border, Trade-Related, Trade in Environmental Goods, Imports
+## 4 Environment, Climate Change, Cross-Border, Trade-Related, Trade in Environmental Goods, Imports
+## 5 Environment, Climate Change, Cross-Border, Trade-Related, Trade in Environmental Goods, Exports
+## 6 Environment, Climate Change, Cross-Border, Trade-Related, Trade in Environmental Goods, Exports
+##   Trade_Flow Scale F1994 F1995 F1996 F1997 F1998 F1999 F2000 F2001 F2002 F2003
+## 1    Exports Units    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA
+## 2    Exports Units    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA
+## 3    Imports Units    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA
+## 4    Imports Units    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA
+## 5    Exports Units    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA
+## 6    Exports Units    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA
+##   F2004 F2005 F2006 F2007 F2008 F2009 F2010 F2011 F2012 F2013 F2014 F2015
+## 1    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA
+## 2    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA
+## 3    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA
+## 4    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA
+## 5    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA
+## 6    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA
+##          F2016        F2017       F2018 F2019 F2020 F2021 F2022
+## 1           NA 145.95000000          NA    NA    NA    NA    NA
+## 2           NA   0.02430819          NA    NA    NA    NA    NA
+## 3 3.359500e+04           NA          NA    NA    NA    NA    NA
+## 4 6.048676e-01           NA          NA    NA    NA    NA    NA
+## 5           NA 729.43000000 658.4400000    NA    NA    NA    NA
+## 6           NA   0.30453443   0.6306111    NA    NA    NA    NA
+\end{verbatim}
+
+\begin{quote}
+Checking Shape of Dataset
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{shape }\OtherTok{\textless{}{-}} \FunctionTok{dim}\NormalTok{(data)}
+\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Rows:\textquotesingle{}}\NormalTok{, shape[}\DecValTok{1}\NormalTok{], }\StringTok{\textquotesingle{}Columns:\textquotesingle{}}\NormalTok{, shape[}\DecValTok{2}\NormalTok{], }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 149801 Columns: 44
+\end{verbatim}
+
+\begin{quote}
+Checking data types of columns.
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_types }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(data, class)}
+\FunctionTok{print}\NormalTok{(data\_types)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            ObjectId             Country                ISO2                ISO3 
+##           "integer"         "character"         "character"         "character" 
+## Counterpart_Country    Counterpart_ISO2    Counterpart_ISO3           Indicator 
+##         "character"         "character"         "character"         "character" 
+##                Unit              Source            CTS_Code            CTS_Name 
+##         "character"         "character"         "character"         "character" 
+## CTS_Full_Descriptor          Trade_Flow               Scale               F1994 
+##         "character"         "character"         "character"           "numeric" 
+##               F1995               F1996               F1997               F1998 
+##           "numeric"           "numeric"           "numeric"           "numeric" 
+##               F1999               F2000               F2001               F2002 
+##           "numeric"           "numeric"           "numeric"           "numeric" 
+##               F2003               F2004               F2005               F2006 
+##           "numeric"           "numeric"           "numeric"           "numeric" 
+##               F2007               F2008               F2009               F2010 
+##           "numeric"           "numeric"           "numeric"           "numeric" 
+##               F2011               F2012               F2013               F2014 
+##           "numeric"           "numeric"           "numeric"           "numeric" 
+##               F2015               F2016               F2017               F2018 
+##           "numeric"           "numeric"           "numeric"           "numeric" 
+##               F2019               F2020               F2021               F2022 
+##           "numeric"           "numeric"           "numeric"           "numeric"
+\end{verbatim}
+
+\begin{quote}
+Statistical Summary of Dataset
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     ObjectId        Country              ISO2               ISO3          
+##  Min.   :     1   Length:149801      Length:149801      Length:149801     
+##  1st Qu.: 37451   Class :character   Class :character   Class :character  
+##  Median : 74901   Mode  :character   Mode  :character   Mode  :character  
+##  Mean   : 74957                                                           
+##  3rd Qu.:112351                                                           
+##  Max.   :153801                                                           
+##                                                                           
+##  Counterpart_Country Counterpart_ISO2   Counterpart_ISO3    Indicator        
+##  Length:149801       Length:149801      Length:149801      Length:149801     
+##  Class :character    Class :character   Class :character   Class :character  
+##  Mode  :character    Mode  :character   Mode  :character   Mode  :character  
+##                                                                              
+##                                                                              
+##                                                                              
+##                                                                              
+##      Unit              Source            CTS_Code           CTS_Name        
+##  Length:149801      Length:149801      Length:149801      Length:149801     
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##                                                                             
+##  CTS_Full_Descriptor  Trade_Flow           Scale               F1994           
+##  Length:149801       Length:149801      Length:149801      Min.   :-5.235e+09  
+##  Class :character    Class :character   Class :character   1st Qu.: 2.749e+04  
+##  Mode  :character    Mode  :character   Mode  :character   Median : 5.003e+05  
+##                                                            Mean   : 3.818e+07  
+##                                                            3rd Qu.: 5.805e+06  
+##                                                            Max.   : 1.342e+10  
+##                                                            NA's   :127054      
+##      F1995                F1996                F1997           
+##  Min.   :-5.471e+09   Min.   :-4.881e+09   Min.   :-5.318e+09  
+##  1st Qu.: 2.872e+04   1st Qu.: 3.027e+04   1st Qu.: 2.630e+04  
+##  Median : 5.292e+05   Median : 5.423e+05   Median : 4.937e+05  
+##  Mean   : 4.276e+07   Mean   : 4.198e+07   Mean   : 4.145e+07  
+##  3rd Qu.: 6.497e+06   3rd Qu.: 6.476e+06   3rd Qu.: 6.087e+06  
+##  Max.   : 1.501e+10   Max.   : 1.601e+10   Max.   : 1.842e+10  
+##  NA's   :124330       NA's   :121992       NA's   :120337      
+##      F1998                F1999                F2000           
+##  Min.   :-5.417e+09   Min.   :-5.793e+09   Min.   :-6.848e+09  
+##  1st Qu.: 4.000e+00   1st Qu.: 4.000e+00   1st Qu.: 3.000e+00  
+##  Median : 2.934e+04   Median : 2.152e+04   Median : 8.874e+03  
+##  Mean   : 2.645e+07   Mean   : 2.625e+07   Mean   : 2.484e+07  
+##  3rd Qu.: 1.778e+06   3rd Qu.: 1.447e+06   3rd Qu.: 9.393e+05  
+##  Max.   : 1.977e+10   Max.   : 2.187e+10   Max.   : 2.475e+10  
+##  NA's   :102472       NA's   :99841        NA's   :90057       
+##      F2001                F2002                F2003           
+##  Min.   :-6.441e+09   Min.   :-5.942e+09   Min.   :-9.733e+09  
+##  1st Qu.: 3.000e+00   1st Qu.: 3.000e+00   1st Qu.: 3.000e+00  
+##  Median : 8.283e+03   Median : 8.225e+03   Median : 8.818e+03  
+##  Mean   : 2.375e+07   Mean   : 2.401e+07   Mean   : 2.759e+07  
+##  3rd Qu.: 9.689e+05   3rd Qu.: 9.342e+05   3rd Qu.: 1.035e+06  
+##  Max.   : 2.353e+10   Max.   : 2.298e+10   Max.   : 2.331e+10  
+##  NA's   :88094        NA's   :86005        NA's   :84074       
+##      F2004                F2005                F2006           
+##  Min.   :-1.367e+10   Min.   :-1.328e+10   Min.   :-1.676e+10  
+##  1st Qu.: 3.000e+00   1st Qu.: 3.000e+00   1st Qu.: 3.000e+00  
+##  Median : 9.208e+03   Median : 1.000e+04   Median : 9.014e+03  
+##  Mean   : 3.314e+07   Mean   : 3.628e+07   Mean   : 4.058e+07  
+##  3rd Qu.: 1.160e+06   3rd Qu.: 1.290e+06   3rd Qu.: 1.382e+06  
+##  Max.   : 2.547e+10   Max.   : 2.771e+10   Max.   : 3.019e+10  
+##  NA's   :81671        NA's   :79590        NA's   :77087       
+##      F2007                F2008                F2009           
+##  Min.   :-2.000e+10   Min.   :-2.088e+10   Min.   :-1.608e+10  
+##  1st Qu.: 3.000e+00   1st Qu.: 4.000e+00   1st Qu.: 4.000e+00  
+##  Median : 1.035e+04   Median : 1.104e+04   Median : 1.019e+04  
+##  Mean   : 4.655e+07   Mean   : 5.276e+07   Mean   : 4.326e+07  
+##  3rd Qu.: 1.657e+06   3rd Qu.: 1.982e+06   3rd Qu.: 1.645e+06  
+##  Max.   : 3.221e+10   Max.   : 3.415e+10   Max.   : 2.790e+10  
+##  NA's   :74143        NA's   :72652        NA's   :72747       
+##      F2010                F2011                F2012           
+##  Min.   :-2.277e+10   Min.   :-2.414e+10   Min.   :-2.259e+10  
+##  1st Qu.: 4.000e+00   1st Qu.: 4.000e+00   1st Qu.: 4.000e+00  
+##  Median : 9.955e+03   Median : 1.113e+04   Median : 1.108e+04  
+##  Mean   : 5.052e+07   Mean   : 5.797e+07   Mean   : 5.829e+07  
+##  3rd Qu.: 1.716e+06   3rd Qu.: 1.975e+06   3rd Qu.: 1.963e+06  
+##  Max.   : 3.780e+10   Max.   : 4.345e+10   Max.   : 4.499e+10  
+##  NA's   :69883        NA's   :69813        NA's   :67996       
+##      F2013                F2014                F2015           
+##  Min.   :-2.213e+10   Min.   :-2.125e+10   Min.   :-2.416e+10  
+##  1st Qu.: 4.000e+00   1st Qu.: 4.000e+00   1st Qu.: 4.000e+00  
+##  Median : 1.124e+04   Median : 1.096e+04   Median : 9.185e+03  
+##  Mean   : 5.803e+07   Mean   : 5.989e+07   Mean   : 5.392e+07  
+##  3rd Qu.: 2.020e+06   3rd Qu.: 2.115e+06   3rd Qu.: 1.781e+06  
+##  Max.   : 4.521e+10   Max.   : 4.966e+10   Max.   : 5.013e+10  
+##  NA's   :66098        NA's   :66472        NA's   :63899       
+##      F2016                F2017                F2018           
+##  Min.   :-2.368e+10   Min.   :-2.468e+10   Min.   :-2.931e+10  
+##  1st Qu.: 4.000e+00   1st Qu.: 4.000e+00   1st Qu.: 4.000e+00  
+##  Median : 8.131e+03   Median : 8.338e+03   Median : 9.636e+03  
+##  Mean   : 5.221e+07   Mean   : 5.773e+07   Mean   : 6.302e+07  
+##  3rd Qu.: 1.629e+06   3rd Qu.: 1.737e+06   3rd Qu.: 1.921e+06  
+##  Max.   : 4.974e+10   Max.   : 5.402e+10   Max.   : 5.727e+10  
+##  NA's   :62569        NA's   :61109        NA's   :61652       
+##      F2019                F2020                F2021           
+##  Min.   :-2.399e+10   Min.   :-2.533e+10   Min.   :-3.305e+10  
+##  1st Qu.: 4.000e+00   1st Qu.: 5.000e+00   1st Qu.: 5.000e+00  
+##  Median : 9.410e+03   Median : 9.944e+03   Median : 1.135e+04  
+##  Mean   : 6.368e+07   Mean   : 6.580e+07   Mean   : 8.339e+07  
+##  3rd Qu.: 1.874e+06   3rd Qu.: 1.919e+06   3rd Qu.: 2.206e+06  
+##  Max.   : 5.691e+10   Max.   : 5.542e+10   Max.   : 6.957e+10  
+##  NA's   :61751        NA's   :64425        NA's   :65980       
+##      F2022           
+##  Min.   :-1.241e+10  
+##  1st Qu.: 4.000e+00  
+##  Median : 1.052e+04  
+##  Mean   : 6.217e+07  
+##  3rd Qu.: 1.958e+06  
+##  Max.   : 6.594e+10  
+##  NA's   :118829
+\end{verbatim}
+
+\begin{quote}
+Checking null values
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{null\_values\_count}\OtherTok{\textless{}{-}} \FunctionTok{colSums}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(data))}
+\NormalTok{null\_values\_dataframe }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Column =} \FunctionTok{names}\NormalTok{(null\_values\_count), }\AttributeTok{NA\_Count =}\NormalTok{ null\_values\_count)}
+\NormalTok{null\_values\_dataframe}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                                  Column NA_Count
+## ObjectId                       ObjectId        0
+## Country                         Country        0
+## ISO2                               ISO2      847
+## ISO3                               ISO3        0
+## Counterpart_Country Counterpart_Country        0
+## Counterpart_ISO2       Counterpart_ISO2      704
+## Counterpart_ISO3       Counterpart_ISO3        0
+## Indicator                     Indicator        0
+## Unit                               Unit        0
+## Source                           Source        0
+## CTS_Code                       CTS_Code        0
+## CTS_Name                       CTS_Name        0
+## CTS_Full_Descriptor CTS_Full_Descriptor        0
+## Trade_Flow                   Trade_Flow        0
+## Scale                             Scale        0
+## F1994                             F1994   127054
+## F1995                             F1995   124330
+## F1996                             F1996   121992
+## F1997                             F1997   120337
+## F1998                             F1998   102472
+## F1999                             F1999    99841
+## F2000                             F2000    90057
+## F2001                             F2001    88094
+## F2002                             F2002    86005
+## F2003                             F2003    84074
+## F2004                             F2004    81671
+## F2005                             F2005    79590
+## F2006                             F2006    77087
+## F2007                             F2007    74143
+## F2008                             F2008    72652
+## F2009                             F2009    72747
+## F2010                             F2010    69883
+## F2011                             F2011    69813
+## F2012                             F2012    67996
+## F2013                             F2013    66098
+## F2014                             F2014    66472
+## F2015                             F2015    63899
+## F2016                             F2016    62569
+## F2017                             F2017    61109
+## F2018                             F2018    61652
+## F2019                             F2019    61751
+## F2020                             F2020    64425
+## F2021                             F2021    65980
+## F2022                             F2022   118829
+\end{verbatim}
+
+\begin{quote}
+Removing Some columns from dataset.
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{columns\_to\_remove }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}ISO3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Counterpart\_ISO3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Source\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}CTS\_Code\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}CTS\_Name\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}CTS\_Full\_Descriptor\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Unit\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Scale\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F1994\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F1995\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F1996\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F1997\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F1998\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F1999\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F2000\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F2001\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F2002\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F2003\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F2004\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F2005\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F2006\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F2007\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F2008\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F2009\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F2010\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F2011\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{filtered\_data }\OtherTok{\textless{}{-}}\NormalTok{ data[, }\SpecialCharTok{!}\NormalTok{(}\FunctionTok{names}\NormalTok{(data) }\SpecialCharTok{\%in\%}\NormalTok{ columns\_to\_remove)]}
+\FunctionTok{head}\NormalTok{(filtered\_data,}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   ObjectId                      Country ISO2 Counterpart_Country
+## 1        1 Afghanistan, Islamic Rep. of   AF           Australia
+## 2        2 Afghanistan, Islamic Rep. of   AF           Australia
+##   Counterpart_ISO2                                             Indicator
+## 1               AU                           Environmental goods exports
+## 2               AU Environmental goods exports as share of total exports
+##   Trade_Flow F2012 F2013 F2014 F2015 F2016        F2017 F2018 F2019 F2020 F2021
+## 1    Exports    NA    NA    NA    NA    NA 145.95000000    NA    NA    NA    NA
+## 2    Exports    NA    NA    NA    NA    NA   0.02430819    NA    NA    NA    NA
+##   F2022
+## 1    NA
+## 2    NA
+\end{verbatim}
+
+\begin{quote}
+extracting columns of filtered Data.
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(filtered\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "ObjectId"            "Country"             "ISO2"               
+##  [4] "Counterpart_Country" "Counterpart_ISO2"    "Indicator"          
+##  [7] "Trade_Flow"          "F2012"               "F2013"              
+## [10] "F2014"               "F2015"               "F2016"              
+## [13] "F2017"               "F2018"               "F2019"              
+## [16] "F2020"               "F2021"               "F2022"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{unique\_country }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(data}\SpecialCharTok{$}\NormalTok{Country)}
+\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}There are\textquotesingle{}}\NormalTok{,}\FunctionTok{length}\NormalTok{(unique\_country),}\StringTok{\textquotesingle{}unique countries in dataset\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## There are 208 unique countries in dataset
+\end{verbatim}
+
+\begin{quote}
+Checking null values of filtered\_data
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{null\_values\_count}\OtherTok{\textless{}{-}} \FunctionTok{colSums}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(filtered\_data))}
+\NormalTok{null\_values\_dataframe }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Column =} \FunctionTok{names}\NormalTok{(null\_values\_count), }\AttributeTok{NA\_Count =}\NormalTok{ null\_values\_count)}
+\NormalTok{null\_values\_dataframe}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                                  Column NA_Count
+## ObjectId                       ObjectId        0
+## Country                         Country        0
+## ISO2                               ISO2      847
+## Counterpart_Country Counterpart_Country        0
+## Counterpart_ISO2       Counterpart_ISO2      704
+## Indicator                     Indicator        0
+## Trade_Flow                   Trade_Flow        0
+## F2012                             F2012    67996
+## F2013                             F2013    66098
+## F2014                             F2014    66472
+## F2015                             F2015    63899
+## F2016                             F2016    62569
+## F2017                             F2017    61109
+## F2018                             F2018    61652
+## F2019                             F2019    61751
+## F2020                             F2020    64425
+## F2021                             F2021    65980
+## F2022                             F2022   118829
+\end{verbatim}
+
+\begin{quote}
+Droping null values
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_cleaned }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(filtered\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+Checking shape of cleaned data
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{shape }\OtherTok{\textless{}{-}} \FunctionTok{dim}\NormalTok{(data\_cleaned)}
+\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Rows:\textquotesingle{}}\NormalTok{, shape[}\DecValTok{1}\NormalTok{], }\StringTok{\textquotesingle{}Columns:\textquotesingle{}}\NormalTok{, shape[}\DecValTok{2}\NormalTok{], }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 19741 Columns: 18
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(data\_cleaned)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      ObjectId                  Country ISO2      Counterpart_Country
+## 1337     1337 Andorra, Principality of   AD Andorra, Principality of
+## 1352     1352 Andorra, Principality of   AD                  Austria
+## 1364     1364 Andorra, Principality of   AD                  Belgium
+## 1365     1365 Andorra, Principality of   AD                  Belgium
+## 1366     1366 Andorra, Principality of   AD                  Belgium
+## 1367     1367 Andorra, Principality of   AD                  Belgium
+##      Counterpart_ISO2                          Indicator     Trade_Flow
+## 1337               AD        Environmental goods imports        Imports
+## 1352               AT        Environmental goods imports        Imports
+## 1364               BE        Environmental goods exports        Exports
+## 1365               BE        Environmental goods imports        Imports
+## 1366               BE  Environmental goods trade balance Not Applicable
+## 1367               BE Total trade in environmental goods Not Applicable
+##           F2012     F2013      F2014      F2015       F2016      F2017
+## 1337 124176.704  72869.57   15552.94    688.099     408.981   8042.192
+## 1352  57436.525  79987.58  616090.09  69688.266  123826.566 266202.777
+## 1364   4977.802  17650.64   23345.22  11296.396   19243.477   5714.549
+## 1365  55250.193  64066.09  140259.66  52245.280  124409.763  66914.236
+## 1366 -50272.391 -46415.45 -116914.44 -40948.884 -105166.286 -61199.687
+## 1367  60227.995  81716.73  163604.87  63541.676  143653.240  72628.785
+##           F2018      F2019      F2020       F2021     F2022
+## 1337   4921.683    831.419   9112.604    6622.224  12337.32
+## 1352 646338.649 471439.576 456033.149 1264195.860 311349.64
+## 1364  12698.171  73595.050   1090.393    3052.548 347615.58
+## 1365  80759.229  64025.268  45854.805  168176.728 173184.81
+## 1366 -68061.058   9569.782 -44764.412 -165124.180 174430.77
+## 1367  93457.400 137620.318  46945.198  171229.276 520800.40
+\end{verbatim}
+
+\begin{quote}
+Changing value of object id and resetting index
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_cleaned}\SpecialCharTok{$}\NormalTok{ObjectId }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(data\_cleaned))}
+\FunctionTok{head}\NormalTok{(data\_cleaned)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      ObjectId                  Country ISO2      Counterpart_Country
+## 1337        1 Andorra, Principality of   AD Andorra, Principality of
+## 1352        2 Andorra, Principality of   AD                  Austria
+## 1364        3 Andorra, Principality of   AD                  Belgium
+## 1365        4 Andorra, Principality of   AD                  Belgium
+## 1366        5 Andorra, Principality of   AD                  Belgium
+## 1367        6 Andorra, Principality of   AD                  Belgium
+##      Counterpart_ISO2                          Indicator     Trade_Flow
+## 1337               AD        Environmental goods imports        Imports
+## 1352               AT        Environmental goods imports        Imports
+## 1364               BE        Environmental goods exports        Exports
+## 1365               BE        Environmental goods imports        Imports
+## 1366               BE  Environmental goods trade balance Not Applicable
+## 1367               BE Total trade in environmental goods Not Applicable
+##           F2012     F2013      F2014      F2015       F2016      F2017
+## 1337 124176.704  72869.57   15552.94    688.099     408.981   8042.192
+## 1352  57436.525  79987.58  616090.09  69688.266  123826.566 266202.777
+## 1364   4977.802  17650.64   23345.22  11296.396   19243.477   5714.549
+## 1365  55250.193  64066.09  140259.66  52245.280  124409.763  66914.236
+## 1366 -50272.391 -46415.45 -116914.44 -40948.884 -105166.286 -61199.687
+## 1367  60227.995  81716.73  163604.87  63541.676  143653.240  72628.785
+##           F2018      F2019      F2020       F2021     F2022
+## 1337   4921.683    831.419   9112.604    6622.224  12337.32
+## 1352 646338.649 471439.576 456033.149 1264195.860 311349.64
+## 1364  12698.171  73595.050   1090.393    3052.548 347615.58
+## 1365  80759.229  64025.268  45854.805  168176.728 173184.81
+## 1366 -68061.058   9569.782 -44764.412 -165124.180 174430.77
+## 1367  93457.400 137620.318  46945.198  171229.276 520800.40
+\end{verbatim}
+
+\begin{quote}
+save filtered data into csv file
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{write.csv}\NormalTok{(data\_cleaned, }\StringTok{"Data.csv"}\NormalTok{, }\AttributeTok{row.names =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+Filter dataset
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data}\OtherTok{\textless{}{-}}\FunctionTok{read.csv}\NormalTok{(}\StringTok{"Data.csv"}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   ObjectId                  Country ISO2      Counterpart_Country
+## 1        1 Andorra, Principality of   AD Andorra, Principality of
+## 2        2 Andorra, Principality of   AD                  Austria
+## 3        3 Andorra, Principality of   AD                  Belgium
+## 4        4 Andorra, Principality of   AD                  Belgium
+## 5        5 Andorra, Principality of   AD                  Belgium
+## 6        6 Andorra, Principality of   AD                  Belgium
+##   Counterpart_ISO2                          Indicator     Trade_Flow      F2012
+## 1               AD        Environmental goods imports        Imports 124176.704
+## 2               AT        Environmental goods imports        Imports  57436.525
+## 3               BE        Environmental goods exports        Exports   4977.802
+## 4               BE        Environmental goods imports        Imports  55250.193
+## 5               BE  Environmental goods trade balance Not Applicable -50272.391
+## 6               BE Total trade in environmental goods Not Applicable  60227.995
+##       F2013      F2014      F2015       F2016      F2017      F2018      F2019
+## 1  72869.57   15552.94    688.099     408.981   8042.192   4921.683    831.419
+## 2  79987.58  616090.09  69688.266  123826.566 266202.777 646338.649 471439.576
+## 3  17650.64   23345.22  11296.396   19243.477   5714.549  12698.171  73595.050
+## 4  64066.09  140259.66  52245.280  124409.763  66914.236  80759.229  64025.268
+## 5 -46415.45 -116914.44 -40948.884 -105166.286 -61199.687 -68061.058   9569.782
+## 6  81716.73  163604.87  63541.676  143653.240  72628.785  93457.400 137620.318
+##        F2020       F2021     F2022
+## 1   9112.604    6622.224  12337.32
+## 2 456033.149 1264195.860 311349.64
+## 3   1090.393    3052.548 347615.58
+## 4  45854.805  168176.728 173184.81
+## 5 -44764.412 -165124.180 174430.77
+## 6  46945.198  171229.276 520800.40
+\end{verbatim}
+
+\begin{quote}
+No.~of unique countries after filtering dataset
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{unique\_country }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(data}\SpecialCharTok{$}\NormalTok{Country)}
+\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}There are\textquotesingle{}}\NormalTok{,}\FunctionTok{length}\NormalTok{(unique\_country),}\StringTok{\textquotesingle{}unique countries in dataset\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## There are 48 unique countries in dataset
+\end{verbatim}
+
+\begin{quote}
+Exploratory Data Analysis
+\end{quote}
+
+--- SMART QUESTION 01: What is the trend in global environmental goods
+exports over the last decade (2013-2022)?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{exports\_data }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(data, Indicator }\SpecialCharTok{==} \StringTok{"Environmental goods exports"}\NormalTok{) }
+\FunctionTok{head}\NormalTok{(exports\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   ObjectId                  Country ISO2 Counterpart_Country Counterpart_ISO2
+## 1        3 Andorra, Principality of   AD             Belgium               BE
+## 2       14 Andorra, Principality of   AD              France               FR
+## 3       18 Andorra, Principality of   AD             Germany               DE
+## 4       26 Andorra, Principality of   AD               Italy               IT
+## 5       35 Andorra, Principality of   AD    Netherlands, The               NL
+## 6       39 Andorra, Principality of   AD              Norway               NO
+##                     Indicator Trade_Flow      F2012      F2013     F2014
+## 1 Environmental goods exports    Exports   4977.802  17650.636  23345.22
+## 2 Environmental goods exports    Exports 333741.685 654987.125 856655.32
+## 3 Environmental goods exports    Exports  17916.401  16433.645  42109.43
+## 4 Environmental goods exports    Exports  58748.693 195708.618 231083.88
+## 5 Environmental goods exports    Exports  18278.694   9245.024  31706.86
+## 6 Environmental goods exports    Exports  45672.751  40555.439  46440.88
+##        F2015       F2016       F2017       F2018       F2019       F2020
+## 1   11296.40   19243.477    5714.549   12698.171   73595.050    1090.393
+## 2 1030334.07 1234084.840 1016697.537 1100321.851 1356900.374 2421820.712
+## 3   16199.17   36896.948   22514.621    1001.678    2921.677   12279.488
+## 4   86439.44  181035.927  483990.169    8248.304    2245.843    2856.204
+## 5   10940.51    8314.891    7467.299    2022.019  119551.294   27688.404
+## 6   15371.52    4304.702    5937.560    2805.334    2446.793    9370.652
+##         F2021      F2022
+## 1    3052.548  347615.58
+## 2 2450100.158 2353566.87
+## 3  633214.245  142628.66
+## 4    7094.110   35013.62
+## 5    1176.319   23766.57
+## 6   86769.964   65582.46
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{exports\_trend }\OtherTok{\textless{}{-}} \FunctionTok{colSums}\NormalTok{(exports\_data[, }\FunctionTok{c}\NormalTok{(}\StringTok{"F2013"}\NormalTok{, }\StringTok{"F2014"}\NormalTok{, }\StringTok{"F2015"}\NormalTok{, }\StringTok{"F2016"}\NormalTok{, }\StringTok{"F2017"}\NormalTok{, }\StringTok{"F2018"}\NormalTok{, }\StringTok{"F2019"}\NormalTok{, }\StringTok{"F2020"}\NormalTok{, }\StringTok{"F2021"}\NormalTok{, }\StringTok{"F2022"}\NormalTok{)], }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{exports\_trend }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        F2013        F2014        F2015        F2016        F2017        F2018 
+## 334665669498 344215245140 308304010583 313092795139 362823189353 394046482423 
+##        F2019        F2020        F2021        F2022 
+## 392301626678 389186528113 475843460975 484885451576
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{exports\_trend }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(exports\_trend }\SpecialCharTok{/} \DecValTok{1000000000}\NormalTok{) }\CommentTok{\#Converting the tota cost of exports into billion}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{exports\_trend\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Year =} \DecValTok{2013}\SpecialCharTok{:}\DecValTok{2022}\NormalTok{, }\StringTok{\textquotesingle{}Exports\_In\_Billions\textquotesingle{}} \OtherTok{=}\NormalTok{ exports\_trend)}
+\FunctionTok{head}\NormalTok{(exports\_trend\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Year Exports_In_Billions
+## F2013 2013                 335
+## F2014 2014                 344
+## F2015 2015                 308
+## F2016 2016                 313
+## F2017 2017                 363
+## F2018 2018                 394
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(exports\_trend\_df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Year, }\AttributeTok{y =}\NormalTok{ Exports\_In\_Billions)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{group =} \DecValTok{1}\NormalTok{, }\AttributeTok{color =} \StringTok{\textquotesingle{}\#38599F\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{color=}\StringTok{"\#00297b"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Global Environmental Goods Exports (2013{-}2022)"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Year"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Total Exports (US Dollars in billions)"}\NormalTok{) }\SpecialCharTok{+}
+  
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{breaks =} \DecValTok{2013}\SpecialCharTok{:}\DecValTok{2022}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{300}\NormalTok{, }\DecValTok{500}\NormalTok{, }\AttributeTok{by =} \DecValTok{25}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Group06_IDS_Project_files/figure-latex/unnamed-chunk-23-1.pdf}
+\textgreater Linear Regression Model
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{env\_goods\_exports }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(data, Indicator }\SpecialCharTok{==} \StringTok{\textquotesingle{}Environmental goods exports\textquotesingle{}}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(env\_goods\_exports)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    ObjectId                  Country ISO2 Counterpart_Country Counterpart_ISO2
+## 3         3 Andorra, Principality of   AD             Belgium               BE
+## 14       14 Andorra, Principality of   AD              France               FR
+## 18       18 Andorra, Principality of   AD             Germany               DE
+## 26       26 Andorra, Principality of   AD               Italy               IT
+## 35       35 Andorra, Principality of   AD    Netherlands, The               NL
+## 39       39 Andorra, Principality of   AD              Norway               NO
+##                      Indicator Trade_Flow      F2012      F2013     F2014
+## 3  Environmental goods exports    Exports   4977.802  17650.636  23345.22
+## 14 Environmental goods exports    Exports 333741.685 654987.125 856655.32
+## 18 Environmental goods exports    Exports  17916.401  16433.645  42109.43
+## 26 Environmental goods exports    Exports  58748.693 195708.618 231083.88
+## 35 Environmental goods exports    Exports  18278.694   9245.024  31706.86
+## 39 Environmental goods exports    Exports  45672.751  40555.439  46440.88
+##         F2015       F2016       F2017       F2018       F2019       F2020
+## 3    11296.40   19243.477    5714.549   12698.171   73595.050    1090.393
+## 14 1030334.07 1234084.840 1016697.537 1100321.851 1356900.374 2421820.712
+## 18   16199.17   36896.948   22514.621    1001.678    2921.677   12279.488
+## 26   86439.44  181035.927  483990.169    8248.304    2245.843    2856.204
+## 35   10940.51    8314.891    7467.299    2022.019  119551.294   27688.404
+## 39   15371.52    4304.702    5937.560    2805.334    2446.793    9370.652
+##          F2021      F2022
+## 3     3052.548  347615.58
+## 14 2450100.158 2353566.87
+## 18  633214.245  142628.66
+## 26    7094.110   35013.62
+## 35    1176.319   23766.57
+## 39   86769.964   65582.46
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{years }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}F\textquotesingle{}}\NormalTok{, }\DecValTok{2013}\SpecialCharTok{:}\DecValTok{2022}\NormalTok{)}
+\NormalTok{env\_goods\_exports\_years }\OtherTok{\textless{}{-}}\NormalTok{ env\_goods\_exports[, }\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Country\textquotesingle{}}\NormalTok{, years)]}
+\FunctionTok{head}\NormalTok{(env\_goods\_exports\_years)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                     Country      F2013     F2014      F2015       F2016
+## 3  Andorra, Principality of  17650.636  23345.22   11296.40   19243.477
+## 14 Andorra, Principality of 654987.125 856655.32 1030334.07 1234084.840
+## 18 Andorra, Principality of  16433.645  42109.43   16199.17   36896.948
+## 26 Andorra, Principality of 195708.618 231083.88   86439.44  181035.927
+## 35 Andorra, Principality of   9245.024  31706.86   10940.51    8314.891
+## 39 Andorra, Principality of  40555.439  46440.88   15371.52    4304.702
+##          F2017       F2018       F2019       F2020       F2021      F2022
+## 3     5714.549   12698.171   73595.050    1090.393    3052.548  347615.58
+## 14 1016697.537 1100321.851 1356900.374 2421820.712 2450100.158 2353566.87
+## 18   22514.621    1001.678    2921.677   12279.488  633214.245  142628.66
+## 26  483990.169    8248.304    2245.843    2856.204    7094.110   35013.62
+## 35    7467.299    2022.019  119551.294   27688.404    1176.319   23766.57
+## 39    5937.560    2805.334    2446.793    9370.652   86769.964   65582.46
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{total\_exports\_by\_year }\OtherTok{\textless{}{-}} \FunctionTok{colSums}\NormalTok{(env\_goods\_exports\_years[, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{], }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(total\_exports\_by\_year, }\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        F2013        F2014        F2015 
+## 334665669498 344215245140 308304010583
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{total\_exports\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Year =} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{sub}\NormalTok{(}\StringTok{"F"}\NormalTok{, }\StringTok{""}\NormalTok{, }\FunctionTok{names}\NormalTok{(total\_exports\_by\_year))), }
+                                \AttributeTok{Total\_Export\_Value =}\NormalTok{ total\_exports\_by\_year)}
+\NormalTok{total\_exports\_df }\OtherTok{\textless{}{-}} \FunctionTok{arrange}\NormalTok{(total\_exports\_df, Year)}
+\NormalTok{total\_exports\_df}\SpecialCharTok{$}\NormalTok{Total\_Export\_Value }\OtherTok{\textless{}{-}}\NormalTok{ (total\_exports\_df}\SpecialCharTok{$}\NormalTok{Total\_Export\_Value}\SpecialCharTok{/}\DecValTok{1000000000}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(total\_exports\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Year Total_Export_Value
+## F2013 2013           334.6657
+## F2014 2014           344.2152
+## F2015 2015           308.3040
+## F2016 2016           313.0928
+## F2017 2017           362.8232
+## F2018 2018           394.0465
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{variance\_exports }\OtherTok{\textless{}{-}} \FunctionTok{var}\NormalTok{(total\_exports\_df}\SpecialCharTok{$}\NormalTok{Total\_Export\_Value)}
+\NormalTok{sd\_exports }\OtherTok{\textless{}{-}} \FunctionTok{sd}\NormalTok{(total\_exports\_df}\SpecialCharTok{$}\NormalTok{Total\_Export\_Value)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{variance\_exports }\OtherTok{\textless{}{-}} \FunctionTok{var}\NormalTok{(total\_exports\_df}\SpecialCharTok{$}\NormalTok{Total\_Export\_Value)}
+\NormalTok{sd\_exports }\OtherTok{\textless{}{-}} \FunctionTok{sd}\NormalTok{(total\_exports\_df}\SpecialCharTok{$}\NormalTok{Total\_Export\_Value)}
+
+\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Variance: \textquotesingle{}}\NormalTok{,variance\_exports, }\StringTok{\textquotesingle{}Standard deviation: \textquotesingle{}}\NormalTok{,sd\_exports)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Variance:  3763.066 Standard deviation:  61.34383
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(total\_exports\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Year Total_Export_Value
+## F2013 2013           334.6657
+## F2014 2014           344.2152
+## F2015 2015           308.3040
+## F2016 2016           313.0928
+## F2017 2017           362.8232
+## F2018 2018           394.0465
+## F2019 2019           392.3016
+## F2020 2020           389.1865
+## F2021 2021           475.8435
+## F2022 2022           484.8855
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Variance of Exports:\textquotesingle{}}\NormalTok{, variance\_exports, }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Variance of Exports: 3763.066
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Standard Deviation of Exports:\textquotesingle{}}\NormalTok{, sd\_exports, }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Standard Deviation of Exports: 61.34383
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{linear\_model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(Total\_Export\_Value }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Year, }\AttributeTok{data =}\NormalTok{ total\_exports\_df)}
+\NormalTok{model\_summary }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(linear\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(total\_exports\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Year Total_Export_Value
+## F2013 2013           334.6657
+## F2014 2014           344.2152
+## F2015 2015           308.3040
+## F2016 2016           313.0928
+## F2017 2017           362.8232
+## F2018 2018           394.0465
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{total\_exports\_df}\SpecialCharTok{$}\NormalTok{residuals }\OtherTok{\textless{}{-}} \FunctionTok{residuals}\NormalTok{(linear\_model)}
+\NormalTok{total\_exports\_df}\SpecialCharTok{$}\NormalTok{predicted }\OtherTok{\textless{}{-}} \FunctionTok{fitted}\NormalTok{(linear\_model)}
+
+\NormalTok{plot }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(total\_exports\_df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Year)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ Total\_Export\_Value, }\AttributeTok{color =} \StringTok{"Actual Data Points"}\NormalTok{), }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ predicted, }\AttributeTok{linetype =} \StringTok{"Trend Line"}\NormalTok{), }\AttributeTok{size =} \FloatTok{0.77}\NormalTok{, }\AttributeTok{color =} \StringTok{"\#38599f"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ predicted, }\AttributeTok{color =} \StringTok{"Predicted Points"}\NormalTok{), }\AttributeTok{size =} \DecValTok{4}\NormalTok{, }\AttributeTok{shape =} \DecValTok{17}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"Actual Data Points"} \OtherTok{=} \StringTok{"\#00297b"}\NormalTok{, }
+                                \StringTok{"Predicted Points"} \OtherTok{=} \StringTok{"\#a5bfd1"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_linetype\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"Trend Line"} \OtherTok{=} \StringTok{"solid"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Trend in Global Environmental Goods Exports (2013{-}2022)"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Year"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Total Export Value (in billions)"}\NormalTok{,}
+       \AttributeTok{color =} \StringTok{"Legend"}\NormalTok{,}
+       \AttributeTok{linetype =} \StringTok{"Legend"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\FunctionTok{min}\NormalTok{(total\_exports\_df}\SpecialCharTok{$}\NormalTok{Year), }\FunctionTok{max}\NormalTok{(total\_exports\_df}\SpecialCharTok{$}\NormalTok{Year), }\AttributeTok{by =} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{guides}\NormalTok{(}\AttributeTok{color =} \FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{override.aes =} \FunctionTok{list}\NormalTok{(}\AttributeTok{shape =} \FunctionTok{c}\NormalTok{(}\DecValTok{16}\NormalTok{, }\DecValTok{17}\NormalTok{), }\AttributeTok{size =} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{))),}
+         \AttributeTok{linetype =} \FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{override.aes =} \FunctionTok{list}\NormalTok{(}\AttributeTok{size =} \FloatTok{0.77}\NormalTok{)))}\SpecialCharTok{+}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{300}\NormalTok{, }\DecValTok{500}\NormalTok{, }\AttributeTok{by =} \DecValTok{25}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+## i Please use `linewidth` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Group06_IDS_Project_files/figure-latex/unnamed-chunk-33-1.pdf}
+
+-----------------SMART QUESTION 2----------------------------
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{selected\_data }\OtherTok{\textless{}{-}}\NormalTok{ exports\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(Country, F2018, F2019, F2020, F2021, F2022)}
+\FunctionTok{head}\NormalTok{(exports\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   ObjectId                  Country ISO2 Counterpart_Country Counterpart_ISO2
+## 1        3 Andorra, Principality of   AD             Belgium               BE
+## 2       14 Andorra, Principality of   AD              France               FR
+## 3       18 Andorra, Principality of   AD             Germany               DE
+## 4       26 Andorra, Principality of   AD               Italy               IT
+## 5       35 Andorra, Principality of   AD    Netherlands, The               NL
+## 6       39 Andorra, Principality of   AD              Norway               NO
+##                     Indicator Trade_Flow      F2012      F2013     F2014
+## 1 Environmental goods exports    Exports   4977.802  17650.636  23345.22
+## 2 Environmental goods exports    Exports 333741.685 654987.125 856655.32
+## 3 Environmental goods exports    Exports  17916.401  16433.645  42109.43
+## 4 Environmental goods exports    Exports  58748.693 195708.618 231083.88
+## 5 Environmental goods exports    Exports  18278.694   9245.024  31706.86
+## 6 Environmental goods exports    Exports  45672.751  40555.439  46440.88
+##        F2015       F2016       F2017       F2018       F2019       F2020
+## 1   11296.40   19243.477    5714.549   12698.171   73595.050    1090.393
+## 2 1030334.07 1234084.840 1016697.537 1100321.851 1356900.374 2421820.712
+## 3   16199.17   36896.948   22514.621    1001.678    2921.677   12279.488
+## 4   86439.44  181035.927  483990.169    8248.304    2245.843    2856.204
+## 5   10940.51    8314.891    7467.299    2022.019  119551.294   27688.404
+## 6   15371.52    4304.702    5937.560    2805.334    2446.793    9370.652
+##         F2021      F2022
+## 1    3052.548  347615.58
+## 2 2450100.158 2353566.87
+## 3  633214.245  142628.66
+## 4    7094.110   35013.62
+## 5    1176.319   23766.57
+## 6   86769.964   65582.46
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(selected\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                    Country       F2018       F2019       F2020       F2021
+## 1 Andorra, Principality of   12698.171   73595.050    1090.393    3052.548
+## 2 Andorra, Principality of 1100321.851 1356900.374 2421820.712 2450100.158
+## 3 Andorra, Principality of    1001.678    2921.677   12279.488  633214.245
+## 4 Andorra, Principality of    8248.304    2245.843    2856.204    7094.110
+## 5 Andorra, Principality of    2022.019  119551.294   27688.404    1176.319
+## 6 Andorra, Principality of    2805.334    2446.793    9370.652   86769.964
+##        F2022
+## 1  347615.58
+## 2 2353566.87
+## 3  142628.66
+## 4   35013.62
+## 5   23766.57
+## 6   65582.46
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Step 3: Check for each country if the exports have increased every year}
+\NormalTok{increasing\_exports }\OtherTok{\textless{}{-}}\NormalTok{ selected\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(F2018 }\SpecialCharTok{\textless{}}\NormalTok{ F2019 }\SpecialCharTok{\&}\NormalTok{ F2019 }\SpecialCharTok{\textless{}}\NormalTok{ F2020 }\SpecialCharTok{\&}\NormalTok{ F2020 }\SpecialCharTok{\textless{}}\NormalTok{ F2021 }\SpecialCharTok{\&}\NormalTok{ F2021 }\SpecialCharTok{\textless{}}\NormalTok{ F2022) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(F2022))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(increasing\_exports)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            Country      F2018      F2019      F2020       F2021       F2022
+## 1 Netherlands, The 8316603140 8772761559 9452270201 12181505503 13020268657
+## 2       Czech Rep. 6258020652 6390968996 7442721687  9633436831 10195826088
+## 3          Hungary 5162379027 5234097261 5457287764  6992357950  8399320651
+## 4 Netherlands, The 4112786985 5159306995 6431886896  7433899047  7556575458
+## 5          Belgium 2238178258 2663951782 3050020197  4039025943  4636423734
+## 6       Czech Rep. 1233755346 1281256479 1446627766  1996938588  2399384384
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{increasing\_exports\_long }\OtherTok{\textless{}{-}}\NormalTok{ increasing\_exports }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gather}\NormalTok{(}\AttributeTok{key =} \StringTok{"Year"}\NormalTok{, }\AttributeTok{value =} \StringTok{"Exports"}\NormalTok{, }\SpecialCharTok{{-}}\NormalTok{Country) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Year =} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{sub}\NormalTok{(}\StringTok{"F"}\NormalTok{, }\StringTok{""}\NormalTok{, Year))) }
+
+\NormalTok{increasing\_exports\_long}\SpecialCharTok{$}\NormalTok{Exports}\OtherTok{=}\FunctionTok{round}\NormalTok{(increasing\_exports\_long}\SpecialCharTok{$}\NormalTok{Exports}\SpecialCharTok{/}\DecValTok{1000000000}\NormalTok{)}
+
+\NormalTok{top\_three\_countries }\OtherTok{\textless{}{-}} \FunctionTok{head}\NormalTok{(increasing\_exports, }\DecValTok{3}\NormalTok{)}
+
+
+\NormalTok{top\_three\_countries\_names }\OtherTok{\textless{}{-}}\NormalTok{ top\_three\_countries}\SpecialCharTok{$}\NormalTok{Country}
+
+\NormalTok{top\_three\_countries\_long }\OtherTok{\textless{}{-}}\NormalTok{ increasing\_exports\_long }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(Country }\SpecialCharTok{\%in\%}\NormalTok{ top\_three\_countries\_names)}
+
+\NormalTok{top\_three\_countries\_long }\OtherTok{\textless{}{-}}\NormalTok{ top\_three\_countries\_long }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Country\_Year =} \FunctionTok{paste}\NormalTok{(Country, Year, }\AttributeTok{sep =} \StringTok{"{-}"}\NormalTok{))}
+\FunctionTok{head}\NormalTok{(top\_three\_countries\_long)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            Country Year Exports          Country_Year
+## 1 Netherlands, The 2018       8 Netherlands, The-2018
+## 2       Czech Rep. 2018       6       Czech Rep.-2018
+## 3          Hungary 2018       5          Hungary-2018
+## 4 Netherlands, The 2018       4 Netherlands, The-2018
+## 5       Czech Rep. 2018       1       Czech Rep.-2018
+## 6 Netherlands, The 2018       2 Netherlands, The-2018
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(top\_three\_countries\_long, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Country, }\AttributeTok{y =}\NormalTok{ Exports, }\AttributeTok{fill =} \FunctionTok{as.factor}\NormalTok{(Year))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"2018"} \OtherTok{=} \StringTok{"\#00297b"}\NormalTok{, }\StringTok{"2019"} \OtherTok{=} \StringTok{"\#38599F"}\NormalTok{, }\StringTok{"2020"} \OtherTok{=} \StringTok{"\#698bbD"}\NormalTok{, }\StringTok{"2021"} \OtherTok{=} \StringTok{"\#A5bfd1"}\NormalTok{, }\StringTok{"2022"} \OtherTok{=} \StringTok{"\#f1f1d2"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Environmental Goods Exports Trend (2018{-}2022)"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Country"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Exports (US Dollars in billions)"}\NormalTok{,}
+       \AttributeTok{fill =} \StringTok{"Year"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{15}\NormalTok{,}\AttributeTok{by=}\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Group06_IDS_Project_files/figure-latex/unnamed-chunk-39-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## List of 1
+##  $ legend.position: chr "bottom"
+##  - attr(*, "class")= chr [1:2] "theme" "gg"
+##  - attr(*, "complete")= logi FALSE
+##  - attr(*, "validate")= logi TRUE
+\end{verbatim}
+
+\begin{quote}
+\begin{quote}
+\begin{quote}
+SMART QUESTION 04: How do landlocked countries compare to coastal
+countries in terms of environmental goods imports in 2022?
+\end{quote}
+\end{quote}
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Define the groups of countries}
+\NormalTok{landlocked\_countries\_group }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Czech Republic\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Hungary\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Azerbaijan\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Bolivia\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Georgia\textquotesingle{}}\NormalTok{)}
+\NormalTok{coastal\_countries\_group }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Chile\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Greece\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Jordan\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Estonia\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Mozambique\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Filter data for the specified countries, indicators, and the year 2022}
+\NormalTok{filtered\_group\_data }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(Country }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(landlocked\_countries\_group, coastal\_countries\_group),}
+\NormalTok{         Indicator }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Environmental goods imports\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Environmental goods exports\textquotesingle{}}\NormalTok{),}
+\NormalTok{         Trade\_Flow }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Imports\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Exports\textquotesingle{}}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(Country, Indicator, Trade\_Flow, F2022)}
+
+\CommentTok{\# Display the filtered data}
+\FunctionTok{head}\NormalTok{(filtered\_group\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Country                   Indicator Trade_Flow    F2022
+## 1 Bolivia Environmental goods imports    Imports       97
+## 2 Bolivia Environmental goods exports    Exports  2662444
+## 3 Bolivia Environmental goods imports    Imports 27777260
+## 4 Bolivia Environmental goods imports    Imports   337997
+## 5 Bolivia Environmental goods imports    Imports   662011
+## 6 Bolivia Environmental goods imports    Imports   130086
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Add a new column for country classification}
+\NormalTok{filtered\_group\_data}\SpecialCharTok{$}\NormalTok{Country\_Classification }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(filtered\_group\_data}\SpecialCharTok{$}\NormalTok{Country }\SpecialCharTok{\%in\%}\NormalTok{ landlocked\_countries\_group, }\StringTok{\textquotesingle{}Landlocked\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Coastal\textquotesingle{}}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(filtered\_group\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Country                   Indicator Trade_Flow    F2022
+## 1 Bolivia Environmental goods imports    Imports       97
+## 2 Bolivia Environmental goods exports    Exports  2662444
+## 3 Bolivia Environmental goods imports    Imports 27777260
+## 4 Bolivia Environmental goods imports    Imports   337997
+## 5 Bolivia Environmental goods imports    Imports   662011
+## 6 Bolivia Environmental goods imports    Imports   130086
+##   Country_Classification
+## 1             Landlocked
+## 2             Landlocked
+## 3             Landlocked
+## 4             Landlocked
+## 5             Landlocked
+## 6             Landlocked
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calculate total trade (imports and exports) for landlocked and coastal groups}
+\NormalTok{total\_trade\_group }\OtherTok{\textless{}{-}}\NormalTok{ filtered\_group\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Country\_Classification, Trade\_Flow) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Total\_Trade =} \FunctionTok{sum}\NormalTok{(F2022)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{spread}\NormalTok{(}\AttributeTok{key =}\NormalTok{ Trade\_Flow, }\AttributeTok{value =}\NormalTok{ Total\_Trade)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'Country_Classification'. You can override
+## using the `.groups` argument.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(total\_trade\_group)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 3
+## # Groups:   Country_Classification [2]
+##   Country_Classification      Exports      Imports
+##   <chr>                         <dbl>        <dbl>
+## 1 Coastal                11396243878. 11219542337.
+## 2 Landlocked             25736801925. 19357005298.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Transform the data to a long format}
+\NormalTok{total\_trade\_long }\OtherTok{\textless{}{-}}\NormalTok{ total\_trade\_group }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gather}\NormalTok{(}\AttributeTok{key =} \StringTok{"Trade\_Flow"}\NormalTok{, }\AttributeTok{value =} \StringTok{"Amount"}\NormalTok{, }\SpecialCharTok{{-}}\NormalTok{Country\_Classification)}
+\FunctionTok{head}\NormalTok{(total\_trade\_long)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4 x 3
+## # Groups:   Country_Classification [2]
+##   Country_Classification Trade_Flow       Amount
+##   <chr>                  <chr>             <dbl>
+## 1 Coastal                Exports    11396243878.
+## 2 Landlocked             Exports    25736801925.
+## 3 Coastal                Imports    11219542337.
+## 4 Landlocked             Imports    19357005298.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(total\_trade\_long, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Country\_Classification, }\AttributeTok{y =}\NormalTok{ Amount, }\AttributeTok{fill =}\NormalTok{ Trade\_Flow)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.6}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_y\_continuous}\NormalTok{(}
+    \AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\FunctionTok{label\_number}\NormalTok{(}\AttributeTok{scale =} \FloatTok{1e{-}9}\NormalTok{, }\AttributeTok{accuracy =} \DecValTok{1}\NormalTok{),}
+    \AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{3e10}\NormalTok{),}
+    \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{3e10}\NormalTok{, }\AttributeTok{by =} \FloatTok{5e9}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{y =} \StringTok{"Amount in Billions"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Country Classification"}\NormalTok{,}
+    \AttributeTok{title =} \StringTok{"Environmental Goods Imports and Exports in 2022"}\NormalTok{,}
+    \AttributeTok{subtitle =} \StringTok{"Landlocked vs Coastal Countries"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"Exports"} \OtherTok{=} \StringTok{"\#38599F"}\NormalTok{, }\StringTok{"Imports"} \OtherTok{=} \StringTok{"\#698bbd"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =}\NormalTok{ scales}\SpecialCharTok{::}\FunctionTok{label\_number}\NormalTok{(}\AttributeTok{accuracy =} \FloatTok{0.01}\NormalTok{)(Amount}\SpecialCharTok{/}\FloatTok{1e9}\NormalTok{)),}
+            \AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.6}\NormalTok{), }\AttributeTok{vjust =} \SpecialCharTok{{-}}\FloatTok{0.5}\NormalTok{)}
+
+\CommentTok{\# Show the plot}
+\NormalTok{p}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Group06_IDS_Project_files/figure-latex/unnamed-chunk-44-1.pdf}
+
+--------------------SMART QUESTION 05-------------------
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{india\_trade }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(data, Counterpart\_Country }\SpecialCharTok{==} \StringTok{\textquotesingle{}India\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{environmental\_trade }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(india\_trade, Indicator }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Environmental goods exports\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Environmental goods imports\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{country\_indicator\_count }\OtherTok{\textless{}{-}}\NormalTok{ environmental\_trade }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Country) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Unique\_Indicators =} \FunctionTok{n\_distinct}\NormalTok{(Indicator))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{countries\_with\_both }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(country\_indicator\_count, Unique\_Indicators }\SpecialCharTok{==} \DecValTok{2}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pull}\NormalTok{(Country)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{filtered\_data }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(environmental\_trade, Country }\SpecialCharTok{\%in\%}\NormalTok{ countries\_with\_both)}
+
+\CommentTok{\# Step 2: Group the data by country and indicator, and calculate the sum for each group}
+\NormalTok{grouped\_data }\OtherTok{\textless{}{-}}\NormalTok{ filtered\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Country, Indicator) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Sum =} \FunctionTok{sum}\NormalTok{(F2022, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'Country'. You can override using the
+## `.groups` argument.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Step 3: Pivot the data to have exports and imports in separate columns for easier comparison}
+\NormalTok{trade\_sums }\OtherTok{\textless{}{-}}\NormalTok{ grouped\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{spread}\NormalTok{(}\AttributeTok{key =}\NormalTok{ Indicator, }\AttributeTok{value =}\NormalTok{ Sum)}
+
+\CommentTok{\# Step 4: Replace NaN values with 0}
+\NormalTok{trade\_sums[}\FunctionTok{is.na}\NormalTok{(trade\_sums)] }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{trade\_sums}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 32 x 3
+##    Country                `Environmental goods exports` Environmental goods im~1
+##    <chr>                                          <dbl>                    <dbl>
+##  1 Armenia, Rep. of                             108948.                 2419733.
+##  2 Australia                                  66709661.               353861776.
+##  3 Belgium                                   176686852.               105309964.
+##  4 Bosnia and Herzegovina                       227430.                10088742.
+##  5 Bulgaria                                   32707117.                 5563577.
+##  6 Chile                                        286887.               110312620.
+##  7 China, P.R.: Hong Kong                    984567750.                42102024.
+##  8 Croatia, Rep. of                           10493427                 20763636 
+##  9 Cyprus                                      4028684.                 4960816.
+## 10 Czech Rep.                                206991050                130838923 
+## # i 22 more rows
+## # i abbreviated name: 1: `Environmental goods imports`
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Step 1: Calculate the Import{-}Export Difference}
+\NormalTok{trade\_sums }\OtherTok{\textless{}{-}}\NormalTok{ trade\_sums }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Import\_Export\_Difference =} \StringTok{\textasciigrave{}}\AttributeTok{Environmental goods imports}\StringTok{\textasciigrave{}} \SpecialCharTok{{-}} \StringTok{\textasciigrave{}}\AttributeTok{Environmental goods exports}\StringTok{\textasciigrave{}}\NormalTok{)}
+
+\CommentTok{\# Step 2: Select Specific Columns}
+\NormalTok{result }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(trade\_sums, Country, Import\_Export\_Difference)}
+\FunctionTok{head}\NormalTok{(result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 2
+##   Country                Import_Export_Difference
+##   <chr>                                     <dbl>
+## 1 Armenia, Rep. of                       2310784.
+## 2 Australia                            287152114.
+## 3 Belgium                              -71376887.
+## 4 Bosnia and Herzegovina                 9861312.
+## 5 Bulgaria                             -27143540.
+## 6 Chile                                110025733.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{trade\_values }\OtherTok{\textless{}{-}}\NormalTok{ trade\_sums }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{c}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Environmental goods exports}\StringTok{\textasciigrave{}}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{Environmental goods imports}\StringTok{\textasciigrave{}}\NormalTok{),}
+               \AttributeTok{names\_to =} \StringTok{"Indicator"}\NormalTok{,}
+               \AttributeTok{values\_to =} \StringTok{"Trade\_Value"}\NormalTok{)}
+
+\CommentTok{\# Showing the trade values}
+\FunctionTok{print}\NormalTok{(trade\_values)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 64 x 4
+##    Country                Import_Export_Difference Indicator         Trade_Value
+##    <chr>                                     <dbl> <chr>                   <dbl>
+##  1 Armenia, Rep. of                       2310784. Environmental go~     108948.
+##  2 Armenia, Rep. of                       2310784. Environmental go~    2419733.
+##  3 Australia                            287152114. Environmental go~   66709661.
+##  4 Australia                            287152114. Environmental go~  353861776.
+##  5 Belgium                              -71376887. Environmental go~  176686852.
+##  6 Belgium                              -71376887. Environmental go~  105309964.
+##  7 Bosnia and Herzegovina                 9861312. Environmental go~     227430.
+##  8 Bosnia and Herzegovina                 9861312. Environmental go~   10088742.
+##  9 Bulgaria                             -27143540. Environmental go~   32707117.
+## 10 Bulgaria                             -27143540. Environmental go~    5563577.
+## # i 54 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Step 1: Calculate the Import{-}Export Difference}
+\NormalTok{trade\_sums }\OtherTok{\textless{}{-}}\NormalTok{ trade\_sums }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Import\_Export\_Difference =} \StringTok{\textasciigrave{}}\AttributeTok{Environmental goods imports}\StringTok{\textasciigrave{}} \SpecialCharTok{{-}} \StringTok{\textasciigrave{}}\AttributeTok{Environmental goods exports}\StringTok{\textasciigrave{}}\NormalTok{)}
+
+\CommentTok{\# Step 2: Select Specific Columns}
+\NormalTok{result }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(trade\_sums, Country, Import\_Export\_Difference)}
+\FunctionTok{head}\NormalTok{(result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 2
+##   Country                Import_Export_Difference
+##   <chr>                                     <dbl>
+## 1 Armenia, Rep. of                       2310784.
+## 2 Australia                            287152114.
+## 3 Belgium                              -71376887.
+## 4 Bosnia and Herzegovina                 9861312.
+## 5 Bulgaria                             -27143540.
+## 6 Chile                                110025733.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\NormalTok{top\_countries }\OtherTok{\textless{}{-}}\NormalTok{ result }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(}\FunctionTok{abs}\NormalTok{(Import\_Export\_Difference)))}
+
+\CommentTok{\# Step 2: Select the Top 10}
+\NormalTok{top\_10\_countries }\OtherTok{\textless{}{-}} \FunctionTok{head}\NormalTok{(top\_countries, }\DecValTok{10}\NormalTok{)}
+
+\CommentTok{\# Step 3: Create the Plot}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ top\_10\_countries, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(Country, }\SpecialCharTok{{-}}\FunctionTok{abs}\NormalTok{(Import\_Export\_Difference)), }\AttributeTok{y =}\NormalTok{ Import\_Export\_Difference)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"\#698bbd"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Top 10 Countries: Import{-}Export Difference of Environmental Goods"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Country"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Import{-}Export Difference"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Group06_IDS_Project_files/figure-latex/unnamed-chunk-53-1.pdf}
+
+--- SMART QUESTION 06
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{trade\_balance\_data }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(data, data}\SpecialCharTok{$}\NormalTok{Indicator }\SpecialCharTok{==} \StringTok{\textquotesingle{}Environmental goods trade balance\textquotesingle{}}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(trade\_balance\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   ObjectId                  Country ISO2 Counterpart_Country Counterpart_ISO2
+## 1        5 Andorra, Principality of   AD             Belgium               BE
+## 2       16 Andorra, Principality of   AD              France               FR
+## 3       20 Andorra, Principality of   AD             Germany               DE
+## 4       28 Andorra, Principality of   AD               Italy               IT
+## 5       37 Andorra, Principality of   AD    Netherlands, The               NL
+## 6       45 Andorra, Principality of   AD            Portugal               PT
+##                           Indicator     Trade_Flow       F2012       F2013
+## 1 Environmental goods trade balance Not Applicable   -50272.39   -46415.45
+## 2 Environmental goods trade balance Not Applicable -4660354.05 -3213472.14
+## 3 Environmental goods trade balance Not Applicable  -902931.22 -1180312.12
+## 4 Environmental goods trade balance Not Applicable  -261423.82 -1476528.65
+## 5 Environmental goods trade balance Not Applicable  -111084.27   -99883.18
+## 6 Environmental goods trade balance Not Applicable    23861.84    15222.90
+##         F2014        F2015       F2016        F2017        F2018        F2019
+## 1  -116914.44   -40948.884  -105166.29   -61199.687   -68061.058     9569.782
+## 2 -4016035.12 -3518875.064 -2807624.24 -3694204.514 -6275971.269 -3616339.936
+## 3 -4899167.99 -1255385.468  -770787.72 -1270529.379 -1347615.072 -1140457.669
+## 4  -207582.49  -231325.854  -738532.34  -319882.415  -807337.711  -368964.385
+## 5   -68016.72   -30976.790   -55366.03  -573365.953  -651176.316  -469429.290
+## 6    28673.39     8721.299    18083.88     7228.336     1390.928   -19719.412
+##         F2020      F2021       F2022
+## 1   -44764.41  -165124.2    174430.8
+## 2 -1322269.04 -1923390.6  -6057906.2
+## 3 -2892163.58 -6314674.4 -12228802.0
+## 4 -1109829.47 -2885661.9  -1856007.4
+## 5  -324642.07  -179536.8   -407419.8
+## 6   -25041.73  -424260.7   -123822.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{asian\_countries }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Afghanistan\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Armenia\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Azerbaijan\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Bahrain\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Bangladesh\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Bhutan\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Brunei Darussalam\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Cambodia\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}China\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Cyprus\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Georgia\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}India\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Indonesia\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Iran (Islamic Republic of)\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Iraq\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Israel\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Japan\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Jordan\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Kazakhstan\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Kuwait\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Kyrgyzstan\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Lao People}\SpecialCharTok{\textbackslash{}\textquotesingle{}}\StringTok{s Democratic Republic\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Lebanon\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Malaysia\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Maldives\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Mongolia\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Myanmar\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Nepal\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Korea (Democratic People}\SpecialCharTok{\textbackslash{}\textquotesingle{}}\StringTok{s Republic of)\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Oman\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Pakistan\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Palestine\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Philippines\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Qatar\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Saudi Arabia\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Singapore\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Korea (Republic of)\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Sri Lanka\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Syrian Arab Republic\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Taiwan\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Tajikistan\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Thailand\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Timor{-}Leste\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Turkey\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Turkmenistan\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}United Arab Emirates\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Uzbekistan\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Viet Nam\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Yemen\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{european\_countries }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Albania\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Andorra\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Austria\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Belarus\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Belgium\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Bosnia and Herzegovina\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Bulgaria\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Croatia\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Cyprus\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Czech Republic\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Denmark\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Estonia\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Finland\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}France\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Germany\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Greece\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Hungary\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Iceland\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Ireland\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Italy\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Latvia\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Liechtenstein\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Lithuania\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Luxembourg\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Malta\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Moldova\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Monaco\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Montenegro\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Netherlands\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}North Macedonia\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Norway\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Poland\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Portugal\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Romania\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Russian Federation\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}San Marino\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Serbia\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Slovakia\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Slovenia\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Spain\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Sweden\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Switzerland\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Ukraine\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}United Kingdom\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Vatican City State (Holy See)\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{trade\_balance\_data}\SpecialCharTok{$}\NormalTok{Region }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(trade\_balance\_data}\SpecialCharTok{$}\NormalTok{Country }\SpecialCharTok{\%in\%}\NormalTok{ asian\_countries, }\StringTok{\textquotesingle{}Asia\textquotesingle{}}\NormalTok{,}
+                                    \FunctionTok{ifelse}\NormalTok{(trade\_balance\_data}\SpecialCharTok{$}\NormalTok{Country }\SpecialCharTok{\%in\%}\NormalTok{ european\_countries, }\StringTok{\textquotesingle{}Europe\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Other\textquotesingle{}}\NormalTok{))}
+\FunctionTok{head}\NormalTok{(trade\_balance\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   ObjectId                  Country ISO2 Counterpart_Country Counterpart_ISO2
+## 1        5 Andorra, Principality of   AD             Belgium               BE
+## 2       16 Andorra, Principality of   AD              France               FR
+## 3       20 Andorra, Principality of   AD             Germany               DE
+## 4       28 Andorra, Principality of   AD               Italy               IT
+## 5       37 Andorra, Principality of   AD    Netherlands, The               NL
+## 6       45 Andorra, Principality of   AD            Portugal               PT
+##                           Indicator     Trade_Flow       F2012       F2013
+## 1 Environmental goods trade balance Not Applicable   -50272.39   -46415.45
+## 2 Environmental goods trade balance Not Applicable -4660354.05 -3213472.14
+## 3 Environmental goods trade balance Not Applicable  -902931.22 -1180312.12
+## 4 Environmental goods trade balance Not Applicable  -261423.82 -1476528.65
+## 5 Environmental goods trade balance Not Applicable  -111084.27   -99883.18
+## 6 Environmental goods trade balance Not Applicable    23861.84    15222.90
+##         F2014        F2015       F2016        F2017        F2018        F2019
+## 1  -116914.44   -40948.884  -105166.29   -61199.687   -68061.058     9569.782
+## 2 -4016035.12 -3518875.064 -2807624.24 -3694204.514 -6275971.269 -3616339.936
+## 3 -4899167.99 -1255385.468  -770787.72 -1270529.379 -1347615.072 -1140457.669
+## 4  -207582.49  -231325.854  -738532.34  -319882.415  -807337.711  -368964.385
+## 5   -68016.72   -30976.790   -55366.03  -573365.953  -651176.316  -469429.290
+## 6    28673.39     8721.299    18083.88     7228.336     1390.928   -19719.412
+##         F2020      F2021       F2022 Region
+## 1   -44764.41  -165124.2    174430.8  Other
+## 2 -1322269.04 -1923390.6  -6057906.2  Other
+## 3 -2892163.58 -6314674.4 -12228802.0  Other
+## 4 -1109829.47 -2885661.9  -1856007.4  Other
+## 5  -324642.07  -179536.8   -407419.8  Other
+## 6   -25041.73  -424260.7   -123822.2  Other
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Select the columns for years and Region}
+\NormalTok{years }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}F2015\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F2016\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F2017\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F2018\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F2019\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F2020\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F2021\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}F2022\textquotesingle{}}\NormalTok{)}
+\NormalTok{agg\_data }\OtherTok{\textless{}{-}}\NormalTok{ trade\_balance\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\FunctionTok{one\_of}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"Region"}\NormalTok{, years)))}
+\CommentTok{\# Group by \textquotesingle{}Region\textquotesingle{} and calculate the sum for each year}
+\NormalTok{agg\_data }\OtherTok{\textless{}{-}}\NormalTok{ agg\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Region) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\AttributeTok{.cols =} \FunctionTok{everything}\NormalTok{(), }\AttributeTok{.fns =}\NormalTok{ sum, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: There was 1 warning in `summarise()`.
+## i In argument: `across(.cols = everything(), .fns = sum, na.rm = TRUE)`.
+## i In group 1: `Region = "Asia"`.
+## Caused by warning:
+## ! The `...` argument of `across()` is deprecated as of dplyr 1.1.0.
+## Supply arguments directly to `.fns` through an anonymous function instead.
+## 
+##   # Previously
+##   across(a:b, mean, na.rm = TRUE)
+## 
+##   # Now
+##   across(a:b, \(x) mean(x, na.rm = TRUE))
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Filter only \textquotesingle{}Asia\textquotesingle{} and \textquotesingle{}Europe\textquotesingle{}}
+\NormalTok{agg\_data }\OtherTok{\textless{}{-}}\NormalTok{ agg\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(Region }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Asia\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Europe\textquotesingle{}}\NormalTok{))}
+\FunctionTok{head}\NormalTok{(agg\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 9
+##   Region        F2015     F2016   F2017   F2018   F2019   F2020   F2021    F2022
+##   <chr>         <dbl>     <dbl>   <dbl>   <dbl>   <dbl>   <dbl>   <dbl>    <dbl>
+## 1 Asia   32196601464.   3.48e10 5.59e10 5.60e10 4.85e10 4.94e10 5.72e10  4.35e10
+## 2 Europe 26128055650.   2.56e10 1.94e10 1.58e10 1.51e10 7.07e 9 1.88e 7 -7.17e 9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{result6 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Year =} \DecValTok{2015}\SpecialCharTok{:}\DecValTok{2022}\NormalTok{, }
+                      \StringTok{\textquotesingle{}Asia\textquotesingle{}} \OtherTok{=} \FunctionTok{t}\NormalTok{(agg\_data[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(agg\_data)]), }
+                      \StringTok{\textquotesingle{}Europe\textquotesingle{}} \OtherTok{=} \FunctionTok{t}\NormalTok{(agg\_data[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(agg\_data)]))}
+\FunctionTok{head}\NormalTok{(result6)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Year        Asia      Europe
+## F2015 2015 32196601464 26128055650
+## F2016 2016 34770140193 25635947569
+## F2017 2017 55917580807 19411082983
+## F2018 2018 56041252955 15834022373
+## F2019 2019 48492246199 15115300322
+## F2020 2020 49410870490  7074862160
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(result6, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Year)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ Asia }\SpecialCharTok{/} \DecValTok{1000000000}\NormalTok{, }\AttributeTok{label=}\StringTok{\textquotesingle{}Asia\textquotesingle{}}\NormalTok{), }\AttributeTok{color =} \StringTok{"red"}\NormalTok{, }\AttributeTok{linetype =} \StringTok{"solid"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ Europe }\SpecialCharTok{/} \DecValTok{1000000000}\NormalTok{, }\AttributeTok{label=}\StringTok{\textquotesingle{}Europe\textquotesingle{}}\NormalTok{), }\AttributeTok{color =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{linetype =} \StringTok{"solid"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Total Trade Balance by Year (in Billions)"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Year"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Trade Balance"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"Asia"} \OtherTok{=} \StringTok{"red"}\NormalTok{, }\StringTok{"Europe"} \OtherTok{=} \StringTok{"blue"}\NormalTok{),}
+                     \AttributeTok{name =} \StringTok{"Legend"}\NormalTok{,}
+                     \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Asia\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Europe\textquotesingle{}}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in geom_line(aes(y = Asia/1e+09, label = "Asia"), color = "red", :
+## Ignoring unknown aesthetics: label
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in geom_line(aes(y = Europe/1e+09, label = "Europe"), color = "blue", :
+## Ignoring unknown aesthetics: label
+\end{verbatim}
+
+\includegraphics{Group06_IDS_Project_files/figure-latex/unnamed-chunk-59-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{correlation\_coefficient }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(result6[}\StringTok{\textquotesingle{}Asia\textquotesingle{}}\NormalTok{], result6[}\StringTok{\textquotesingle{}Europe\textquotesingle{}}\NormalTok{])}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Pearson Correlation Coefficient:"}\NormalTok{, correlation\_coefficient, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Pearson Correlation Coefficient: -0.4190462
+\end{verbatim}
+
+--- SMART QUESTION 07
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{us\_data }\OtherTok{=} \FunctionTok{filter}\NormalTok{(trade\_balance\_data, Counterpart\_Country }\SpecialCharTok{==} \StringTok{"United States"}\NormalTok{)}
+\NormalTok{us\_data }\OtherTok{\textless{}{-}}\NormalTok{ us\_data }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\StringTok{"Country"}\NormalTok{, }\StringTok{"F2012"}\NormalTok{, }\StringTok{"F2013"}\NormalTok{, }\StringTok{"F2014"}\NormalTok{, }\StringTok{"F2015"}\NormalTok{, }\StringTok{"F2016"}\NormalTok{, }\StringTok{"F2017"}\NormalTok{, }\StringTok{"F2018"}\NormalTok{, }\StringTok{"F2019"}\NormalTok{, }\StringTok{"F2020"}\NormalTok{, }\StringTok{"F2021"}\NormalTok{, }\StringTok{"F2022"}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(us\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##               Country       F2012       F2013       F2014       F2015
+## 1    Armenia, Rep. of    -7149680    -6718457   -13780041    -6287212
+## 2           Australia -3611066455 -3005607704 -2877301532 -2448904759
+## 3 Azerbaijan, Rep. of   -92008383   -64933265  -215700032  -157465963
+## 4            Barbados   -34432082   -35730795   -38109436   -35910046
+## 5             Belgium  -265501695  -187855979  -184250438  -187937311
+## 6             Bolivia  -182974014  -219653681  -185938002  -192285367
+##         F2016       F2017       F2018       F2019       F2020       F2021
+## 1    -4273964    -7148792    -5344556    -5066965    -4878982    -3967025
+## 2 -2142689380 -2314985441 -2325780846 -2195466968 -1902978695 -2256888884
+## 3  -185216637   -88568664  -104838339   -73901788   -75768338   -82637715
+## 4   -37215323   -39844124   -36964878   -37917177   -43993174   -53083028
+## 5  -197501805  -355605586  -168434922  -136639816  -292272712  -144103700
+## 6  -113046672  -105158665  -102837114  -107993682   -59337147   -59301829
+##         F2022
+## 1   -22651737
+## 2 -2735994886
+## 3  -120225630
+## 4   -55596984
+## 5   689975026
+## 6   -62693025
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Convert the data into a long format}
+\NormalTok{trade\_balance\_data\_long }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(us\_data, }
+                                       \AttributeTok{cols =} \FunctionTok{starts\_with}\NormalTok{(}\StringTok{"F"}\NormalTok{), }
+                                       \AttributeTok{names\_to =} \StringTok{"Year"}\NormalTok{, }
+                                       \AttributeTok{values\_to =} \StringTok{"Balance"}\NormalTok{)}
+\NormalTok{trade\_balance\_data\_long}\SpecialCharTok{$}\NormalTok{Year }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{substring}\NormalTok{(trade\_balance\_data\_long}\SpecialCharTok{$}\NormalTok{Year, }\DecValTok{2}\NormalTok{))}
+\FunctionTok{head}\NormalTok{(trade\_balance\_data\_long)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##   Country           Year    Balance
+##   <chr>            <dbl>      <dbl>
+## 1 Armenia, Rep. of  2012  -7149680 
+## 2 Armenia, Rep. of  2013  -6718457 
+## 3 Armenia, Rep. of  2014 -13780041 
+## 4 Armenia, Rep. of  2015  -6287212 
+## 5 Armenia, Rep. of  2016  -4273964 
+## 6 Armenia, Rep. of  2017  -7148792.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create the multiline graph}
+\FunctionTok{ggplot}\NormalTok{(trade\_balance\_data\_long, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Year, }\AttributeTok{y =}\NormalTok{ Balance }\SpecialCharTok{/} \DecValTok{1000000000}\NormalTok{, }\AttributeTok{color =}\NormalTok{ Country)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Trade Balance with the USA"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Year"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Balance in Billions"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"top"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\FunctionTok{min}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(trade\_balance\_data\_long}\SpecialCharTok{$}\NormalTok{Year)), }
+                                  \FunctionTok{max}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(trade\_balance\_data\_long}\SpecialCharTok{$}\NormalTok{Year)), }\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Group06_IDS_Project_files/figure-latex/unnamed-chunk-63-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fluctuation\_data }\OtherTok{\textless{}{-}}\NormalTok{ us\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Fluctuation =}\NormalTok{ F2022 }\SpecialCharTok{{-}}\NormalTok{ F2012)}
+
+\FunctionTok{ggplot}\NormalTok{(fluctuation\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Country, }\AttributeTok{y =}\NormalTok{ Fluctuation }\SpecialCharTok{/} \DecValTok{1000000000}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"\#698bbd"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Environmental Goods Trade Balance Fluctuation (2010{-}2022)"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Country"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Fluctuation in Billions"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{90}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Group06_IDS_Project_files/figure-latex/unnamed-chunk-64-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{max\_fluctuation\_index }\OtherTok{\textless{}{-}} \FunctionTok{which.max}\NormalTok{(}\FunctionTok{abs}\NormalTok{(fluctuation\_data}\SpecialCharTok{$}\NormalTok{Fluctuation))}
+\NormalTok{country\_with\_max\_fluctuation }\OtherTok{\textless{}{-}}\NormalTok{ fluctuation\_data}\SpecialCharTok{$}\NormalTok{Country[max\_fluctuation\_index]}
+\NormalTok{max\_fluctuation }\OtherTok{\textless{}{-}}\NormalTok{ fluctuation\_data}\SpecialCharTok{$}\NormalTok{Fluctuation[max\_fluctuation\_index]}
+
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Country with Maximum Fluctuation (based on absolute values):"}\NormalTok{, country\_with\_max\_fluctuation, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Country with Maximum Fluctuation (based on absolute values): Mexico
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Maximum Fluctuation Value (based on absolute values in billions):"}\NormalTok{, max\_fluctuation }\SpecialCharTok{/} \DecValTok{1000000000}\NormalTok{, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Maximum Fluctuation Value (based on absolute values in billions): 11.94997
+\end{verbatim}
+
+------------------SMART QUESTION 08----------------------------
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#filtered\_data = data[[\textquotesingle{}Country\textquotesingle{}, \textquotesingle{}Counterpart\_Country\textquotesingle{}, \textquotesingle{}Trade\_Flow\textquotesingle{}, \textquotesingle{}F2022\textquotesingle{}]]}
+\NormalTok{filtered\_data }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(Country, Counterpart\_Country, Trade\_Flow, F2022)}
+\FunctionTok{head}\NormalTok{(filtered\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                    Country      Counterpart_Country     Trade_Flow     F2022
+## 1 Andorra, Principality of Andorra, Principality of        Imports  12337.32
+## 2 Andorra, Principality of                  Austria        Imports 311349.64
+## 3 Andorra, Principality of                  Belgium        Exports 347615.58
+## 4 Andorra, Principality of                  Belgium        Imports 173184.81
+## 5 Andorra, Principality of                  Belgium Not Applicable 174430.77
+## 6 Andorra, Principality of                  Belgium Not Applicable 520800.40
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#calculate mutual trade volume.}
+\NormalTok{filtered\_data\_2 }\OtherTok{\textless{}{-}}\NormalTok{ filtered\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Country\_Pair =} \FunctionTok{if\_else}\NormalTok{(Country }\SpecialCharTok{\textless{}}\NormalTok{ Counterpart\_Country,}
+                                \FunctionTok{paste}\NormalTok{(Country, Counterpart\_Country, }\AttributeTok{sep =} \StringTok{" {-} "}\NormalTok{),}
+                                \FunctionTok{paste}\NormalTok{(Counterpart\_Country, Country, }\AttributeTok{sep =} \StringTok{" {-} "}\NormalTok{)))}
+\FunctionTok{head}\NormalTok{(filtered\_data\_2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                    Country      Counterpart_Country     Trade_Flow     F2022
+## 1 Andorra, Principality of Andorra, Principality of        Imports  12337.32
+## 2 Andorra, Principality of                  Austria        Imports 311349.64
+## 3 Andorra, Principality of                  Belgium        Exports 347615.58
+## 4 Andorra, Principality of                  Belgium        Imports 173184.81
+## 5 Andorra, Principality of                  Belgium Not Applicable 174430.77
+## 6 Andorra, Principality of                  Belgium Not Applicable 520800.40
+##                                          Country_Pair
+## 1 Andorra, Principality of - Andorra, Principality of
+## 2                  Andorra, Principality of - Austria
+## 3                  Andorra, Principality of - Belgium
+## 4                  Andorra, Principality of - Belgium
+## 5                  Andorra, Principality of - Belgium
+## 6                  Andorra, Principality of - Belgium
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calculate the mutual trade volume for each country pair}
+\NormalTok{mutual\_trade\_volume }\OtherTok{\textless{}{-}}\NormalTok{ filtered\_data\_2 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Country\_Pair) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Total\_Trade\_2022 =} \FunctionTok{sum}\NormalTok{(F2022, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{()}
+\FunctionTok{head}\NormalTok{(mutual\_trade\_volume)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 2
+##   Country_Pair                                          Total_Trade_2022
+##   <chr>                                                            <dbl>
+## 1 Afghanistan, Islamic Rep. of - Australia                        44139.
+## 2 Afghanistan, Islamic Rep. of - Belgium                          56133.
+## 3 Afghanistan, Islamic Rep. of - Bulgaria                           946.
+## 4 Afghanistan, Islamic Rep. of - China, P.R.: Hong Kong            6097.
+## 5 Afghanistan, Islamic Rep. of - Czech Rep.                        2878.
+## 6 Afghanistan, Islamic Rep. of - Denmark                         153246.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#sort the results and find the country pairs with the highest mutual trade volume in 2022}
+\NormalTok{highest\_mutual\_trade\_volume }\OtherTok{\textless{}{-}}\NormalTok{ mutual\_trade\_volume }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(Total\_Trade\_2022))}
+\NormalTok{highest\_mutual\_trade\_volume}\OtherTok{\textless{}{-}} \FunctionTok{head}\NormalTok{(highest\_mutual\_trade\_volume,}\DecValTok{15}\NormalTok{)}
+\NormalTok{highest\_mutual\_trade\_volume}\SpecialCharTok{$}\NormalTok{Total\_Trade\_2022}\OtherTok{\textless{}{-}}\NormalTok{ highest\_mutual\_trade\_volume}\SpecialCharTok{$}\NormalTok{Total\_Trade\_2022}\SpecialCharTok{/}\DecValTok{10000000000}
+\FunctionTok{head}\NormalTok{(highest\_mutual\_trade\_volume)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 2
+##   Country_Pair                                   Total_Trade_2022
+##   <chr>                                                     <dbl>
+## 1 Mexico - United States                                    14.9 
+## 2 China, P.R.: Mainland - Japan                              8.24
+## 3 Japan - United States                                      6.90
+## 4 China, P.R.: Hong Kong - China, P.R.: Mainland             5.20
+## 5 Germany - Netherlands, The                                 5.17
+## 6 Germany - Poland, Rep. of                                  5.04
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(highest\_mutual\_trade\_volume, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(Country\_Pair, }\SpecialCharTok{{-}}\NormalTok{Total\_Trade\_2022), }\AttributeTok{y =}\NormalTok{ Total\_Trade\_2022)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_segment}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(Country\_Pair, }\SpecialCharTok{{-}}\NormalTok{Total\_Trade\_2022), }\AttributeTok{xend =} \FunctionTok{reorder}\NormalTok{(Country\_Pair, }\SpecialCharTok{{-}}\NormalTok{Total\_Trade\_2022), }\AttributeTok{y =} \DecValTok{0}\NormalTok{, }\AttributeTok{yend =}\NormalTok{ Total\_Trade\_2022), }\AttributeTok{color =} \StringTok{"\#00297b"}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(Country\_Pair, }\SpecialCharTok{{-}}\NormalTok{Total\_Trade\_2022), }\AttributeTok{y =}\NormalTok{ Total\_Trade\_2022), }\AttributeTok{color =} \StringTok{"\#698bbd"}\NormalTok{, }\AttributeTok{size =} \DecValTok{4}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(Country\_Pair, }\SpecialCharTok{{-}}\NormalTok{Total\_Trade\_2022), }\AttributeTok{y =}\NormalTok{ Total\_Trade\_2022), }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{size =} \DecValTok{4}\NormalTok{, }\AttributeTok{shape =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{90}\NormalTok{, }\AttributeTok{vjust =} \DecValTok{1}\NormalTok{, }\AttributeTok{hjust=}\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Mutual Trade Volume in 2022"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Country Pair"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Trade Volume (USD)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Group06_IDS_Project_files/figure-latex/unnamed-chunk-70-1.pdf}
+
+\begin{quote}
+Statistical Testing
+\end{quote}
+
+\begin{quote}
+Hypothesis: Is there a significant difference in mutual trade volumes
+across different country-counterpart pairs in 2022?''
+\end{quote}
+
+\begin{quote}
+Test: ANNOVA \# Step 1: Prepare the data for ANOVA
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataset }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Country, Counterpart\_Country) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Mutual\_Trade\_2022 =} \FunctionTok{sum}\NormalTok{(F2022, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{unique\_pairs }\OtherTok{\textless{}{-}}\NormalTok{ dataset }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{distinct}\NormalTok{(Country, Counterpart\_Country, }\AttributeTok{.keep\_all =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{sorted\_pairs }\OtherTok{\textless{}{-}}\NormalTok{ unique\_pairs }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(Mutual\_Trade\_2022))}
+\NormalTok{top\_pairs }\OtherTok{\textless{}{-}} \FunctionTok{head}\NormalTok{(sorted\_pairs, }\DecValTok{15}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(top\_pairs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 19
+##   ObjectId Country          ISO2  Counterpart_Country Counterpart_ISO2 Indicator
+##      <int> <chr>            <chr> <chr>               <chr>            <chr>    
+## 1    14776 Mexico           MX    United States       US               Environm~
+## 2    12644 Japan            JP    China, P.R.: Mainl~ CN               Environm~
+## 3    13185 Japan            JP    United States       US               Environm~
+## 4     3852 China, P.R.: Ho~ HK    China, P.R.: Mainl~ CN               Environm~
+## 5    15717 Netherlands, The NL    Germany             DE               Environm~
+## 6    18640 Poland, Rep. of  PL    Germany             DE               Environm~
+## # i 13 more variables: Trade_Flow <chr>, F2012 <dbl>, F2013 <dbl>, F2014 <dbl>,
+## #   F2015 <dbl>, F2016 <dbl>, F2017 <dbl>, F2018 <dbl>, F2019 <dbl>,
+## #   F2020 <dbl>, F2021 <dbl>, F2022 <dbl>, Mutual_Trade_2022 <dbl>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{anova\_data }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(top\_pairs), }\ControlFlowTok{function}\NormalTok{(i) \{}
+\NormalTok{  row }\OtherTok{\textless{}{-}}\NormalTok{ top\_pairs[i, ]}
+\NormalTok{  subset\_data }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(dataset, Country }\SpecialCharTok{==}\NormalTok{ row}\SpecialCharTok{$}\NormalTok{Country }\SpecialCharTok{\&}\NormalTok{ Counterpart\_Country }\SpecialCharTok{==}\NormalTok{ row}\SpecialCharTok{$}\NormalTok{Counterpart\_Country)}
+  \FunctionTok{c}\NormalTok{(subset\_data}\SpecialCharTok{$}\NormalTok{F2012, subset\_data}\SpecialCharTok{$}\NormalTok{F2013, subset\_data}\SpecialCharTok{$}\NormalTok{F2014, subset\_data}\SpecialCharTok{$}\NormalTok{F2015, subset\_data}\SpecialCharTok{$}\NormalTok{F2016,}
+\NormalTok{    subset\_data}\SpecialCharTok{$}\NormalTok{F2017, subset\_data}\SpecialCharTok{$}\NormalTok{F2018, subset\_data}\SpecialCharTok{$}\NormalTok{F2019, subset\_data}\SpecialCharTok{$}\NormalTok{F2020, subset\_data}\SpecialCharTok{$}\NormalTok{F2021, subset\_data}\SpecialCharTok{$}\NormalTok{F2022)}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{anova\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{values =} \FunctionTok{unlist}\NormalTok{(anova\_data),}
+  \AttributeTok{group =} \FunctionTok{factor}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{, }\AttributeTok{each =} \DecValTok{11}\NormalTok{))}
+\NormalTok{)}
+\FunctionTok{head}\NormalTok{(anova\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         values group
+## 1 2.388243e+10     1
+## 2 8.297059e+00     1
+## 3 1.896264e+10     1
+## 4 9.664146e+00     1
+## 5 4.919792e+09     1
+## 6 4.284507e+10     1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Performing the ANOVA test}
+\NormalTok{anova\_result }\OtherTok{\textless{}{-}} \FunctionTok{aov}\NormalTok{(values }\SpecialCharTok{\textasciitilde{}}\NormalTok{ group, }\AttributeTok{data =}\NormalTok{ anova\_df)}
+\FunctionTok{summary}\NormalTok{(anova\_result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              Df    Sum Sq   Mean Sq F value Pr(>F)
+## group         9 5.179e+20 5.755e+19   0.621   0.78
+## Residuals   980 9.078e+22 9.263e+19
+\end{verbatim}
+
+\begin{quote}
+Conclusion: Because the p-value (0.78) is much greater than the common
+alpha level of 0.05, we fail to reject the null hypothesis. There is not
+enough statistical evidence to conclude that there is a significant
+difference in mutual trade volumes across different country-counterpart
+pairs in 2022. Interpretation: The mutual trade volumes across the
+selected country-counterpart pairs in 2022 do not significantly differ
+from each other, based on the ANOVA test conducted on the top trading
+pairs. This suggests that the variations in trade volumes within the
+pairs are not significantly less than the variations between the pairs.
+\end{quote}
+
+-------------------------------SMART QUESTION
+9------------------------------------------------------
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#filtered\_data = data[[\textquotesingle{}Country\textquotesingle{}, \textquotesingle{}Counterpart\_Country\textquotesingle{}, \textquotesingle{}Trade\_Flow\textquotesingle{}, \textquotesingle{}F2022\textquotesingle{}]]}
+\NormalTok{filtered\_data }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(Country, Counterpart\_Country, Trade\_Flow, F2022)}
+\FunctionTok{head}\NormalTok{(filtered\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                    Country      Counterpart_Country     Trade_Flow     F2022
+## 1 Andorra, Principality of Andorra, Principality of        Imports  12337.32
+## 2 Andorra, Principality of                  Austria        Imports 311349.64
+## 3 Andorra, Principality of                  Belgium        Exports 347615.58
+## 4 Andorra, Principality of                  Belgium        Imports 173184.81
+## 5 Andorra, Principality of                  Belgium Not Applicable 174430.77
+## 6 Andorra, Principality of                  Belgium Not Applicable 520800.40
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{trade\_partnerships }\OtherTok{\textless{}{-}}\NormalTok{ filtered\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Country) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Unique\_Trade\_Partners =} \FunctionTok{n\_distinct}\NormalTok{(Counterpart\_Country)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{()}
+\FunctionTok{head}\NormalTok{(trade\_partnerships)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 2
+##   Country                  Unique_Trade_Partners
+##   <chr>                                    <int>
+## 1 Andorra, Principality of                    39
+## 2 Armenia, Rep. of                            67
+## 3 Australia                                  169
+## 4 Azerbaijan, Rep. of                         66
+## 5 Barbados                                    65
+## 6 Belgium                                    185
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Find the Country with the Most Diversified Trade}
+
+\NormalTok{most\_diversified\_trade }\OtherTok{=}\NormalTok{ most\_diversified\_trade }\OtherTok{\textless{}{-}}\NormalTok{ trade\_partnerships }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(Unique\_Trade\_Partners))}
+\FunctionTok{head}\NormalTok{(most\_diversified\_trade)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 2
+##   Country          Unique_Trade_Partners
+##   <chr>                            <int>
+## 1 Netherlands, The                   206
+## 2 Italy                              195
+## 3 Japan                              187
+## 4 Belgium                            185
+## 5 Denmark                            183
+## 6 Poland, Rep. of                    180
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Bar Chart}
+
+
+\CommentTok{\# Bar Chart}
+\FunctionTok{ggplot}\NormalTok{(most\_diversified\_trade, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(Country, }\SpecialCharTok{{-}}\NormalTok{Unique\_Trade\_Partners), }\AttributeTok{y =}\NormalTok{ Unique\_Trade\_Partners)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"\#00297b"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Number of Unique Trade Partnerships in 2022"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Country"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Number of Unique Trade Partners"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{90}\NormalTok{, }\AttributeTok{vjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{hjust=}\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Group06_IDS_Project_files/figure-latex/unnamed-chunk-78-1.pdf}
+\textgreater{} Statistical Testing
+
+\begin{quote}
+Herfindahl-Hirschman Index (HHI):
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(most\_diversified\_trade)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 2
+##   Country          Unique_Trade_Partners
+##   <chr>                            <int>
+## 1 Netherlands, The                   206
+## 2 Italy                              195
+## 3 Japan                              187
+## 4 Belgium                            185
+## 5 Denmark                            183
+## 6 Poland, Rep. of                    180
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{total\_trade }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Country) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Total\_Trade\_2022 =} \FunctionTok{sum}\NormalTok{(F2022, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))}
+\FunctionTok{head}\NormalTok{(total\_trade)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 2
+##   Country                  Total_Trade_2022
+##   <chr>                               <dbl>
+## 1 Andorra, Principality of       106828803.
+## 2 Armenia, Rep. of               601531474.
+## 3 Australia                    61311121447.
+## 4 Azerbaijan, Rep. of           1420948623.
+## 5 Barbados                       204736521.
+## 6 Belgium                     135814661809.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{trade\_proportions }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{left\_join}\NormalTok{(total\_trade, }\AttributeTok{by =} \StringTok{"Country"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Trade\_Proportion =}\NormalTok{ F2022 }\SpecialCharTok{/}\NormalTok{ Total\_Trade\_2022)}
+\FunctionTok{head}\NormalTok{(trade\_proportions)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   ObjectId                  Country ISO2      Counterpart_Country
+## 1        1 Andorra, Principality of   AD Andorra, Principality of
+## 2        2 Andorra, Principality of   AD                  Austria
+## 3        3 Andorra, Principality of   AD                  Belgium
+## 4        4 Andorra, Principality of   AD                  Belgium
+## 5        5 Andorra, Principality of   AD                  Belgium
+## 6        6 Andorra, Principality of   AD                  Belgium
+##   Counterpart_ISO2                          Indicator     Trade_Flow      F2012
+## 1               AD        Environmental goods imports        Imports 124176.704
+## 2               AT        Environmental goods imports        Imports  57436.525
+## 3               BE        Environmental goods exports        Exports   4977.802
+## 4               BE        Environmental goods imports        Imports  55250.193
+## 5               BE  Environmental goods trade balance Not Applicable -50272.391
+## 6               BE Total trade in environmental goods Not Applicable  60227.995
+##       F2013      F2014      F2015       F2016      F2017      F2018      F2019
+## 1  72869.57   15552.94    688.099     408.981   8042.192   4921.683    831.419
+## 2  79987.58  616090.09  69688.266  123826.566 266202.777 646338.649 471439.576
+## 3  17650.64   23345.22  11296.396   19243.477   5714.549  12698.171  73595.050
+## 4  64066.09  140259.66  52245.280  124409.763  66914.236  80759.229  64025.268
+## 5 -46415.45 -116914.44 -40948.884 -105166.286 -61199.687 -68061.058   9569.782
+## 6  81716.73  163604.87  63541.676  143653.240  72628.785  93457.400 137620.318
+##        F2020       F2021     F2022 Total_Trade_2022 Trade_Proportion
+## 1   9112.604    6622.224  12337.32        106828803     0.0001154868
+## 2 456033.149 1264195.860 311349.64        106828803     0.0029144728
+## 3   1090.393    3052.548 347615.58        106828803     0.0032539500
+## 4  45854.805  168176.728 173184.81        106828803     0.0016211434
+## 5 -44764.412 -165124.180 174430.77        106828803     0.0016328065
+## 6  46945.198  171229.276 520800.40        106828803     0.0048750934
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Assuming trade\_proportions is your data frame and is already available in your R environment}
+\NormalTok{hhi\_results }\OtherTok{\textless{}{-}}\NormalTok{ trade\_proportions }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Country) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{HHI =} \FunctionTok{round}\NormalTok{(}\FunctionTok{sum}\NormalTok{(Trade\_Proportion}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{), }\DecValTok{2}\NormalTok{))}
+
+\CommentTok{\# Now hhi\_results will contain the HHI values rounded to two decimal places}
+\FunctionTok{print}\NormalTok{(hhi\_results)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 48 x 2
+##    Country                    HHI
+##    <chr>                    <dbl>
+##  1 Andorra, Principality of  0.82
+##  2 Armenia, Rep. of          0.13
+##  3 Australia                 0.13
+##  4 Azerbaijan, Rep. of       0.12
+##  5 Barbados                  0.32
+##  6 Belgium                   0.03
+##  7 Bolivia                   0.17
+##  8 Bosnia and Herzegovina    0.05
+##  9 Bulgaria                  0.03
+## 10 Chile                     0.11
+## # i 38 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hhi\_data }\OtherTok{\textless{}{-}}\NormalTok{ hhi\_results }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Group =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    hhi\_results}\SpecialCharTok{$}\NormalTok{HHI }\SpecialCharTok{\textgreater{}=} \FloatTok{0.25} \SpecialCharTok{\textasciitilde{}} \StringTok{"Low Diversity"}\NormalTok{,}
+\NormalTok{    hhi\_results}\SpecialCharTok{$}\NormalTok{HHI }\SpecialCharTok{\textgreater{}=} \FloatTok{0.15} \SpecialCharTok{\&}\NormalTok{ hhi\_results}\SpecialCharTok{$}\NormalTok{HHI }\SpecialCharTok{\textless{}} \FloatTok{0.25} \SpecialCharTok{\textasciitilde{}} \StringTok{"Moderate Diversity"}\NormalTok{,}
+\NormalTok{    hhi\_results}\SpecialCharTok{$}\NormalTok{HHI }\SpecialCharTok{\textless{}} \FloatTok{0.15} \SpecialCharTok{\textasciitilde{}} \StringTok{"High Diversity"}
+\NormalTok{  ))}
+\FunctionTok{head}\NormalTok{(hhi\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##   Country                    HHI Group         
+##   <chr>                    <dbl> <chr>         
+## 1 Andorra, Principality of  0.82 Low Diversity 
+## 2 Armenia, Rep. of          0.13 High Diversity
+## 3 Australia                 0.13 High Diversity
+## 4 Azerbaijan, Rep. of       0.12 High Diversity
+## 5 Barbados                  0.32 Low Diversity 
+## 6 Belgium                   0.03 High Diversity
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hhi\_data}\SpecialCharTok{$}\NormalTok{Group }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(hhi\_data}\SpecialCharTok{$}\NormalTok{Group)}
+\FunctionTok{head}\NormalTok{(hhi\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##   Country                    HHI Group         
+##   <chr>                    <dbl> <fct>         
+## 1 Andorra, Principality of  0.82 Low Diversity 
+## 2 Armenia, Rep. of          0.13 High Diversity
+## 3 Australia                 0.13 High Diversity
+## 4 Azerbaijan, Rep. of       0.12 High Diversity
+## 5 Barbados                  0.32 Low Diversity 
+## 6 Belgium                   0.03 High Diversity
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{anova\_result }\OtherTok{\textless{}{-}} \FunctionTok{aov}\NormalTok{(HHI }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Group, }\AttributeTok{data =}\NormalTok{ hhi\_data)}
+\FunctionTok{summary}\NormalTok{(anova\_result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             Df Sum Sq Mean Sq F value   Pr(>F)    
+## Group        2 1.2363  0.6182   71.75 1.01e-14 ***
+## Residuals   45 0.3877  0.0086                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{quote}
+Null Hypothesis (H0): All countries have the same level of diversity in
+their environmental goods trade partnerships in 2022.
+\end{quote}
+
+\begin{quote}
+Alternative Hypothesis (H1): There is at least one country that has a
+significantly different level of diversity in its environmental goods
+trade partnerships in 2022 compared to other countries.
+\end{quote}
+
+\begin{quote}
+Conclusion: This means that there is a statistically significant
+difference in the diversity of environmental goods trade partnerships
+among the countries in 2022.
+\end{quote}
+
+\end{document}
