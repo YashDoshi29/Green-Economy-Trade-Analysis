@@ -1,9 +1,6 @@
 ---
 title: "PROJECT"
-output:
-  word_document: default
-  html_document: default
-  pdf_document: default
+output: html_document
 date: "2023-10-21"
 ---
 
@@ -219,17 +216,12 @@ head(total_exports_df)
 ```
 
 
-```{r}
 
-variance_exports <- var(total_exports_df$Total_Export_Value)
-sd_exports <- sd(total_exports_df$Total_Export_Value)
-```
 
 ```{r}
 variance_exports <- var(total_exports_df$Total_Export_Value)
 sd_exports <- sd(total_exports_df$Total_Export_Value)
 
-cat('Variance: ',variance_exports, 'Standard deviation: ',sd_exports)
 ```
 
 ```{r}
@@ -241,16 +233,23 @@ cat('Standard Deviation of Exports:', sd_exports, '\n')
 ```{r}
 linear_model <- lm(Total_Export_Value ~ Year, data = total_exports_df)
 model_summary <- summary(linear_model)
-
+model_summary
 ```
 
 ```{r}
 head(total_exports_df)
 ```
 
+
+
 ```{r}
-total_exports_df$residuals <- residuals(linear_model)
+total_exports_df
+```
+
+
+```{r}
 total_exports_df$predicted <- fitted(linear_model)
+total_exports_df$residuals <- residuals(linear_model)
 
 plot <- ggplot(total_exports_df, aes(x = Year)) +
   geom_point(aes(y = Total_Export_Value, color = "Actual Data Points"), size = 3) +
@@ -274,6 +273,18 @@ print(plot)
 
 
 
+```
+```{r}
+# Mean Squared Error
+mse <- mean(total_exports_df$residuals^2)
+
+# Mean Absolute Error
+mae <- mean(abs(total_exports_df$residuals))
+```
+
+```{r}
+cat("Mean Squared Error: ", mse, "\n")
+cat("Mean Absolute Error: ", mae, "\n")
 ```
 
 -----------------SMART QUESTION 2----------------------------
@@ -395,7 +406,7 @@ p <- ggplot(total_trade_long, aes(x = Country_Classification, y = Amount, fill =
   labs(
     y = "Amount in Billions",
     x = "Country Classification",
-    title = "Environmental Goods Imports and Exports in 2022",
+    title = "Environmental Goods Trades  in 2022",
     subtitle = "Landlocked vs Coastal Countries"
   ) +
   theme_minimal() +
