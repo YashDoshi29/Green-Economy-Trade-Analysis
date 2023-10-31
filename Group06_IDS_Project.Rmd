@@ -218,7 +218,7 @@ head(total_exports_df)
 
 ```{r, results='markup'}
 
-
+```
 ```{r}
 variance_exports <- var(total_exports_df$Total_Export_Value)
 sd_exports <- sd(total_exports_df$Total_Export_Value)
@@ -273,9 +273,22 @@ print(plot)
 
 
 ```
+
+
 ```{r}
 # Mean Squared Error
 mse <- mean(total_exports_df$residuals^2)
+```{r}
+# Mean Squared Error
+mse <- mean(total_exports_df$residuals^2)
+
+# Mean Absolute Error
+mae <- mean(abs(total_exports_df$residuals))
+```
+
+```{r}
+cat("Mean Squared Error: ", mse, "\n")
+cat("Mean Absolute Error: ", mae, "\n")
 
 --------------------------------- SMART QUESTION 02----------------------------------
 Which three countries have consistently increased their environmental goods exports every year for the last five years (2018-2022)?
