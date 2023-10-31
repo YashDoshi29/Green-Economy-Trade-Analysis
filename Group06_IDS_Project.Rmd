@@ -286,16 +286,16 @@ mse <- mean(total_exports_df$residuals^2)
 mae <- mean(abs(total_exports_df$residuals))
 ```
 
-```{r}
+```{r, results='markup'}
 cat("Mean Squared Error: ", mse, "\n")
 cat("Mean Absolute Error: ", mae, "\n")
+```
 
 --------------------------------- SMART QUESTION 02----------------------------------
 Which three countries have consistently increased their environmental goods exports every year for the last five years (2018-2022)?
 
-```{r, results='markup'}
 
------------------SMART QUESTION 2----------------------------
+
 
 ```{r}
 
