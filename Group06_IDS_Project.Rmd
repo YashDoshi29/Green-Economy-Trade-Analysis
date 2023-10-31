@@ -216,6 +216,7 @@ head(total_exports_df)
 ```
 
 
+```{r, results='markup'}
 
 
 ```{r}
@@ -238,16 +239,14 @@ model_summary
 
 ```{r}
 head(total_exports_df)
-```
-
-
-
-```{r}
+=========
+```{r, results='markup'}
 total_exports_df
+>>>>>>>>> Temporary merge branch 2
 ```
 
-
-```{r}
+```{r, results='markup'}
+total_exports_df$residuals <- residuals(linear_model)
 total_exports_df$predicted <- fitted(linear_model)
 total_exports_df$residuals <- residuals(linear_model)
 
@@ -278,14 +277,10 @@ print(plot)
 # Mean Squared Error
 mse <- mean(total_exports_df$residuals^2)
 
-# Mean Absolute Error
-mae <- mean(abs(total_exports_df$residuals))
-```
+--------------------------------- SMART QUESTION 02----------------------------------
+Which three countries have consistently increased their environmental goods exports every year for the last five years (2018-2022)?
 
-```{r}
-cat("Mean Squared Error: ", mse, "\n")
-cat("Mean Absolute Error: ", mae, "\n")
-```
+```{r, results='markup'}
 
 -----------------SMART QUESTION 2----------------------------
 
@@ -406,7 +401,7 @@ p <- ggplot(total_trade_long, aes(x = Country_Classification, y = Amount, fill =
   labs(
     y = "Amount in Billions",
     x = "Country Classification",
-    title = "Environmental Goods Trades  in 2022",
+    title = "Environmental Goods Trades in 2022",
     subtitle = "Landlocked vs Coastal Countries"
   ) +
   theme_minimal() +
