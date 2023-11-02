@@ -105,9 +105,12 @@ shape <- dim(data_cleaned)
 cat('Rows:', shape[1], 'Columns:', shape[2], '\n')
 
 ```
+
+
 ```{r, results='markup'}
 head(data_cleaned)
 ```
+
 > Changing value of object id and resetting index
 
 ```{r, results='markup'}
@@ -144,11 +147,9 @@ cat('There are',length(unique_country),'unique countries in dataset')
 
 >Exploratory Data Analysis
 
-```{r, results='markup'}
 
-```
-
---- SMART QUESTION 01: What is the trend in global environmental goods exports over the last decade (2013-2022)?
+--------------------------------- SMART QUESTION 01----------------------------------
+What is the trend in global environmental goods exports over the last decade (2013-2022)?
 
 
 
@@ -239,10 +240,6 @@ model_summary
 
 ```{r}
 head(total_exports_df)
-=========
-```{r, results='markup'}
-total_exports_df
->>>>>>>>> Temporary merge branch 2
 ```
 
 ```{r, results='markup'}
@@ -278,6 +275,8 @@ print(plot)
 ```{r}
 # Mean Squared Error
 mse <- mean(total_exports_df$residuals^2)
+```
+
 ```{r}
 # Mean Squared Error
 mse <- mean(total_exports_df$residuals^2)
@@ -361,7 +360,8 @@ ggplot(top_three_countries_long, aes(x = Country, y = Exports, fill = as.factor(
   theme(legend.position = "bottom")
 ```
 
->>> SMART QUESTION 04: How do landlocked countries compare to coastal countries in terms of environmental goods imports in 2022?
+--------------------------------- SMART QUESTION 03---------------------------------- 
+How do landlocked countries compare to coastal countries in terms of environmental goods imports in 2022?
 
 ```{r}
 # Define the groups of countries
@@ -427,7 +427,7 @@ p
 ```
 
 
---------------------SMART QUESTION 05-------------------
+--------------------------------- SMART QUESTION 04---------------------------------- 
 ```{r}
 india_trade <- filter(data, Counterpart_Country == 'India')
 ```
@@ -522,7 +522,8 @@ ggplot(data = top_10_countries, aes(x = reorder(Country, -abs(Import_Export_Diff
 
 
 
---- SMART QUESTION 06
+--------------------------------- SMART QUESTION 06---------------------------------- 
+
 
 ```{r}
 trade_balance_data <- filter(data, data$Indicator == 'Environmental goods trade balance')
@@ -586,7 +587,8 @@ cat("Pearson Correlation Coefficient:", correlation_coefficient, "\n")
 ```
 
 
---- SMART QUESTION 07
+--------------------------------- SMART QUESTION 07---------------------------------- 
+
 
 ```{r}
 us_data = filter(trade_balance_data, Counterpart_Country == "United States")
@@ -645,8 +647,8 @@ cat("Country with Maximum Fluctuation (based on absolute values):", country_with
 cat("Maximum Fluctuation Value (based on absolute values in billions):", max_fluctuation / 1000000000, "\n")
 ```
 
+--------------------------------- SMART QUESTION 08---------------------------------- 
 
-------------------SMART QUESTION 08----------------------------
 
 ```{r}
 #filtered_data = data[['Country', 'Counterpart_Country', 'Trade_Flow', 'F2022']]
@@ -751,7 +753,7 @@ Interpretation:
 The mutual trade volumes across the selected country-counterpart pairs in 2022 do not significantly differ from each other, based on the ANOVA test conducted on the top trading pairs. This suggests that the variations in trade volumes within the pairs are not significantly less than the variations between the pairs.
 
 
--------------------------------SMART QUESTION 9------------------------------------------------------
+--------------------------------- SMART QUESTION 09---------------------------------- 
 
 ```{r}
 
