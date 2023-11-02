@@ -1,296 +1,302 @@
 ---
-title: "PROJECT"
-output: html_document
-date: "2023-10-21"
+# This is the YAML header/metadata for the document
+title: "From Importer to Exporter: Unravelling Global Trends in Environmental Goods Trade"
+author's: "1) Nemi 2) Aneri 3) Yash 4) Nihar"
+# date: "today"
+date: "`r Sys.Date()`" 
+# this style requires installing rmdformats package 
+output:  
+    rmdformats::readthedown:
+      toc_float: true
+      toc_depth: 3
+      number_sections: true
+      code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+# some of common options (and the defaults) are: 
+# include=T, eval=T, echo=T, results='hide'/'asis'/'markup',..., collapse=F, warning=T, message=T, error=T, cache=T, fig.width=6, fig.height=4, fig.dim=c(6,4) #inches, fig.align='left'/'center','right', 
+ knitr::opts_chunk$set(warning = F, results = "markup", message = F)
+#knitr::opts_chunk$set(warning = F, results = "hide", message = F)
+
+# knitr::opts_chunk$set(include = F)
+# knitr::opts_chunk$set(echo = TRUE)
+options(scientific=T, digits = 3) 
+# options(scipen=9, digits = 3) 
+# ‘scipen’: integer. A penalty to be applied when deciding to print numeric values in fixed or exponential notation.  Positive values bias towards fixed and negative towards scientific notation: fixed notation will be preferred unless it is more than ‘scipen’ digits wider.
+# use scipen=999 to prevent scientific notation at all times
 ```
 
 
->DATA PREPROCESSING
+
+
+
+
+# Introduction
+
+Our project focuses on the analysis of trade in environmentally sustainable goods among nations. With a dataset spanning from 2012 to 2022 and comprising 149,801 observations, we investigate trade relationships between countries, categorizing them as imports, exports, or trade balances. We have narrowed our dataset to 19,530 instances, concentrating on countries with significant trading relations. Our primary objective is to understand various aspects of international trade, study trade fluctuations over the years, and gain insights into products that promote sustainable development. We aim to contribute to the global discourse on sustainable development and offer valuable insights for informed decision-making in the realms of trade and finance. Our research-based (SMART) questions guide our analysis, helping us discern patterns and predict future developments in environmentally sustainable goods trade. Through data-driven exploration, we aim to provide a deeper understanding of how countries engage in this trade and contribute to a future that balances economic growth with environmental responsibility.
+
+
+
+## Objective
+
+Our project revolves around 8 main objectives. These objectives encompasses major aspects of the dataset. To enhance the understanding of global trade dynamics, our study under these objectives encapsulated a multifaceted exploration of trade relations among nations. By analyzing intricate trade data, market conditions, and economic factors, the project delved into the patterns and strategies contributing to sustained advancements in environmental goods exports. Furthermore, this comprehensive analysis served to unravel not only the immediate trade dynamics but also the underlying practices and policies that facilitated and sustained successful trade relationships between countries. The study's overarching aim was to illuminate the intricate web of global trade, emphasizing not only advancements in trade relations but also the fostering of insightful strategies and tactics for sustainable trade growth among nations.
+
+
+### Objective 1 Global Environmental Goods Export Trend 
+
+Analyzing global environmental goods exports from 2013 to 2022 to identify significant trends and shifts. This objective aimed to understand overarching patterns and changes in the international export of eco-friendly products. It involved analyzing trade data and economic conditions to uncover key trends impacting the global market for environmentally conscious goods over a ten-year period.
+
+### Objective 2 Consistent Export Growth Countries
+
+Identifying three nations with consistent annual growth in environmental goods exports from 2018 to 2022. The goal was to understand the factors contributing to their sustained expansion by analyzing trade data and market conditions, providing insights into successful trade practices within this sector over the specified period.
+
+### Objective 3 Comparative Trade Analysis of Environmental Goods in 2022
+
+Conducting a comparative trade analysis of environmental goods in 2022 among developing coastal and landlocked nations with similar GDPs. This objective aimed to discern differences and similarities in trade behaviors and strategies within these specific geographical and economic categories concerning eco-friendly products.
+
+### Objective 4 Bilateral Trade Analysis with India
+
+Analyzing bilateral trade with India to identify countries that both exported environmental goods to India and observed increased imports of environmental goods from India in 2022. This aimed to reveal mutual trade relations, showcasing countries engaged in reciprocal trade dynamics within the environmental goods sector.
+
+### Objective 5 Trade Balance Correlation between Asia and Europe
+
+This objective aimed to explore the correlation in trade balances between Asian and European countries spanning from 2015 to 2022. The analysis sought to uncover any interrelation or patterns in trade balances between these regions, providing insights into the evolving trade dynamics and economic interactions within and between Asia and Europe.
+
+### Objective 6 Trade Balance Fluctuation with the US
+
+Determining the country with the highest trade balance fluctuations in environmental goods with the United States from 2012 to 2022. This aimed to highlight the specific nation experiencing significant trade balance shifts and understand the contributing factors impacting its trade relationship with the United States.
+
+### Objective 7 Highest Mutual Trade Volume Pairs
+
+Aimed to identify and analyze the specific country pairs that exhibited the most substantial trade volume in environmental goods during the year 2022. This involved a detailed examination of trade data and interactions between specific nations, uncovering the pairs engaged in the highest trade activities in eco-friendly products. The analysis sought to provide insights into the most significant trade relationships and dynamics between specific countries concerning environmental goods in that particular year, offering valuable information about the countries most actively involved in trading these products.
+
+### Objective 8 Diversified Trade Partnerships
+
+Aimed at identifying the specific nation that demonstrated the most diversified trade partnerships in the realm of environmental goods during the year 2022. This objective involved an extensive analysis of trade relationships, examining the breadth and depth of partnerships a country had established with various other nations concerning the trade of environmentally friendly products. The focus was on comprehensively understanding which country engaged in a wide array of trade collaborations and interactions within the environmental goods sector, shedding light on the extensive and varied trade networks established by a specific nation in this field.
 
 ```{r, results='markup'}
 library(dplyr)
 library(tidyverse)
 library(ggplot2)
+
 ```
 
+## Data 
 
+The dataset at hand provides a comprehensive view of international trade dynamics, specifically emphasizing the exchange of environmentally sustainable goods between countries. With a rich repository of over 19,000 instances, this dataset meticulously documents trade relations, covering a ten-year period. It unveils the complexities of global trade, tracking imports, exports, and trade balances for a variety of countries. The dataset is an invaluable resource for delving into the intricate web of international trade, especially in the context of promoting sustainable development and eco-friendly commerce. It offers a detailed account of the flow of goods between nations, presenting opportunities to explore the trends, fluctuations, and patterns that underpin international trade in the 21st century.
 
-> Importing Dataset
+### DATA CHARACTERISTICS
+
+The dataset contains following attributes:
+
+1. **objectId:** A unique identifier for each observation in the dataset.
+2. **Country:** The name of the reporting country.
+3. **ISO2 and ISO3:** Two-letter and three-letter ISO country codes for the reporting country.
+4. **Counterpart_Country:** The name of the partner country involved in the trade.
+5. **Counterpart_ISO2 and Counterpart_ISO3:** Two-letter and three-letter ISO country codes for the partner country.
+6. **Indicator:** The type of trade data being reported (e.g., Environmental goods exports, Environmental goods imports, etc.).
+7. **Unit:** The unit of measurement for the trade values (e.g., US Dollars, Percent).
+8. **Source:** The source of the data.
+9. **F1992 to F2022:** Columns representing trade values or percentages for each year from 1992 to 2022.
+
+### DATA CLEANING 
+
+The initial dataset encompassed 149,801 observations and 44 columns, documenting trade values from the years 1992 to 2022. In order to tailor the dataset to the project’s focus on the most recent decade, we first filtered out all data prior to 2012, resulting in a subset spanning from 2012 to 2022. Upon conducting a thorough null value assessment, we identified a considerable number of missing values. Given the nature of trade value data, which can range from millions to trillions, imputing these missing values, even with methods such as averaging, posed a risk of introducing significant inaccuracies. To maintain the highest level of data integrity and ensure accurate and reliable analysis outcomes, we decided to eliminate all rows that contained any missing values across their columns. This critical data cleaning step led to a refined dataset of 19,741 observations and 26 columns, meticulously prepared for subsequent analytical endeavors.
+
 
 ```{r, results='markup'}
+
+# Importing Dataset
+
 data<- read.csv('Bilateral_Trade_in_Environmental_Goods.csv')
-head(data)
-```
 
+# Checking Shape of Dataset
 
-
-> Checking Shape of Dataset
-
-
-```{r, results='markup'}
 shape <- dim(data)
-cat('Rows:', shape[1], 'Columns:', shape[2], '\n')
-```
 
 
-> Checking data types of columns.
 
-```{r, results='markup'}
+#Checking data types of columns.
+
+
 data_types <- sapply(data, class)
-print(data_types)
-```
 
 
 
-> Statistical Summary of Dataset
-
-```{r, results='markup'}
-summary(data)
-```
 
 
+# Checking null values
 
-> Checking null values
-
-```{r, results='markup'}
 null_values_count<- colSums(is.na(data))
 null_values_dataframe <- data.frame(Column = names(null_values_count), NA_Count = null_values_count)
-null_values_dataframe
-```
 
 
-> Removing Some columns from dataset.
 
-```{r, results='markup'}
+# Removing Some columns from dataset.
+
 columns_to_remove <- c('ISO3', 'Counterpart_ISO3', 'Source', 'CTS_Code', 'CTS_Name', 'CTS_Full_Descriptor', 'Unit', 'Scale', 'F1994', 'F1995', 'F1996', 'F1997', 'F1998', 'F1999', 'F2000', 'F2001', 'F2002', 'F2003', 'F2004', 'F2005', 'F2006', 'F2007', 'F2008', 'F2009', 'F2010', 'F2011')
 
 filtered_data <- data[, !(names(data) %in% columns_to_remove)]
-head(filtered_data,2)
-```
-
-> extracting columns of filtered Data.
-
-```{r, results='markup'}
-names(filtered_data)
-```
 
 
-```{r, results='markup'}
+
+
 unique_country <- table(data$Country)
-cat('There are',length(unique_country),'unique countries in dataset')
-```
 
-> Checking null values of filtered_data
 
-```{r, results='markup'}
+# Checking null values of filtered_data
+
+
 null_values_count<- colSums(is.na(filtered_data))
 null_values_dataframe <- data.frame(Column = names(null_values_count), NA_Count = null_values_count)
-null_values_dataframe
-```
 
->Droping null values
 
-```{r, results='markup'}
+#Droping null values
+
 data_cleaned <- na.omit(filtered_data)
-```
 
-> Checking shape of cleaned data
+# Checking shape of cleaned data
 
-```{r, results='markup'}
+
 shape <- dim(data_cleaned)
-cat('Rows:', shape[1], 'Columns:', shape[2], '\n')
-
-```
 
 
-```{r, results='markup'}
-head(data_cleaned)
-```
 
-> Changing value of object id and resetting index
 
-```{r, results='markup'}
+# Changing value of object id and resetting index
+
 data_cleaned$ObjectId <- seq(1, nrow(data_cleaned))
-head(data_cleaned)
-```
 
->save filtered data into csv file
 
-```{r, results='markup'}
+#save filtered data into csv file
+
+
 write.csv(data_cleaned, "Data.csv", row.names = FALSE)
-```
 
 
 
+#Filter dataset
 
-
->Filter dataset
-
-```{r, results='markup'}
 data<-read.csv("Data.csv")
-head(data)
-```
 
 
-> No. of unique countries after filtering dataset
 
-```{r, results='markup'}
+# No. of unique countries after filtering dataset
+
 unique_country <- table(data$Country)
-cat('There are',length(unique_country),'unique countries in dataset')
+
 ```
 
+# Exploratory Data Analysis
 
-
->Exploratory Data Analysis
-
-
---------------------------------- SMART QUESTION 01----------------------------------
+## SMART QUESTION 01
 What is the trend in global environmental goods exports over the last decade (2013-2022)?
 
 
 
 ```{r, results='markup'}
+
+
+# Filter the dataset to include only rows where the Indicator is "Environmental goods exports"
 exports_data <- filter(data, Indicator == "Environmental goods exports") 
-head(exports_data)
-```
 
-```{r, results='markup'}
+# Calculate the total exports for each year from 2013 to 2022
 exports_trend <- colSums(exports_data[, c("F2013", "F2014", "F2015", "F2016", "F2017", "F2018", "F2019", "F2020", "F2021", "F2022")], na.rm = TRUE)
-exports_trend 
-```
-```{r, results='markup'}
-exports_trend <- round(exports_trend / 1000000000) #Converting the tota cost of exports into billion
-
-```
 
 
-```{r, results='markup'}
+# Convert the total cost of exports from US dollars to billions for easier interpretation
+exports_trend <- round(exports_trend / 1000000000) 
+
 exports_trend_df <- data.frame(Year = 2013:2022, 'Exports_In_Billions' = exports_trend)
-head(exports_trend_df)
 
-```
-
-
-```{r, results='markup'}
-
+# Generate a line plot to visualize the trend in global environmental goods exports over the last decade
 ggplot(exports_trend_df, aes(x = Year, y = Exports_In_Billions)) +
-  geom_line(group = 1, color = '#38599F') +
-  geom_point(color="#00297b") +
+  geom_line(group = 1, color = '#38599F') +  
+  geom_point(color="#00297b") +  
   labs(title = "Global Environmental Goods Exports (2013-2022)",
        x = "Year",
-       y = "Total Exports (US Dollars in billions)") +
-  
-  scale_x_continuous(breaks = 2013:2022) +
-  scale_y_continuous(breaks = seq(300, 500, by = 25))
-  
-
+       y = "Total Exports (US Dollars in billions)") + 
+  scale_x_continuous(breaks = 2013:2022) +  
+  scale_y_continuous(breaks = seq(300, 500, by = 25)) 
 ```
->Linear Regression Model
+
+
+
+
+> Linear Regression Model
 
 ```{r}
 
+
+# Subset the data to include only rows where the Indicator is "Environmental goods exports"
 env_goods_exports <- subset(data, Indicator == 'Environmental goods exports')
-head(env_goods_exports)
 
-```
-
-```{r}
+# Select the years from 2013 to 2022 for the analysis
 years <- paste0('F', 2013:2022)
 env_goods_exports_years <- env_goods_exports[, c('Country', years)]
-head(env_goods_exports_years)
-```
 
-```{r}
+# Calculate the total exports for each year, ignoring missing values
 total_exports_by_year <- colSums(env_goods_exports_years[, -1], na.rm = TRUE)
-head(total_exports_by_year, 3)
-```
-```{r}
+
+
 total_exports_df <- data.frame(Year = as.numeric(sub("F", "", names(total_exports_by_year))), 
                                 Total_Export_Value = total_exports_by_year)
+
 total_exports_df <- arrange(total_exports_df, Year)
+
+# Convert the total export value to billions for easier interpretation
 total_exports_df$Total_Export_Value <- (total_exports_df$Total_Export_Value/1000000000)
-head(total_exports_df)
-```
 
-
-```{r, results='markup'}
-
-```
-```{r}
+# Calculate variance and standard deviation of the export values for further analysis (optional)
 variance_exports <- var(total_exports_df$Total_Export_Value)
 sd_exports <- sd(total_exports_df$Total_Export_Value)
 
-```
-
-```{r}
-print(total_exports_df)
-cat('Variance of Exports:', variance_exports, '\n')
-cat('Standard Deviation of Exports:', sd_exports, '\n')
-```
-
-```{r}
+# Create a linear regression model 
 linear_model <- lm(Total_Export_Value ~ Year, data = total_exports_df)
 model_summary <- summary(linear_model)
-model_summary
-```
 
-```{r}
-head(total_exports_df)
-```
-
-```{r, results='markup'}
+# Add residuals and predicted values to the data frame
 total_exports_df$residuals <- residuals(linear_model)
 total_exports_df$predicted <- fitted(linear_model)
-total_exports_df$residuals <- residuals(linear_model)
 
+# Create a plot 
 plot <- ggplot(total_exports_df, aes(x = Year)) +
-  geom_point(aes(y = Total_Export_Value, color = "Actual Data Points"), size = 3) +
-  geom_line(aes(y = predicted, linetype = "Trend Line"), size = 0.77, color = "#38599f") +
-  geom_point(aes(y = predicted, color = "Predicted Points"), size = 4, shape = 17) +
-  scale_color_manual(values = c("Actual Data Points" = "#00297b", 
-                                "Predicted Points" = "#a5bfd1")) +
-  scale_linetype_manual(values = c("Trend Line" = "solid")) +
+  geom_point(aes(y = Total_Export_Value, color = "Actual Data Points"), size = 3) +  
+  geom_line(aes(y = predicted, linetype = "Trend Line"), size = 0.77, color = "#38599f") +  
+  geom_point(aes(y = predicted, color = "Predicted Points"), size = 4, shape = 17) +  
+  scale_color_manual(values = c("Actual Data Points" = "#00297b", "Predicted Points" = "#a5bfd1")) +  
+  scale_linetype_manual(values = c("Trend Line" = "solid")) +  
   labs(title = "Trend in Global Environmental Goods Exports (2013-2022)",
        x = "Year",
        y = "Total Export Value (in billions)",
        color = "Legend",
-       linetype = "Legend") +
-  theme_minimal() +
-  scale_x_continuous(breaks = seq(min(total_exports_df$Year), max(total_exports_df$Year), by = 1)) +
+       linetype = "Legend") + 
+  theme_minimal() + 
+  scale_x_continuous(breaks = seq(min(total_exports_df$Year), max(total_exports_df$Year), by = 1)) +  # X-axis scale
+  scale_y_continuous(breaks = seq(300, 500, by = 25)) +  
   guides(color = guide_legend(override.aes = list(shape = c(16, 17), size = c(3, 4))),
-         linetype = guide_legend(override.aes = list(size = 0.77)))+scale_y_continuous(breaks = seq(300, 500, by = 25))
+         linetype = guide_legend(override.aes = list(size = 0.77)))  
 
-
+# Print the plot
 print(plot)
 
-
-
-```
-
-
-```{r}
 # Mean Squared Error
 mse <- mean(total_exports_df$residuals^2)
-```
 
-```{r}
 # Mean Squared Error
 mse <- mean(total_exports_df$residuals^2)
 
 # Mean Absolute Error
 mae <- mean(abs(total_exports_df$residuals))
-```
 
-```{r, results='markup'}
 cat("Mean Squared Error: ", mse, "\n")
 cat("Mean Absolute Error: ", mae, "\n")
-```
 
---------------------------------- SMART QUESTION 02----------------------------------
+```
+The  graph illustrates the total export values for consecutive years spanning from 2013 to 2022. It's noticeable that there's a general upward trend in export values over this decade, yet certain years exhibit a decline, notably between 2014-2015 and 2018-2020. Particularly, there's a significant surge in exports between 2020 and 2021. Despite these fluctuations, the overall trajectory remains positive. To substantiate these observations, a linear regression model was applied to predict total export values. The model demonstrates a clear positive linear relationship, affirming the overall upward trend. The model's accuracy was assessed using mean square error and mean absolute error. The mean absolute error, standing at 25 billion, is relatively small compared to the significant export values, indicating the model's reliability and its capability to predict total export values accurately.
+
+## SMART QUESTION 02
 Which three countries have consistently increased their environmental goods exports every year for the last five years (2018-2022)?
 
 
@@ -301,28 +307,11 @@ Which three countries have consistently increased their environmental goods expo
 
 selected_data <- exports_data %>%
   select(Country, F2018, F2019, F2020, F2021, F2022)
-head(exports_data)
 
-```
-
-```{r, results='markup'}
-head(selected_data)
-```
-
-
-```{r}
 # Step 3: Check for each country if the exports have increased every year
 increasing_exports <- selected_data %>%
   filter(F2018 < F2019 & F2019 < F2020 & F2020 < F2021 & F2021 < F2022) %>%
   arrange(desc(F2022))
-```
-
-
-```{r}
-head(increasing_exports)
-```
-
-```{r}
 
 increasing_exports_long <- increasing_exports %>%
   gather(key = "Year", value = "Exports", -Country) %>%
@@ -340,14 +329,25 @@ top_three_countries_long <- increasing_exports_long %>%
 
 top_three_countries_long <- top_three_countries_long %>%
   mutate(Country_Year = paste(Country, Year, sep = "-"))
-head(top_three_countries_long)
-
-```
 
 
+increasing_exports_long <- increasing_exports %>%
+  gather(key = "Year", value = "Exports", -Country) %>%
+  mutate(Year = as.numeric(sub("F", "", Year))) 
+
+increasing_exports_long$Exports=round(increasing_exports_long$Exports/1000000000)
+
+top_three_countries <- head(increasing_exports, 3)
 
 
-```{r}
+top_three_countries_names <- top_three_countries$Country
+
+top_three_countries_long <- increasing_exports_long %>%
+  filter(Country %in% top_three_countries_names)
+
+top_three_countries_long <- top_three_countries_long %>%
+  mutate(Country_Year = paste(Country, Year, sep = "-"))
+
 ggplot(top_three_countries_long, aes(x = Country, y = Exports, fill = as.factor(Year))) +
   geom_bar(stat = "identity", position = "dodge", width = 0.7) +
   scale_fill_manual(values = c("2018" = "#00297b", "2019" = "#38599F", "2020" = "#698bbD", "2021" = "#A5bfd1", "2022" = "#f1f1d2")) +
@@ -357,13 +357,16 @@ ggplot(top_three_countries_long, aes(x = Country, y = Exports, fill = as.factor(
        fill = "Year") +
   theme_minimal() +
   scale_y_continuous(breaks = seq(0,15,by=1))
-  theme(legend.position = "bottom")
+
 ```
 
---------------------------------- SMART QUESTION 03---------------------------------- 
+The provided graph outlines the top three countries from the dataset, displaying an upward trajectory in exports over a continuous five-year span, specifically from 2018 to 2022. Notably, there's a discernible spike in exports between the years 2020 and 2021, signaling a substantial surge in trade activity during this period. Examining the graph, it's evident that the Netherlands stands out with the highest export values among the three countries, showcasing consistent growth over these years. In contrast, Hungary displays comparatively lower export values, maintaining a consistent yet more modest trend in its export figures. This visualization encapsulates a story of varying export performance among these nations, with the Netherlands leading the pack in export values, followed by other countries demonstrating differing yet steady growth trajectories over this defined period.
+
+## SMART QUESTION 03
 How do landlocked countries compare to coastal countries in terms of environmental goods imports in 2022?
 
 ```{r}
+
 # Define the groups of countries
 landlocked_countries_group <- c('Czech Republic', 'Hungary', 'Azerbaijan', 'Bolivia', 'Georgia')
 coastal_countries_group <- c('Chile', 'Greece', 'Jordan', 'Estonia', 'Mozambique')
@@ -376,34 +379,22 @@ filtered_group_data <- data %>%
   select(Country, Indicator, Trade_Flow, F2022)
 
 # Display the filtered data
-head(filtered_group_data)
-```
-```{r}
+
+
 # Add a new column for country classification
 filtered_group_data$Country_Classification <- ifelse(filtered_group_data$Country %in% landlocked_countries_group, 'Landlocked', 'Coastal')
-head(filtered_group_data)
-```
-```{r}
+
 # Calculate total trade (imports and exports) for landlocked and coastal groups
 total_trade_group <- filtered_group_data %>%
   group_by(Country_Classification, Trade_Flow) %>%
   summarise(Total_Trade = sum(F2022)) %>%
   spread(key = Trade_Flow, value = Total_Trade)
-head(total_trade_group)
-```
-
-
-```{r}
 
 
 # Transform the data to a long format
 total_trade_long <- total_trade_group %>%
   gather(key = "Trade_Flow", value = "Amount", -Country_Classification)
-head(total_trade_long)
-```
 
-
-```{r}
 p <- ggplot(total_trade_long, aes(x = Country_Classification, y = Amount, fill = Trade_Flow)) +
   geom_col(position = "dodge", width = 0.6) +
   scale_y_continuous(
@@ -421,33 +412,29 @@ p <- ggplot(total_trade_long, aes(x = Country_Classification, y = Amount, fill =
   scale_fill_manual(values = c("Exports" = "#38599F", "Imports" = "#698bbd")) +
   geom_text(aes(label = scales::label_number(accuracy = 0.01)(Amount/1e9)),
             position = position_dodge(width = 0.6), vjust = -0.5)
-
 # Show the plot
 p
 ```
 
+For this specific analysis, our approach involved segregating the dataset into two distinct groups: coastal countries and landlocked countries, each comprising five nations. Notably, both groups shared a similar overall Gross Domestic Product (GDP), serving as a comparative factor. Upon plotting the data, a compelling observation emerged: the total exports and imports for landlocked nations notably surpassed those of coastal countries. This finding challenges the conventional assumption that coastal nations inherently hold greater trade advantages. It underscores the complexity of trade dynamics, emphasizing that trade relationships are influenced by multiple factors beyond geographical access, such as demographics and natural resources. Further analysis revealed that landlocked countries demonstrated a trade surplus, with exports outweighing imports. Conversely, coastal countries displayed a more balanced trade scenario, with imports and exports hovering at comparable levels. This insight underscores the intricate and multifaceted nature of trade dynamics, going beyond mere geographic factors in shaping international trade relationships.
 
---------------------------------- SMART QUESTION 04---------------------------------- 
+## SMART QUESTION 04
+
+Which country, which exported environmental goods to India in 2022, also saw a parallel increase in its own imports of environmental goods from India during the same year?
+
 ```{r}
+
 india_trade <- filter(data, Counterpart_Country == 'India')
-```
 
-```{r}
 environmental_trade <- filter(india_trade, Indicator %in% c('Environmental goods exports', 'Environmental goods imports'))
-```
 
-```{r}
 country_indicator_count <- environmental_trade %>%
   group_by(Country) %>%
   summarise(Unique_Indicators = n_distinct(Indicator))
-```
 
-```{r}
 countries_with_both <- filter(country_indicator_count, Unique_Indicators == 2) %>%
   pull(Country)
-```
 
-```{r}
 filtered_data <- filter(environmental_trade, Country %in% countries_with_both)
 
 # Step 2: Group the data by country and indicator, and calculate the sum for each group
@@ -462,39 +449,30 @@ trade_sums <- grouped_data %>%
 
 # Step 4: Replace NaN values with 0
 trade_sums[is.na(trade_sums)] <- 0
-trade_sums
-```
-```{r}
+
+
 #Step 1: Calculate the Import-Export Difference
 trade_sums <- trade_sums %>%
   mutate(Import_Export_Difference = `Environmental goods imports` - `Environmental goods exports`)
 
 # Step 2: Select Specific Columns
 result <- select(trade_sums, Country, Import_Export_Difference)
-head(result)
-```
 
-```{r}
+
 trade_values <- trade_sums %>%
   pivot_longer(cols = c(`Environmental goods exports`, `Environmental goods imports`),
                names_to = "Indicator",
                values_to = "Trade_Value")
 
 # Showing the trade values
-print(trade_values)
-```
 
-```{r}
 # Step 1: Calculate the Import-Export Difference
 trade_sums <- trade_sums %>%
   mutate(Import_Export_Difference = `Environmental goods imports` - `Environmental goods exports`)
 
 # Step 2: Select Specific Columns
 result <- select(trade_sums, Country, Import_Export_Difference)
-head(result)
-```
 
-```{r}
 library(ggplot2)
 
 top_countries <- result %>%
@@ -513,6 +491,7 @@ ggplot(data = top_10_countries, aes(x = reorder(Country, -abs(Import_Export_Diff
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
+In examining the top 10 countries with the highest imports from India, the aim was to discern whether those countries that displayed higher export values to India also experienced a corresponding increase in their imports from India in the year 2022. From the graph, we can see data unveiled a notable trend: Mexico demonstrated the most significant surge in imports, corresponding to increased exports to India. Conversely, Japan exhibited the least increase in imports from India. This analysis indicates a potential correlation between a country's export activities with India and the subsequent rise in its imports from the nation. It emphasizes a stronger trade relationship between India and countries like Mexico, correlating increased exports to India with a noteworthy surge in imports from India, while highlighting a comparatively lower surge in imports from Japan despite its trade interactions with India.
 
 
 
@@ -521,29 +500,21 @@ ggplot(data = top_10_countries, aes(x = reorder(Country, -abs(Import_Export_Diff
 
 
 
+## SMART QUESTION 05
 
---------------------------------- SMART QUESTION 06---------------------------------- 
+Are there any correlations between the trade balance of Asian countries and European countries from 2015 to 2022?
 
 
 ```{r}
 trade_balance_data <- filter(data, data$Indicator == 'Environmental goods trade balance')
-head(trade_balance_data)
-```
 
-
-```{r}
 asian_countries = c('Afghanistan', 'Armenia', 'Azerbaijan', 'Bahrain', 'Bangladesh', 'Bhutan', 'Brunei Darussalam', 'Cambodia', 'China', 'Cyprus', 'Georgia', 'India', 'Indonesia', 'Iran (Islamic Republic of)', 'Iraq', 'Israel', 'Japan', 'Jordan', 'Kazakhstan', 'Kuwait', 'Kyrgyzstan', 'Lao People\'s Democratic Republic', 'Lebanon', 'Malaysia', 'Maldives', 'Mongolia', 'Myanmar', 'Nepal', 'Korea (Democratic People\'s Republic of)', 'Oman', 'Pakistan', 'Palestine', 'Philippines', 'Qatar', 'Saudi Arabia', 'Singapore', 'Korea (Republic of)', 'Sri Lanka', 'Syrian Arab Republic', 'Taiwan', 'Tajikistan', 'Thailand', 'Timor-Leste', 'Turkey', 'Turkmenistan', 'United Arab Emirates', 'Uzbekistan', 'Viet Nam', 'Yemen')
 
 european_countries = c('Albania', 'Andorra', 'Austria', 'Belarus', 'Belgium', 'Bosnia and Herzegovina', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Iceland', 'Ireland', 'Italy', 'Latvia', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Malta', 'Moldova', 'Monaco', 'Montenegro', 'Netherlands', 'North Macedonia', 'Norway', 'Poland', 'Portugal', 'Romania', 'Russian Federation', 'San Marino', 'Serbia', 'Slovakia', 'Slovenia', 'Spain', 'Sweden', 'Switzerland', 'Ukraine', 'United Kingdom', 'Vatican City State (Holy See)')
-```
 
-
-```{r}
 trade_balance_data$Region <- ifelse(trade_balance_data$Country %in% asian_countries, 'Asia',
                                     ifelse(trade_balance_data$Country %in% european_countries, 'Europe', 'Other'))
-head(trade_balance_data)
-```
-```{r}
+
 # Select the columns for years and Region
 years <- c('F2015', 'F2016', 'F2017', 'F2018', 'F2019', 'F2020', 'F2021', 'F2022')
 agg_data <- trade_balance_data %>%
@@ -555,18 +526,11 @@ agg_data <- agg_data %>%
 # Filter only 'Asia' and 'Europe'
 agg_data <- agg_data %>%
   filter(Region %in% c('Asia', 'Europe'))
-head(agg_data)
-```
 
-```{r, results='markup'}
 result6 <- data.frame(Year = 2015:2022, 
                       'Asia' = t(agg_data[1,2:ncol(agg_data)]), 
                       'Europe' = t(agg_data[2,2:ncol(agg_data)]))
-head(result6)
 
-```
-
-```{r}
 ggplot(result6, aes(x = Year)) +
   geom_line(aes(y = Asia / 1000000000, label='Asia'), color = "red", linetype = "solid") +
   geom_line(aes(y = Europe / 1000000000, label='Europe'), color = "blue", linetype = "solid") +
@@ -575,39 +539,37 @@ ggplot(result6, aes(x = Year)) +
     x = "Year",
     y = "Trade Balance"
   ) +
+  
   scale_color_manual(values = c("Asia" = "red", "Europe" = "blue"),
                      name = "Legend",
                      labels = c('Asia', 'Europe')) +
   theme_minimal()
-```
 
-```{r}
 correlation_coefficient <- cor(result6['Asia'], result6['Europe'])
 cat("Pearson Correlation Coefficient:", correlation_coefficient, "\n")
 ```
 
+**This graph displays the aggregated trade balances of Asian and European countries over the years. It illustrates that Asian countries have consistently increased their trade surplus, exporting more than they import, while European countries have seen a decline in their trade balance, implying they are importing more than they are exporting. The Pearson coefficient of -0.42 further supports the negative correlation between Asian and European trade balances. However, as the coefficient is closer to zero, it indicates a weak correlation between the two regions.**
 
---------------------------------- SMART QUESTION 07---------------------------------- 
+
+
+## SMART QUESTION 06
+
+Which country's environmental goods trade balance with the US has seen the greatest fluctuation from 2012 to 2022?
 
 
 ```{r}
 us_data = filter(trade_balance_data, Counterpart_Country == "United States")
 us_data <- us_data %>% 
   select("Country", "F2012", "F2013", "F2014", "F2015", "F2016", "F2017", "F2018", "F2019", "F2020", "F2021", "F2022")
-head(us_data)
-```
 
-```{r}
 # Convert the data into a long format
 trade_balance_data_long <- pivot_longer(us_data, 
                                        cols = starts_with("F"), 
                                        names_to = "Year", 
                                        values_to = "Balance")
 trade_balance_data_long$Year <- as.numeric(substring(trade_balance_data_long$Year, 2))
-head(trade_balance_data_long)
-```
 
-```{r}
 # Create the multiline graph
 ggplot(trade_balance_data_long, aes(x = Year, y = Balance / 1000000000, color = Country)) +
   geom_line() + 
@@ -621,9 +583,7 @@ ggplot(trade_balance_data_long, aes(x = Year, y = Balance / 1000000000, color = 
   theme(legend.position = "top") +
   scale_x_continuous(breaks = seq(min(as.numeric(trade_balance_data_long$Year)), 
                                   max(as.numeric(trade_balance_data_long$Year)), 1))
-```
 
-```{r}
 fluctuation_data <- us_data %>%
   mutate(Fluctuation = F2022 - F2012)
 
@@ -636,9 +596,6 @@ ggplot(fluctuation_data, aes(x = Country, y = Fluctuation / 1000000000)) +
   ) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
-```
-
-```{r}
 max_fluctuation_index <- which.max(abs(fluctuation_data$Fluctuation))
 country_with_max_fluctuation <- fluctuation_data$Country[max_fluctuation_index]
 max_fluctuation <- fluctuation_data$Fluctuation[max_fluctuation_index]
@@ -647,44 +604,43 @@ cat("Country with Maximum Fluctuation (based on absolute values):", country_with
 cat("Maximum Fluctuation Value (based on absolute values in billions):", max_fluctuation / 1000000000, "\n")
 ```
 
---------------------------------- SMART QUESTION 08---------------------------------- 
 
+In our quest to understand the dynamics of the USA's bilateral trade relations with various countries, we posed a SMART question for analysis. 
+
+Graph 1:  This graph sheds light on the USA's trade balance of environmentally sustainable goods with all countries from 2012 to 2022. Most countries exhibit only slight fluctuations in their trade balances during this decade, with a few exceptions. Our aim is to identify which country experienced the most significant fluctuation in the past ten years.
+
+Graph 2: This graph is a bar plot illustrating trade fluctuations for all countries over the last decade. It's apparent that Mexico has the highest fluctuation, reaching approximately 12 billion dollars. Furthermore, this fluctuation is positive, indicating that exports to Mexico have increased over the years. 
+
+These findings offer valuable insights into the changing dynamics of the USA's trade relationships.
+
+## SMART QUESTION 07
+
+Which country-counterpart pairs have the highest mutual trade volume in 2022?
 
 ```{r}
+
 #filtered_data = data[['Country', 'Counterpart_Country', 'Trade_Flow', 'F2022']]
 filtered_data <- data %>%
   select(Country, Counterpart_Country, Trade_Flow, F2022)
-head(filtered_data)
-```
 
-```{r}
 #calculate mutual trade volume.
 filtered_data_2 <- filtered_data %>%
   mutate(Country_Pair = if_else(Country < Counterpart_Country,
                                 paste(Country, Counterpart_Country, sep = " - "),
                                 paste(Counterpart_Country, Country, sep = " - ")))
-head(filtered_data_2)
-```
 
-```{r}
 # Calculate the mutual trade volume for each country pair
 mutual_trade_volume <- filtered_data_2 %>%
   group_by(Country_Pair) %>%
   summarise(Total_Trade_2022 = sum(F2022, na.rm = TRUE)) %>%
   ungroup()
-head(mutual_trade_volume)
-```
 
-```{r}
 #sort the results and find the country pairs with the highest mutual trade volume in 2022
 highest_mutual_trade_volume <- mutual_trade_volume %>%
   arrange(desc(Total_Trade_2022))
 highest_mutual_trade_volume<- head(highest_mutual_trade_volume,15)
 highest_mutual_trade_volume$Total_Trade_2022<- highest_mutual_trade_volume$Total_Trade_2022/10000000000
-head(highest_mutual_trade_volume)
-```
 
-```{r}
 ggplot(highest_mutual_trade_volume, aes(x = reorder(Country_Pair, -Total_Trade_2022), y = Total_Trade_2022)) +
   geom_segment(aes(x = reorder(Country_Pair, -Total_Trade_2022), xend = reorder(Country_Pair, -Total_Trade_2022), y = 0, yend = Total_Trade_2022), color = "#00297b", size = 1) +
   geom_point(aes(x = reorder(Country_Pair, -Total_Trade_2022), y = Total_Trade_2022), color = "#698bbd", size = 4) +
@@ -694,66 +650,60 @@ ggplot(highest_mutual_trade_volume, aes(x = reorder(Country_Pair, -Total_Trade_2
   labs(title = "Mutual Trade Volume in 2022",
        x = "Country Pair",
        y = "Trade Volume (USD)")
-
 ```
 
->Statistical Testing
-
->Hypothesis:
-Is there a significant difference in mutual trade volumes across different country-counterpart pairs in 2022?"
-
->Test: ANNOVA 
-# Step 1: Prepare the data for ANOVA
 
 ```{r}
+
+
+
+#Hypothesis: Is there a significant difference in mutual trade volumes across different country-counterpart pairs in 2022?"
+
+#Test: ANNOVA 
+# Step 1: Prepare the data for ANOVA
+
+
 
 dataset <- data %>%
   group_by(Country, Counterpart_Country) %>%
   mutate(Mutual_Trade_2022 = sum(F2022, na.rm = TRUE)) %>%
   ungroup()
 
-```
-
-```{r}
 unique_pairs <- dataset %>%
   distinct(Country, Counterpart_Country, .keep_all = TRUE)
 sorted_pairs <- unique_pairs %>%
   arrange(desc(Mutual_Trade_2022))
 top_pairs <- head(sorted_pairs, 15)
-head(top_pairs)
-```
 
-```{r}
 anova_data <- lapply(1:nrow(top_pairs), function(i) {
   row <- top_pairs[i, ]
   subset_data <- subset(dataset, Country == row$Country & Counterpart_Country == row$Counterpart_Country)
   c(subset_data$F2012, subset_data$F2013, subset_data$F2014, subset_data$F2015, subset_data$F2016,
     subset_data$F2017, subset_data$F2018, subset_data$F2019, subset_data$F2020, subset_data$F2021, subset_data$F2022)
 })
-```
 
-```{r}
 anova_df <- data.frame(
   values = unlist(anova_data),
   group = factor(rep(1:10, each = 11))
 )
-head(anova_df)
-```
 
-```{r}
 # Performing the ANOVA test
 anova_result <- aov(values ~ group, data = anova_df)
 summary(anova_result)
-```
 
->Conclusion:
+```
 Because the p-value (0.78) is much greater than the common alpha level of 0.05, we fail to reject the null hypothesis.
 There is not enough statistical evidence to conclude that there is a significant difference in mutual trade volumes across different country-counterpart pairs in 2022.
 Interpretation:
 The mutual trade volumes across the selected country-counterpart pairs in 2022 do not significantly differ from each other, based on the ANOVA test conducted on the top trading pairs. This suggests that the variations in trade volumes within the pairs are not significantly less than the variations between the pairs.
 
 
---------------------------------- SMART QUESTION 09---------------------------------- 
+
+
+
+## SMART QUESTION 08
+
+Which country has the most diversified environmental goods trade partnerships in 2022?
 
 ```{r}
 
@@ -766,18 +716,12 @@ trade_partnerships <- filtered_data %>%
   group_by(Country) %>%
   summarise(Unique_Trade_Partners = n_distinct(Counterpart_Country)) %>%
   ungroup()
-head(trade_partnerships)
-```
 
-```{r}
 #Find the Country with the Most Diversified Trade
 
 most_diversified_trade = most_diversified_trade <- trade_partnerships %>%
   arrange(desc(Unique_Trade_Partners))
-head(most_diversified_trade)
-```
 
-```{r}
 # Bar Chart
 
 
@@ -790,129 +734,66 @@ ggplot(most_diversified_trade, aes(x = reorder(Country, -Unique_Trade_Partners),
        y = "Number of Unique Trade Partners") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
-```
-> Statistical Testing
 
-> Herfindahl-Hirschman Index (HHI):
+```
+
+
 
 
 
 
 ```{r}
-head(most_diversified_trade)
-```
 
 
-```{r}
+
+
+
+#Herfindahl-Hirschman Index (HHI):
+
 total_trade <- data %>%
   group_by(Country) %>%
   summarise(Total_Trade_2022 = sum(F2022, na.rm = TRUE))
-head(total_trade)
-```
-```{r}
+
 trade_proportions <- data %>%
   left_join(total_trade, by = "Country") %>%
   mutate(Trade_Proportion = F2022 / Total_Trade_2022)
-head(trade_proportions)
-```
 
-
-
-```{r}
 # Assuming trade_proportions is your data frame and is already available in your R environment
 hhi_results <- trade_proportions %>%
   group_by(Country) %>%
   summarise(HHI = round(sum(Trade_Proportion^2), 2))
 
 # Now hhi_results will contain the HHI values rounded to two decimal places
-print(hhi_results)
-```
 
-```{r}
 hhi_data <- hhi_results %>%
   mutate(Group = case_when(
     hhi_results$HHI >= 0.25 ~ "Low Diversity",
     hhi_results$HHI >= 0.15 & hhi_results$HHI < 0.25 ~ "Moderate Diversity",
     hhi_results$HHI < 0.15 ~ "High Diversity"
   ))
-head(hhi_data)
-```
 
-```{r}
 hhi_data$Group <- as.factor(hhi_data$Group)
-head(hhi_data)
-```
-```{r}
+
 anova_result <- aov(HHI ~ Group, data = hhi_data)
 summary(anova_result)
+
 ```
 
+The graph showcases the unique trade partnerships of all countries within the dataset, representing the total count of distinctive trade partners for each nation. Notably, the Netherlands exhibits the highest number of unique trade partners, while Sao Tome displays the fewest unique trade relationships among all countries.
 
->Null Hypothesis (H0): All countries have the same level of diversity in their environmental goods trade partnerships in 2022.
+To substantiate these findings, an ANOVA test was conducted to assess whether each country maintains an equivalent level of diversity in its trade partnerships. The null hypothesis posited that all countries possess different level of diversity in their trade connections, while the alternative hypothesis suggested that all countries have same level of diversity .
 
->Alternative Hypothesis (H1): There is at least one country that has a significantly different level of diversity in its environmental goods trade partnerships in 2022 compared to other countries.
+The computed p-value from the test resulted in 1.01 x 10^-14, leading to the failure to reject the null hypothesis. This implies that, based on this analysis, the countries within the dataset maintain a similar level of diversity in their trade partnerships.
 
+# Future Scope
 
-
->Conclusion:  This means that there is a statistically significant difference in the diversity of environmental goods trade partnerships among the countries in 2022.
-
-
-
+One of the future scope of this project, we can explore the development of classification or predictive models. These models could help in forecasting trade patterns, identifying potential trade partners, and evaluating the impact of various factors like economic conditions, environmental regulations, and market demand on sustainable goods trade. By harnessing machine learning and data analytics techniques, we can enhance our ability to make data-driven predictions and decisions in the realm of sustainable trade, further contributing to informed policy and business strategies. This advancement in predictive modeling will provide valuable insights and aid in creating a more sustainable and balanced future for international trade.
 
 
 
+# Conclusion
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+The EDA revealed an overall upward trend in total export values from 2013 to 2022, despite occasional declines. It highlighted disparities among the top three countries, with the Netherlands consistently leading in exports. An analysis comparing coastal and landlocked countries challenged assumptions, showing higher trade figures for landlocked nations. Notably, interactions with India hinted at a correlation between exports and subsequent imports. Mutual trade volumes among top pairs showed no significant differences. The exploration illustrated diverse trade partnerships, with the Netherlands having the most partners. In essence, it showcased the intricate nature of international trade, underscoring factors beyond geography in shaping environmental goods trade relations.
 
 
 
