@@ -722,7 +722,6 @@ trade_partnerships <- filtered_data %>%
 most_diversified_trade = most_diversified_trade <- trade_partnerships %>%
   arrange(desc(Unique_Trade_Partners))
 
-# Bar Chart
 
 
 # Bar Chart
@@ -763,7 +762,6 @@ hhi_results <- trade_proportions %>%
   group_by(Country) %>%
   summarise(HHI = round(sum(Trade_Proportion^2), 2))
 
-# Now hhi_results will contain the HHI values rounded to two decimal places
 
 hhi_data <- hhi_results %>%
   mutate(Group = case_when(
